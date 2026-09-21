@@ -7,8 +7,8 @@ export const siteConfig = {
   url: "https://www.nalamsoftware.com",
   ogImage: "/images/og-default.jpg",
   contact: {
-    email: "hello@nalamsoftware.com",
-    phone: "+91 00000 00000",
+    email: "info@nalam.care",
+    phone: "+91 86087 92718",
     address: "Chennai, Tamil Nadu, India",
   },
   social: {

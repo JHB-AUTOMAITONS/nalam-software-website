@@ -25,7 +25,7 @@ export function ConnectedSystems() {
   return (
     <section
       id="connected-systems"
-      className="scroll-mt-24 bg-navy-950/55 py-11 backdrop-blur-sm sm:py-16 lg:py-20"
+      className="scroll-mt-32 bg-navy-950/55 py-11 backdrop-blur-sm sm:py-16 lg:py-20"
     >
       <Container className="flex flex-col gap-9">
         <SectionHeading

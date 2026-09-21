@@ -26,7 +26,7 @@ export function CustomizationSection() {
   return (
     <section
       id="customization"
-      className="scroll-mt-24 relative isolate overflow-hidden bg-navy-950/55 py-10 backdrop-blur-sm sm:py-14 lg:py-16"
+      className="scroll-mt-32 relative isolate overflow-hidden bg-navy-950/55 py-10 backdrop-blur-sm sm:py-14 lg:py-16"
     >
       <div
         aria-hidden

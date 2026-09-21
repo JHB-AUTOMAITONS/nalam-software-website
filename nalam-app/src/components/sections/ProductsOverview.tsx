@@ -8,7 +8,7 @@ export function ProductsOverview() {
   return (
     <section
       id="solutions"
-      className="scroll-mt-24 bg-navy-950/55 pt-10 pb-11 backdrop-blur-sm sm:pt-12 sm:pb-16 lg:pt-14 lg:pb-20"
+      className="scroll-mt-32 bg-navy-950/55 pt-10 pb-11 backdrop-blur-sm sm:pt-12 sm:pb-16 lg:pt-14 lg:pb-20"
     >
       <Container className="flex flex-col gap-9">
         <SectionHeading

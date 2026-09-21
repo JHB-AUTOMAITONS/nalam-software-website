@@ -44,7 +44,7 @@ export function ProductDetail({ product, reverse = false, index }: ProductDetail
   return (
     <section
       id={product.id}
-      className="scroll-mt-24 relative isolate overflow-hidden border-t border-teal-400/15 bg-navy-950/55 py-12 backdrop-blur-sm sm:py-16 lg:py-20"
+      className="scroll-mt-32 relative isolate overflow-hidden border-t border-teal-400/15 bg-navy-950/55 py-12 backdrop-blur-sm sm:py-16 lg:py-20"
     >
       {/* Directional fade at the section edges so LMS/HMS/CMS read as distinct, cinematic
           showcases against their neighbours, without hiding the global video mid-section. */}
