@@ -4,6 +4,7 @@ import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { RequirementsPopup } from "@/components/sections/RequirementsPopup";
+import { Analytics } from "@/components/analytics/Analytics";
 import { JsonLd } from "@/components/structured-data/JsonLd";
 import { buildOrganizationSchema, buildWebsiteSchema } from "@/lib/structured-data";
 import { siteConfig } from "@/lib/constants";
@@ -95,6 +96,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${fraunces.variable} ${inter.variable} ${ibmPlexMono.variable} h-full scroll-smooth antialiased`}
     >
       <body className="flex min-h-full flex-col bg-white text-ink">
+        <Analytics />
         <a href="#main-content" className="skip-link">
           Skip to main content
         </a>
