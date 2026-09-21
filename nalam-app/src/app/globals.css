@@ -1,0 +1,175 @@
+@import "tailwindcss";
+
+:root {
+  /* Core brand palette — Premium Emerald Healthcare Technology */
+  --color-ink: #07130f;
+  --color-navy-950: #06100d;
+  --color-navy-900: #091713;
+  --color-navy-800: #0d1d18;
+  --color-navy-700: #123b2c;
+  --color-teal-600: #19c878;
+  --color-teal-500: #19c878;
+  --color-teal-400: #39ff88;
+  --color-cyan-300: #9cffd0;
+  --color-mist-50: #f4faf7;
+  --color-mist-100: #eaf5f0;
+  --color-mist-200: #ddf4e9;
+  --color-slate-500: #52705f;
+  --color-slate-600: #3a4a42;
+  --color-white: #ffffff;
+  --color-signal-coral: #ef7a5a;
+  --color-signal-amber: #f2b544;
+  --color-clinic-jade: #2fe0a8;
+  --color-emerald-onlight: #098049;
+
+  --glass-surface: rgba(10, 30, 23, 0.62);
+  --glass-border: rgba(57, 255, 136, 0.18);
+  --glass-border-strong: rgba(57, 255, 136, 0.35);
+  --glow-green: rgba(57, 255, 136, 0.18);
+
+  --background: var(--color-white);
+  --foreground: var(--color-ink);
+
+  --font-display: var(--font-fraunces);
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-ibm-plex-mono);
+
+  --shadow-soft: 0 1px 2px rgba(6, 16, 13, 0.05), 0 8px 24px -8px rgba(6, 16, 13, 0.14);
+  --shadow-elevated: 0 4px 12px rgba(6, 16, 13, 0.1), 0 24px 48px -16px rgba(6, 16, 13, 0.25);
+  --shadow-glow-teal: 0 0 0 1px rgba(57, 255, 136, 0.18), 0 16px 40px -12px rgba(25, 200, 120, 0.38);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-ink: var(--color-ink);
+  --color-navy-950: var(--color-navy-950);
+  --color-navy-900: var(--color-navy-900);
+  --color-navy-800: var(--color-navy-800);
+  --color-navy-700: var(--color-navy-700);
+  --color-teal-600: var(--color-teal-600);
+  --color-teal-500: var(--color-teal-500);
+  --color-teal-400: var(--color-teal-400);
+  --color-cyan-300: var(--color-cyan-300);
+  --color-mist-50: var(--color-mist-50);
+  --color-mist-100: var(--color-mist-100);
+  --color-mist-200: var(--color-mist-200);
+  --color-slate-500: var(--color-slate-500);
+  --color-slate-600: var(--color-slate-600);
+  --color-signal-coral: var(--color-signal-coral);
+  --color-signal-amber: var(--color-signal-amber);
+  --color-clinic-jade: var(--color-clinic-jade);
+  --color-emerald-onlight: var(--color-emerald-onlight);
+
+  --font-display: var(--font-display);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+
+  --shadow-soft: var(--shadow-soft);
+  --shadow-elevated: var(--shadow-elevated);
+  --shadow-glow-teal: var(--shadow-glow-teal);
+
+  --animate-fade-up: fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-draw-line: draw-line 1.6s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+  --animate-float-slow: float-slow 7s ease-in-out infinite;
+  --animate-pulse-glow: pulse-glow 3s ease-in-out infinite;
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes draw-line {
+    from {
+      stroke-dashoffset: var(--path-length, 1000);
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+  @keyframes float-slow {
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-14px);
+    }
+  }
+  @keyframes pulse-glow {
+    0%,
+    100% {
+      opacity: 0.55;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.06);
+    }
+  }
+}
+
+* {
+  border-color: var(--color-mist-200);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+::selection {
+  background: var(--color-teal-400);
+  color: var(--color-navy-950);
+}
+
+:focus-visible {
+  outline: 2.5px solid var(--color-teal-500);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -3rem;
+  z-index: 100;
+  background: var(--color-navy-950);
+  color: var(--color-white);
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.5rem;
+  transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
