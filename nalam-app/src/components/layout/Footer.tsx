@@ -103,7 +103,10 @@ export function Footer() {
 
       <div className="border-t border-white/10">
         <Container className="flex flex-col items-center justify-between gap-3 py-6 text-xs text-mist-100/60 sm:flex-row">
-          <p>© {year} Nalam Software. All rights reserved.</p>
+          <p>
+            © {year} Nalam Software. All rights reserved.{" "}
+            <span className="text-mist-100/45">A Thukal Innovatives LLP company.</span>
+          </p>
           <p>Hospital, Laboratory &amp; Clinic Management Software</p>
         </Container>
       </div>

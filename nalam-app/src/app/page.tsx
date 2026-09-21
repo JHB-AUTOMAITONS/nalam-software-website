@@ -7,8 +7,8 @@ import { CustomizationSection } from "@/components/sections/CustomizationSection
 import { ConnectedSystems } from "@/components/sections/ConnectedSystems";
 import { FeatureGrid } from "@/components/sections/FeatureGrid";
 import { WhyNalam } from "@/components/sections/WhyNalam";
-import { WorkflowTimeline } from "@/components/sections/WorkflowTimeline";
 import { KKAiSection } from "@/components/sections/KKAiSection";
+import { ClientsSection } from "@/components/sections/ClientsSection";
 import { RequirementsSection } from "@/components/sections/RequirementsSection";
 import { FinalCta } from "@/components/sections/FinalCta";
 import { FaqSection } from "@/components/sections/FaqSection";
@@ -48,8 +48,8 @@ export default function HomePage() {
       <ConnectedSystems />
       <FeatureGrid />
       <WhyNalam />
-      <WorkflowTimeline />
       <KKAiSection />
+      <ClientsSection />
       <RequirementsSection />
       <FinalCta />
       <FaqSection />

@@ -74,18 +74,22 @@ export function Header() {
       transition={{ duration: shouldReduceMotion ? 0 : 0.6, ease: [0.16, 1, 0.3, 1] }}
     >
       <motion.div
-        className="mx-auto w-full max-w-[1400px] rounded-[20px] border border-teal-400/20"
+        className="mx-auto w-full max-w-[1120px] rounded-[20px] border border-teal-400/20"
         initial={false}
         animate={scrolled ? GLASS_SCROLLED : GLASS_TOP}
         transition={barTransition}
       >
         <div
           className={`flex w-full items-center justify-between px-5 transition-[padding] duration-300 sm:px-7 lg:px-8 ${
-            scrolled ? "py-3" : "py-4"
+            scrolled ? "py-2" : "py-3"
           }`}
         >
-          <Link href="/" className="flex items-center">
-            <Logo className="h-8 w-auto sm:h-9" priority />
+          <Link href="/" className="relative flex items-center">
+            <span
+              aria-hidden
+              className="pointer-events-none absolute -inset-3 -z-10 rounded-full bg-[radial-gradient(circle,rgba(57,255,136,0.16),transparent_70%)] blur-md"
+            />
+            <Logo className="h-11 w-auto drop-shadow-[0_0_10px_rgba(57,255,136,0.18)] sm:h-12" priority />
           </Link>
 
           <nav aria-label="Primary" className="hidden items-center gap-1 lg:flex">
