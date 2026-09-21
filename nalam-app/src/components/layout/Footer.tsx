@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
+import { Logo } from "@/components/ui/Logo";
 import { siteConfig } from "@/lib/constants";
 
 const solutionLinks = [
@@ -23,14 +24,8 @@ export function Footer() {
     <footer className="border-t border-teal-400/15 bg-navy-950/70 text-mist-100 backdrop-blur-md">
       <Container className="grid gap-12 py-16 sm:grid-cols-2 lg:grid-cols-4 lg:py-20">
         <div className="flex flex-col gap-4 sm:col-span-2 lg:col-span-1">
-          <Link href="/" className="flex items-center gap-2 font-display text-lg font-semibold text-white">
-            <span
-              aria-hidden
-              className="flex h-8 w-8 items-center justify-center rounded-lg bg-teal-500 font-mono text-sm font-bold text-navy-950"
-            >
-              N
-            </span>
-            Nalam Software
+          <Link href="/" className="flex items-center">
+            <Logo className="h-9 w-auto" />
           </Link>
           <p className="max-w-xs text-sm leading-relaxed text-mist-100/70">
             Smart healthcare software for hospitals, laboratories &amp; clinics.

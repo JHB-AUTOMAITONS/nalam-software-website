@@ -10,6 +10,7 @@ import {
   useScroll,
 } from "framer-motion";
 import { Button } from "@/components/ui/Button";
+import { Logo } from "@/components/ui/Logo";
 import { navigation } from "@/lib/constants";
 
 function getPrefersReducedMotion() {
@@ -83,17 +84,8 @@ export function Header() {
             scrolled ? "py-3" : "py-4"
           }`}
         >
-          <Link
-            href="/"
-            className="flex items-center gap-2 font-display text-lg font-semibold tracking-tight text-white"
-          >
-            <span
-              aria-hidden
-              className="flex h-8 w-8 items-center justify-center rounded-lg bg-teal-400/15 font-mono text-sm font-bold text-teal-400 ring-1 ring-inset ring-teal-400/30"
-            >
-              N
-            </span>
-            Nalam Software
+          <Link href="/" className="flex items-center">
+            <Logo className="h-8 w-auto sm:h-9" priority />
           </Link>
 
           <nav aria-label="Primary" className="hidden items-center gap-1 lg:flex">
