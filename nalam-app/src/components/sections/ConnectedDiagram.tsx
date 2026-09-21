@@ -11,6 +11,10 @@ const stages = [
 
 const stageGap = 96;
 const startY = 40;
+// The final stage's label sits at y + 45 (see the <text> below) and needs a
+// little extra room beneath its own baseline so descenders/glow aren't
+// clipped by the viewBox edge.
+const bottomPadding = 24;
 
 export function ConnectedDiagram() {
   const shouldReduceMotion = useReducedMotion();
@@ -18,7 +22,7 @@ export function ConnectedDiagram() {
   return (
     <div className="mx-auto w-full max-w-sm rounded-[28px] border border-teal-400/20 bg-navy-950/60 p-8 shadow-elevated backdrop-blur-md">
       <svg
-        viewBox={`0 0 240 ${startY * 2 + stageGap * (stages.length - 1)}`}
+        viewBox={`0 0 240 ${startY + stageGap * (stages.length - 1) + 45 + bottomPadding}`}
         className="h-auto w-full"
         role="img"
         aria-label="Diagram showing Clinic, Lab and Hospital data connecting into one Patient Record"
