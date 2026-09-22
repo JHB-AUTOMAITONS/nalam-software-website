@@ -45,7 +45,7 @@ export function Hero() {
             variants={item}
             className="text-balance font-display text-[clamp(1.85rem,7vw,2.25rem)] font-medium leading-[1.1] tracking-tight text-navy-950 sm:text-5xl lg:text-6xl"
           >
-            Your Data. In Your Care.{" "}
+            Your Data. In Your Hands.{" "}
             <span className="text-emerald-onlight">In Your Brand.</span>
           </motion.h1>
 
