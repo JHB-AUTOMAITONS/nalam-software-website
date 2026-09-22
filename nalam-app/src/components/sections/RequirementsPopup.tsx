@@ -8,8 +8,8 @@ import { contactFormSchema, type ContactFormFieldErrors } from "@/lib/validation
 import { PopupSelect } from "@/components/ui/PopupSelect";
 import type { ContactApiResponse } from "@/types/forms";
 
-const POPUP_DELAY_MS = 45_000;
-const SESSION_KEY = "nalam_requirement_popup_shown";
+const POPUP_INTERVAL_MS = 10_000;
+const SESSION_KEY = "nalam_requirement_popup_submitted";
 
 type Status = "idle" | "submitting" | "success" | "error";
 const isStaticExport = process.env.NEXT_PUBLIC_STATIC_EXPORT === "true";
@@ -25,7 +25,7 @@ const initialValues = {
   website: "",
 };
 
-function getSessionAlreadyShown() {
+function getSessionAlreadySubmitted() {
   if (typeof window === "undefined") return true;
   try {
     return window.sessionStorage.getItem(SESSION_KEY) === "1";
@@ -38,7 +38,7 @@ export function RequirementsPopup() {
   const pathname = usePathname();
   const shouldReduceMotion = useReducedMotion();
   const [open, setOpen] = useState(false);
-  const [hasShownOnce, setHasShownOnce] = useState(getSessionAlreadyShown);
+  const [hasSubmitted, setHasSubmitted] = useState(getSessionAlreadySubmitted);
   const [values, setValues] = useState(initialValues);
   const [errors, setErrors] = useState<ContactFormFieldErrors>({});
   const [status, setStatus] = useState<Status>("idle");
@@ -51,20 +51,14 @@ export function RequirementsPopup() {
   const isContactPage = pathname === "/contact";
 
   useEffect(() => {
-    if (hasShownOnce || isContactPage) return;
+    if (hasSubmitted || isContactPage) return;
 
-    const timer = window.setTimeout(() => {
+    const interval = window.setInterval(() => {
       setOpen(true);
-      setHasShownOnce(true);
-      try {
-        window.sessionStorage.setItem(SESSION_KEY, "1");
-      } catch {
-        // sessionStorage unavailable (private mode / disabled) — popup still shows this session.
-      }
-    }, POPUP_DELAY_MS);
+    }, POPUP_INTERVAL_MS);
 
-    return () => window.clearTimeout(timer);
-  }, [hasShownOnce, isContactPage]);
+    return () => window.clearInterval(interval);
+  }, [hasSubmitted, isContactPage]);
 
   useEffect(() => {
     if (!open) return;
@@ -174,6 +168,13 @@ export function RequirementsPopup() {
 
       setStatus("success");
       setValues(initialValues);
+      setHasSubmitted(true);
+      try {
+        window.sessionStorage.setItem(SESSION_KEY, "1");
+      } catch {
+        // sessionStorage unavailable (private mode / disabled) — the in-memory
+        // hasSubmitted flag still stops the popup from reopening this session.
+      }
     } catch {
       setStatus("error");
       setStatusMessage("We couldn't reach the server. Please check your connection and try again.");
@@ -352,21 +353,15 @@ export function RequirementsPopup() {
                         label="Organization Type"
                         error={errors.organizationType}
                       >
-                        <select
+                        <PopupSelect
                           id={`${formId}-org-type`}
-                          name="organizationType"
                           value={values.organizationType}
-                          onChange={(e) =>
-                            updateField("organizationType", e.target.value as typeof values.organizationType)
+                          options={organizationTypes}
+                          onChange={(next) =>
+                            updateField("organizationType", next as typeof values.organizationType)
                           }
-                          className={inputClasses(Boolean(errors.organizationType))}
-                        >
-                          {organizationTypes.map((option) => (
-                            <option key={option.value} value={option.value}>
-                              {option.label}
-                            </option>
-                          ))}
-                        </select>
+                          hasError={Boolean(errors.organizationType)}
+                        />
                       </PopupField>
 
                       <PopupField

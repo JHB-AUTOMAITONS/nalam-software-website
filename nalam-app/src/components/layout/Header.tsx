@@ -85,11 +85,7 @@ export function Header() {
           }`}
         >
           <Link href="/" className="relative flex items-center">
-            <span
-              aria-hidden
-              className="pointer-events-none absolute -inset-3 -z-10 rounded-full bg-[radial-gradient(circle,rgba(57,255,136,0.16),transparent_70%)] blur-md"
-            />
-            <Logo className="h-11 w-auto drop-shadow-[0_0_10px_rgba(57,255,136,0.18)] sm:h-12" priority />
+            <Logo className="h-9 w-auto sm:h-10" priority />
           </Link>
 
           <nav aria-label="Primary" className="hidden items-center gap-1 lg:flex">

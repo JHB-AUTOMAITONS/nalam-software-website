@@ -9,7 +9,7 @@ export const siteConfig = {
   contact: {
     email: "info@nalam.care",
     phone: "+91 86087 92718",
-    address: "Chennai, Tamil Nadu, India",
+    address: "2nd Floor, DNO: 30, Indira Nagar, Narasothipatti, Salem, Tamil Nadu 636004",
   },
   social: {
     linkedin: "https://www.linkedin.com/company/nalam-software",

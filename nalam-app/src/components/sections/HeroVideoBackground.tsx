@@ -2,8 +2,7 @@ export function HeroVideoBackground() {
   return (
     <div className="absolute inset-0 z-0 overflow-hidden bg-navy-950">
       <video
-        className="absolute inset-0 h-full w-full object-cover"
-        style={{ objectPosition: "center" }}
+        className="absolute inset-0 h-full w-full object-cover object-[30%_center] sm:object-center"
         autoPlay
         muted
         loop
