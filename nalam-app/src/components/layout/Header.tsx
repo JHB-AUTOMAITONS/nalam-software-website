@@ -84,7 +84,7 @@ export function Header() {
             scrolled ? "py-2" : "py-3"
           }`}
         >
-          <Link href="/" className="relative flex items-center">
+          <Link href="/" className="relative flex items-center overflow-hidden rounded-[15px] sm:rounded-[20px]">
             <Logo className="h-9 w-auto sm:h-10" priority />
           </Link>
 
