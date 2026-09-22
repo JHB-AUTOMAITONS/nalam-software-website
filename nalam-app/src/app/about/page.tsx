@@ -12,7 +12,7 @@ import { buildMetadata } from "@/lib/seo";
 export const metadata: Metadata = buildMetadata({
   title: "About Nalam Software",
   description:
-    "Nalam Software builds connected healthcare management software — Nalam Hospital Management System, Nalam Lab Management System and Nalam Clinic Management System — customized around how healthcare teams actually work.",
+    "Nalam Software builds connected healthcare management software — Hospital Management System, Lab Management System and Clinic Management System — customized around how healthcare teams actually work.",
   path: "/about",
 });
 
@@ -27,13 +27,13 @@ export default function AboutPage() {
       <JsonLd data={buildBreadcrumbSchema(breadcrumbItems)} />
       <Breadcrumbs items={breadcrumbItems} />
 
-      <section className="bg-navy-950 pt-32 pb-20 sm:pt-40 sm:pb-24">
+      <section className="bg-[#F5F8F6] pt-32 pb-20 sm:pt-40 sm:pb-24">
         <Container>
           <RevealOnScroll className="mx-auto flex max-w-3xl flex-col items-center gap-6 text-center">
-            <h1 className="text-balance font-display text-4xl font-medium leading-[1.1] tracking-tight text-white sm:text-5xl">
+            <h1 className="text-balance font-display text-4xl font-medium leading-[1.1] tracking-tight text-navy-950 sm:text-5xl">
               A Healthcare Technology Company, Built Around Connection
             </h1>
-            <p className="text-balance text-base leading-relaxed text-mist-100/80 sm:text-lg">
+            <p className="text-balance text-base leading-relaxed text-slate-600 sm:text-lg">
               Nalam Software provides hospital, laboratory and clinic
               management software designed to work independently or together
               — so healthcare teams spend less time moving between systems
@@ -44,7 +44,7 @@ export default function AboutPage() {
       </section>
 
       <section className="bg-white py-24 sm:py-28">
-        <Container className="grid gap-12 lg:grid-cols-2 lg:gap-16">
+        <Container className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16">
           <RevealOnScroll className="flex flex-col gap-4">
             <SectionHeading
               align="left"
@@ -52,8 +52,8 @@ export default function AboutPage() {
               title="Three Systems. One Design Philosophy."
             />
             <p className="text-base leading-relaxed text-slate-600">
-              Nalam Hospital Management System, Nalam Lab Management System
-              and Nalam Clinic Management System are each built to run
+              Hospital Management System, Lab Management System
+              and Clinic Management System are each built to run
               independently for a single hospital, laboratory or clinic — or
               to connect together into one unified healthcare platform. That
               design decision shapes everything: shared patient records,

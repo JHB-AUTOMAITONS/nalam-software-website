@@ -31,19 +31,19 @@ export function KKAiChatDemo() {
       whileInView="visible"
       viewport={{ once: true, amount: 0.3 }}
       variants={container}
-      className="mx-auto flex w-full max-w-md flex-col gap-3 rounded-[28px] border border-teal-400/20 bg-white/[0.04] p-5 shadow-glow-teal backdrop-blur-md sm:p-6"
+      className="mx-auto flex w-full max-w-md flex-col gap-3 rounded-[28px] border border-ice-500/25 bg-white/80 p-5 shadow-glow-ice backdrop-blur-md sm:p-6"
     >
-      <div className="flex items-center gap-2.5 border-b border-teal-400/15 pb-4">
-        <span className="relative flex h-8 w-8 items-center justify-center rounded-full bg-teal-500/20 font-mono text-xs font-semibold text-teal-400">
+      <div className="flex items-center gap-2.5 border-b border-ice-500/15 pb-4">
+        <span className="relative flex h-8 w-8 items-center justify-center rounded-full bg-ice-500/15 font-mono text-xs font-semibold text-ice-700">
           KK
           <span
             aria-hidden
-            className="absolute -right-0.5 -top-0.5 h-2.5 w-2.5 rounded-full bg-teal-400 ring-2 ring-navy-950"
+            className="absolute -right-0.5 -top-0.5 h-2.5 w-2.5 rounded-full bg-teal-500 ring-2 ring-white"
           />
         </span>
         <div>
-          <p className="text-sm font-medium text-white">KK AI</p>
-          <p className="font-mono text-[10px] uppercase tracking-wide text-mist-100/50">
+          <p className="text-sm font-medium text-navy-950">KK AI</p>
+          <p className="font-mono text-[10px] uppercase tracking-wide text-slate-500">
             Clinic Assistant
           </p>
         </div>
@@ -57,10 +57,10 @@ export function KKAiChatDemo() {
       >
         {exchanges.map((exchange) => (
           <motion.div key={exchange.q} variants={item} className="flex flex-col gap-2">
-            <div className="ml-auto max-w-[85%] rounded-2xl rounded-tr-sm bg-teal-500 px-4 py-2.5 text-sm text-navy-950">
+            <div className="ml-auto max-w-[85%] rounded-2xl rounded-tr-sm bg-teal-500 px-4 py-2.5 text-sm text-white">
               {exchange.q}
             </div>
-            <div className="mr-auto max-w-[85%] rounded-2xl rounded-tl-sm bg-white/10 px-4 py-2.5 text-sm text-mist-100">
+            <div className="mr-auto max-w-[85%] rounded-2xl rounded-tl-sm bg-navy-950/[0.05] px-4 py-2.5 text-sm text-navy-800">
               {exchange.a}
             </div>
           </motion.div>

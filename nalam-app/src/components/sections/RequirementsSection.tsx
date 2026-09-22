@@ -5,7 +5,7 @@ import { RequirementsForm } from "./RequirementsForm";
 
 export function RequirementsSection() {
   return (
-    <section id="requirements" className="scroll-mt-32 bg-navy-950/55 py-11 backdrop-blur-sm sm:py-16 lg:py-20">
+    <section id="requirements" className="scroll-mt-32 bg-white/40 py-11 backdrop-blur-sm sm:py-16 lg:py-20">
       <Container className="flex flex-col gap-8">
         <SectionHeading
           eyebrow="Tell Us What You Need"
@@ -14,7 +14,7 @@ export function RequirementsSection() {
           tone="dark"
         />
 
-        <RevealOnScroll className="mx-auto w-full max-w-3xl rounded-[28px] border border-teal-400/20 bg-white/95 p-6 shadow-elevated backdrop-blur-sm sm:p-10">
+        <RevealOnScroll className="glass-surface-strong mx-auto w-full max-w-3xl rounded-[28px] border border-ice-500/20 p-6 shadow-elevated backdrop-blur-sm sm:p-10">
           <RequirementsForm />
         </RevealOnScroll>
       </Container>

@@ -1,45 +1,82 @@
 @import "tailwindcss";
 
 :root {
-  /* Core brand palette — Premium Emerald Healthcare Technology */
-  --color-ink: #07130f;
-  --color-navy-950: #06100d;
-  --color-navy-900: #091713;
-  --color-navy-800: #0d1d18;
-  --color-navy-700: #123b2c;
+  /* Core brand palette — Premium Light Healthcare Technology */
+  /* "navy" / "ink" tokens are kept as names for compatibility across ~40 files,
+     but now hold dark charcoal/forest TEXT colors instead of dark backgrounds. */
+  --color-ink: #10231b;
+  --color-navy-950: #10231b;
+  --color-navy-900: #17352a;
+  --color-navy-800: #234536;
+  --color-navy-700: #2f5747;
   --color-teal-600: #19c878;
   --color-teal-500: #19c878;
   --color-teal-400: #39ff88;
-  --color-cyan-300: #9cffd0;
-  --color-mist-50: #f4faf7;
-  --color-mist-100: #eaf5f0;
-  --color-mist-200: #ddf4e9;
+  --color-cyan-300: #1f9c6b;
+  --color-mist-50: #f5f8f6;
+  --color-mist-100: #eef3f0;
+  --color-mist-200: #dde8e1;
   --color-slate-500: #52705f;
   --color-slate-600: #3a4a42;
   --color-white: #ffffff;
-  --color-signal-coral: #ef7a5a;
-  --color-signal-amber: #f2b544;
-  --color-clinic-jade: #2fe0a8;
+  --color-signal-coral: #d9553a;
+  --color-signal-amber: #b8871f;
+  --color-clinic-jade: #0f9d6e;
   --color-emerald-onlight: #098049;
 
-  --glass-surface: rgba(10, 30, 23, 0.62);
-  --glass-border: rgba(57, 255, 136, 0.18);
-  --glass-border-strong: rgba(57, 255, 136, 0.35);
-  --glow-green: rgba(57, 255, 136, 0.18);
+  /* Ice-blue / cyan-blue — sampled directly from the Nalam logo artwork
+     (public/images/nalam-logo.png): the plus icon and "N" gradient both
+     resolve to this saturated cyan-blue (~#05d5d5). A darker on-light
+     variant is derived for text/hover contrast, and a very pale tint is
+     used for card surfaces and subtle backgrounds. */
+  --color-ice-500: #05d5d5;
+  --color-ice-600: #049fb0;
+  --color-ice-700: #037e8f;
+  --color-ice-100: #e3fbfb;
+  --color-ice-50: #f0fdfd;
 
-  --background: var(--color-white);
+  /* Light surfaces */
+  --color-surface: #f5f8f6;
+  --color-surface-raised: #fbfdfc;
+  --color-surface-card: rgba(255, 255, 255, 0.72);
+  --color-surface-card-strong: rgba(255, 255, 255, 0.88);
+  --color-surface-cool: #f2f6f8;
+
+  --glass-surface: rgba(255, 255, 255, 0.62);
+  --glass-border: rgba(19, 120, 74, 0.14);
+  --glass-border-strong: rgba(19, 120, 74, 0.28);
+  --glow-green: rgba(25, 200, 120, 0.16);
+  --glow-ice: rgba(5, 213, 213, 0.18);
+
+  --background: var(--color-surface);
   --foreground: var(--color-ink);
 
   --font-display: var(--font-fraunces);
   --font-sans: var(--font-inter);
   --font-mono: var(--font-ibm-plex-mono);
 
-  --shadow-soft: 0 1px 2px rgba(6, 16, 13, 0.05), 0 8px 24px -8px rgba(6, 16, 13, 0.14);
-  --shadow-elevated: 0 4px 12px rgba(6, 16, 13, 0.1), 0 24px 48px -16px rgba(6, 16, 13, 0.25);
-  --shadow-glow-teal: 0 0 0 1px rgba(57, 255, 136, 0.18), 0 16px 40px -12px rgba(25, 200, 120, 0.38);
+  --shadow-soft: 0 1px 2px rgba(16, 35, 27, 0.04), 0 8px 24px -8px rgba(16, 35, 27, 0.08);
+  --shadow-elevated: 0 4px 12px rgba(16, 35, 27, 0.06), 0 24px 48px -16px rgba(16, 35, 27, 0.14);
+  --shadow-glow-teal: 0 0 0 1px rgba(25, 200, 120, 0.18), 0 16px 40px -12px rgba(25, 200, 120, 0.22);
+  --shadow-glow-ice: 0 0 0 1px rgba(5, 213, 213, 0.2), 0 16px 40px -12px rgba(5, 213, 213, 0.24);
+
+  /* Glassmorphism polish — shared "high-end medical glass" recipe for the
+     navbar, hero platform card, and requirements popup/forms: soft diffused
+     shadow + a faint inset top highlight to read as reflective glass rather
+     than a flat tinted rectangle. Built from the existing shadow-soft scale,
+     not a new heavy shadow. */
+  --shadow-glass: 0 1px 2px rgba(16, 35, 27, 0.04), 0 20px 48px -14px rgba(16, 35, 27, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.65), inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+  --shadow-glass-strong: 0 1px 2px rgba(16, 35, 27, 0.05), 0 24px 56px -14px rgba(16, 35, 27, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.75), inset 0 0 0 1px rgba(255, 255, 255, 0.1);
 }
 
 @theme inline {
+  /* Extra-small breakpoint used to add one more responsive step below the
+     default `sm` (640px) for the very narrow viewports (200-360px) this site
+     is stress-tested against. */
+  --breakpoint-xs: 22.5rem;
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
 
@@ -61,6 +98,16 @@
   --color-signal-amber: var(--color-signal-amber);
   --color-clinic-jade: var(--color-clinic-jade);
   --color-emerald-onlight: var(--color-emerald-onlight);
+  --color-ice-500: var(--color-ice-500);
+  --color-ice-600: var(--color-ice-600);
+  --color-ice-700: var(--color-ice-700);
+  --color-ice-100: var(--color-ice-100);
+  --color-ice-50: var(--color-ice-50);
+  --color-surface: var(--color-surface);
+  --color-surface-raised: var(--color-surface-raised);
+  --color-surface-card: var(--color-surface-card);
+  --color-surface-card-strong: var(--color-surface-card-strong);
+  --color-surface-cool: var(--color-surface-cool);
 
   --font-display: var(--font-display);
   --font-sans: var(--font-sans);
@@ -69,6 +116,9 @@
   --shadow-soft: var(--shadow-soft);
   --shadow-elevated: var(--shadow-elevated);
   --shadow-glow-teal: var(--shadow-glow-teal);
+  --shadow-glow-ice: var(--shadow-glow-ice);
+  --shadow-glass: var(--shadow-glass);
+  --shadow-glass-strong: var(--shadow-glass-strong);
 
   --animate-fade-up: fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   --animate-draw-line: draw-line 1.6s cubic-bezier(0.65, 0, 0.35, 1) forwards;
@@ -119,6 +169,33 @@
   border-color: var(--color-mist-200);
 }
 
+/* Shared "glass material" surface: the same subtle white → pale ice-blue
+   gradient used by the navbar and hero platform card, reused wherever a
+   card/panel should visibly belong to the same glass system. */
+.glass-surface {
+  background: linear-gradient(
+    155deg,
+    rgba(255, 255, 255, 0.78) 0%,
+    rgba(240, 253, 253, 0.58) 100%
+  );
+}
+
+.glass-surface-strong {
+  background: linear-gradient(
+    155deg,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(240, 253, 253, 0.82) 100%
+  );
+}
+
+.glass-surface-hover:hover {
+  background: linear-gradient(
+    155deg,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(240, 253, 253, 0.82) 100%
+  );
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -131,7 +208,7 @@ body {
 
 ::selection {
   background: var(--color-teal-400);
-  color: var(--color-navy-950);
+  color: var(--color-ink);
 }
 
 :focus-visible {
@@ -163,7 +240,7 @@ body {
   left: 1rem;
   top: -3rem;
   z-index: 100;
-  background: var(--color-navy-950);
+  background: var(--color-ink);
   color: var(--color-white);
   padding: 0.75rem 1.25rem;
   border-radius: 0.5rem;

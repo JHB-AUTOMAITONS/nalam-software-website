@@ -3,9 +3,9 @@
 import { motion, useReducedMotion } from "framer-motion";
 
 const nodes = [
-  { id: "lab", label: "LAB", sub: "Nalam LMS", cy: 64, color: "var(--color-teal-400)" },
-  { id: "hospital", label: "HOSPITAL", sub: "Nalam HMS", cy: 184, color: "var(--color-cyan-300)" },
-  { id: "clinic", label: "CLINIC", sub: "Nalam CMS", cy: 304, color: "var(--color-clinic-jade)" },
+  { id: "lab", label: "LAB", sub: "LMS", cy: 64, color: "var(--color-teal-400)" },
+  { id: "hospital", label: "HOSPITAL", sub: "HMS", cy: 184, color: "var(--color-teal-400)" },
+  { id: "clinic", label: "CLINIC", sub: "CMS", cy: 304, color: "var(--color-clinic-jade)" },
 ];
 
 export function HeroVisual() {
@@ -14,17 +14,21 @@ export function HeroVisual() {
   return (
     <div className="relative mx-auto w-full max-w-md lg:max-w-none" aria-hidden="true">
       <div
-        className="rounded-[28px] p-5 shadow-elevated backdrop-blur-md sm:p-8"
+        className="rounded-[30px] p-5 sm:p-8"
         style={{
-          background: "rgba(8, 25, 18, 0.58)",
-          border: "1px solid rgba(156, 255, 208, 0.30)",
+          background:
+            "linear-gradient(155deg, rgba(255, 255, 255, 0.58) 0%, rgba(240, 253, 253, 0.42) 100%)",
+          border: "1px solid rgba(5, 213, 213, 0.22)",
+          backdropFilter: "blur(26px) saturate(150%)",
+          WebkitBackdropFilter: "blur(26px) saturate(150%)",
+          boxShadow: "var(--shadow-glass)",
         }}
       >
         <svg viewBox="0 0 420 368" className="h-auto w-full" role="presentation">
           <defs>
             <linearGradient id="hub-glow" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stopColor="var(--color-teal-400)" />
-              <stop offset="100%" stopColor="var(--color-cyan-300)" />
+              <stop offset="0%" stopColor="var(--color-ice-500)" />
+              <stop offset="100%" stopColor="var(--color-ice-700)" />
             </linearGradient>
           </defs>
 
@@ -38,7 +42,7 @@ export function HeroVisual() {
                 key={node.id}
                 d={pathD}
                 fill="none"
-                stroke={node.color}
+                stroke="var(--color-ice-500)"
                 strokeWidth={1.5}
                 strokeLinecap="round"
                 initial={{ pathLength: shouldReduceMotion ? 1 : 0, opacity: shouldReduceMotion ? 0.55 : 0 }}
@@ -73,7 +77,7 @@ export function HeroVisual() {
                 x={40}
                 y={node.cy - 14}
                 textAnchor="middle"
-                className="fill-white/85 font-mono text-[11px] tracking-[0.12em]"
+                className="fill-navy-950/85 font-mono text-[11px] tracking-[0.12em]"
               >
                 {node.label}
               </text>
@@ -81,7 +85,7 @@ export function HeroVisual() {
                 x={40}
                 y={node.cy + 22}
                 textAnchor="middle"
-                className="fill-white/50 text-[10px]"
+                className="fill-slate-500 text-[10px]"
               >
                 {node.sub}
               </text>
@@ -105,12 +109,12 @@ export function HeroVisual() {
             }
             style={{ transformOrigin: "300px 184px" }}
           />
-          <circle cx={300} cy={184} r={30} fill="var(--color-navy-950)" stroke="var(--color-teal-400)" strokeWidth={1} />
+          <circle cx={300} cy={184} r={30} fill="var(--color-surface-raised)" stroke="var(--color-teal-500)" strokeWidth={1} />
           <text
             x={300}
             y={180}
             textAnchor="middle"
-            className="fill-white font-display text-[13px] font-medium"
+            className="fill-navy-950 font-display text-[13px] font-medium"
           >
             Nalam
           </text>
@@ -118,14 +122,14 @@ export function HeroVisual() {
             x={300}
             y={196}
             textAnchor="middle"
-            className="fill-teal-400 font-mono text-[9px] uppercase tracking-[0.14em]"
+            className="fill-emerald-onlight font-mono text-[9px] uppercase tracking-[0.14em]"
           >
             Platform
           </text>
         </svg>
       </div>
 
-      <p className="mt-4 text-center font-mono text-xs uppercase tracking-[0.14em] text-mist-100/50">
+      <p className="mt-4 text-center font-mono text-xs uppercase tracking-[0.14em] text-slate-500">
         Independent by design. Connected on demand.
       </p>
     </div>

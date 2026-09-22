@@ -14,7 +14,7 @@ const reasons = [
 
 export function WhyNalam() {
   return (
-    <section className="bg-navy-950/55 py-11 backdrop-blur-sm sm:py-16 lg:py-20">
+    <section className="bg-white/40 py-11 backdrop-blur-sm sm:py-16 lg:py-20">
       <Container className="flex flex-col gap-8">
         <SectionHeading
           eyebrow="Why Nalam"
@@ -22,7 +22,7 @@ export function WhyNalam() {
           tone="dark"
         />
 
-        <StaggerGroup as="ul" className="grid gap-3 sm:grid-cols-2 sm:gap-3.5 lg:grid-cols-3 lg:gap-4" staggerDelay={0.08}>
+        <StaggerGroup as="ul" className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-3.5 lg:grid-cols-3 lg:gap-4" staggerDelay={0.08}>
           {reasons.map((reason, index) => (
             <WhyCard key={reason.title} index={index} {...reason} />
           ))}

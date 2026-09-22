@@ -17,9 +17,9 @@ export function ClientCard({ name, subtitle, logoSrc }: ClientCardProps) {
     <motion.li
       variants={getStaggerItem(shouldReduceMotion)}
       whileHover={shouldReduceMotion ? undefined : { y: -4 }}
-      className="flex list-none flex-col items-center gap-4 rounded-2xl border border-teal-400/15 bg-white/[0.05] p-6 text-center shadow-soft backdrop-blur-sm"
+      className="glass-surface flex list-none flex-col items-center gap-4 rounded-2xl border border-ice-500/15 p-6 text-center shadow-soft backdrop-blur-sm"
     >
-      <span className="flex h-20 w-full items-center justify-center rounded-xl bg-white/95 p-3">
+      <span className="flex h-20 w-full items-center justify-center rounded-xl bg-white p-3">
         <Image
           src={logoSrc}
           alt={`${name} logo`}
@@ -30,8 +30,8 @@ export function ClientCard({ name, subtitle, logoSrc }: ClientCardProps) {
         />
       </span>
       <div className="flex flex-col gap-0.5">
-        <p className="text-sm font-medium text-white">{name}</p>
-        {subtitle ? <p className="text-xs text-mist-100/60">{subtitle}</p> : null}
+        <p className="text-sm font-medium text-navy-950">{name}</p>
+        {subtitle ? <p className="text-xs text-slate-500">{subtitle}</p> : null}
       </div>
     </motion.li>
   );

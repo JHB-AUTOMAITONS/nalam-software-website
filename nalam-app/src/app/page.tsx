@@ -4,7 +4,6 @@ import { Hero } from "@/components/sections/Hero";
 import { ProductsOverview } from "@/components/sections/ProductsOverview";
 import { ProductDetail } from "@/components/sections/ProductDetail";
 import { CustomizationSection } from "@/components/sections/CustomizationSection";
-import { ConnectedSystems } from "@/components/sections/ConnectedSystems";
 import { FeatureGrid } from "@/components/sections/FeatureGrid";
 import { WhyNalam } from "@/components/sections/WhyNalam";
 import { KKAiSection } from "@/components/sections/KKAiSection";
@@ -45,7 +44,6 @@ export default function HomePage() {
       <ProductDetail product={products.hms} index={2} reverse />
       <ProductDetail product={products.cms} index={3} />
       <CustomizationSection />
-      <ConnectedSystems />
       <FeatureGrid />
       <WhyNalam />
       <KKAiSection />

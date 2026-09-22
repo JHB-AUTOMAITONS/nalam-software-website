@@ -1,6 +1,11 @@
 import { NextResponse } from "next/server";
 import { sendContactNotification } from "@/lib/email";
-import { contactFormSchema } from "@/lib/validation";
+import {
+  contactFormSchema,
+  popupFormSchema,
+  type ContactFormValues,
+  type PopupFormValues,
+} from "@/lib/validation";
 
 export async function POST(request: Request) {
   let body: unknown;
@@ -14,25 +19,40 @@ export async function POST(request: Request) {
     );
   }
 
+  // The full Contact-page form always sends every field (contactFormSchema).
+  // The 45-second popup only requires Name + Phone, so its payload is
+  // validated against the shorter popupFormSchema instead — this keeps the
+  // Contact page's own required fields fully unchanged.
   const parsed = contactFormSchema.safeParse(body);
 
-  if (!parsed.success) {
-    return NextResponse.json(
-      {
-        success: false,
-        message: "Please check the highlighted fields.",
-        fieldErrors: parsed.error.flatten().fieldErrors,
-      },
-      { status: 422 }
-    );
+  let finalData: ContactFormValues | PopupFormValues;
+
+  if (parsed.success) {
+    finalData = parsed.data;
+  } else {
+    const parsedPopup = popupFormSchema.safeParse(body);
+    if (!parsedPopup.success) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: "Please check the highlighted fields.",
+          fieldErrors: {
+            ...parsed.error.flatten().fieldErrors,
+            ...parsedPopup.error.flatten().fieldErrors,
+          },
+        },
+        { status: 422 }
+      );
+    }
+    finalData = parsedPopup.data;
   }
 
-  if (parsed.data.website) {
+  if (finalData.website) {
     return NextResponse.json({ success: true });
   }
 
   try {
-    await sendContactNotification(parsed.data);
+    await sendContactNotification(finalData);
   } catch (error) {
     console.error("[contact] Failed to send notification email:", error);
     return NextResponse.json(

@@ -13,10 +13,10 @@ const accentStyles: Record<Product["accent"], { ring: string; badge: string; ico
     text: "text-emerald-onlight",
   },
   navy: {
-    ring: "hover:ring-cyan-300/40 hover:shadow-glow-teal",
-    badge: "bg-cyan-300/15 text-navy-800",
-    icon: "bg-cyan-300/15 text-navy-800",
-    text: "text-navy-800",
+    ring: "hover:ring-ice-500/40 hover:shadow-glow-ice",
+    badge: "bg-ice-500/12 text-ice-700",
+    icon: "bg-ice-500/12 text-ice-700",
+    text: "text-ice-700",
   },
   coral: {
     ring: "hover:ring-clinic-jade/40 hover:shadow-glow-teal",
@@ -35,10 +35,12 @@ export function ProductCard({ product }: { product: Product }) {
       variants={getStaggerItem(shouldReduceMotion)}
       whileHover={shouldReduceMotion ? undefined : { y: -6 }}
       transition={{ duration: 0.25, ease: "easeOut" }}
-      className={`group flex h-full flex-col gap-6 rounded-3xl border border-teal-400/20 bg-white/95 p-8 shadow-soft ring-1 ring-transparent backdrop-blur-sm transition-shadow duration-300 ${styles.ring}`}
+      className={`glass-surface-strong group flex h-full min-w-0 flex-col gap-6 rounded-3xl border border-ice-500/20 p-5 shadow-soft ring-1 ring-transparent backdrop-blur-sm transition-shadow duration-300 xs:p-8 ${styles.ring}`}
     >
-      <div className="flex items-start justify-between gap-4">
-        <span className={`inline-flex rounded-full px-3 py-1 font-mono text-[0.65rem] font-medium uppercase tracking-[0.14em] ${styles.badge}`}>
+      <div className="flex min-w-0 items-start justify-between gap-4">
+        <span
+          className={`inline-flex max-w-full items-center rounded-full px-3 py-1 font-mono text-[0.65rem] font-medium uppercase tracking-[0.14em] [overflow-wrap:anywhere] ${styles.badge}`}
+        >
           {product.eyebrow}
         </span>
       </div>

@@ -47,9 +47,9 @@ export const metadata: Metadata = {
     "laboratory software",
     "clinic software",
     "Nalam Software",
-    "Nalam Hospital Management System",
-    "Nalam Lab Management System",
-    "Nalam Clinic Management System",
+    "Hospital Management System",
+    "Lab Management System",
+    "Clinic Management System",
   ],
   authors: [{ name: siteConfig.name }],
   creator: siteConfig.name,
@@ -84,7 +84,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport = {
-  themeColor: "#071019",
+  themeColor: "#F5F8F6",
   width: "device-width",
   initialScale: 1,
 };
@@ -95,7 +95,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${fraunces.variable} ${inter.variable} ${ibmPlexMono.variable} h-full scroll-smooth antialiased`}
     >
-      <body className="flex min-h-full flex-col bg-white text-ink">
+      <body className="flex min-h-full flex-col bg-surface text-ink">
         <Analytics />
         <a href="#main-content" className="skip-link">
           Skip to main content

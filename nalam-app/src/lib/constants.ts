@@ -43,8 +43,8 @@ export interface Product {
 export const products: Record<ProductId, Product> = {
   lms: {
     id: "lms",
-    shortName: "Nalam LMS",
-    fullName: "Nalam Lab Management System",
+    shortName: "LMS",
+    fullName: "Lab Management System",
     slug: "lms",
     landingSlug: "/#lms",
     positioning: "From Sample to Report — Fully Connected.",
@@ -60,15 +60,15 @@ export const products: Record<ProductId, Product> = {
     ],
     valueStatement: "Less Manual Entry. Faster Reports. Better Lab Control.",
     closingStatement: "Run Your Entire Laboratory from One Smart Platform.",
-    ctaLabel: "Explore Nalam LMS",
+    ctaLabel: "Explore LMS",
     audience: "Diagnostic laboratory owners and lab managers",
     eyebrow: "Laboratory Management Software",
     accent: "teal",
   },
   hms: {
     id: "hms",
-    shortName: "Nalam HMS",
-    fullName: "Nalam Hospital Management System",
+    shortName: "HMS",
+    fullName: "Hospital Management System",
     slug: "hms",
     landingSlug: "/#hms",
     positioning: "One Patient. One Hospital Journey. Everything Connected.",
@@ -84,15 +84,15 @@ export const products: Record<ProductId, Product> = {
     ],
     valueStatement: "Less Repeated Work. Faster Patient Care. Better Hospital Control.",
     closingStatement: "Run Your Entire Hospital from One Simple, Connected Platform.",
-    ctaLabel: "Explore Nalam HMS",
+    ctaLabel: "Explore HMS",
     audience: "Hospital owners and hospital administrators",
     eyebrow: "Hospital Management Software",
     accent: "navy",
   },
   cms: {
     id: "cms",
-    shortName: "Nalam CMS",
-    fullName: "Nalam Clinic Management System",
+    shortName: "CMS",
+    fullName: "Clinic Management System",
     slug: "cms",
     landingSlug: "/#cms",
     positioning: "One Platform. One Patient Journey. One Intelligent Assistant.",
@@ -108,7 +108,7 @@ export const products: Record<ProductId, Product> = {
     ],
     valueStatement: "One Assistant. Instant Answers. Total Clarity.",
     closingStatement: "Run Your Entire Clinic from One Intelligent Platform.",
-    ctaLabel: "Explore Nalam CMS",
+    ctaLabel: "Explore CMS",
     audience: "Clinic owners and medical management teams",
     eyebrow: "Clinic Management Software",
     accent: "coral",
@@ -124,9 +124,9 @@ export const navigation = {
       label: "Solutions",
       href: "/#solutions",
       children: [
-        { label: "Nalam HMS", href: "/#hms" },
-        { label: "Nalam LMS", href: "/#lms" },
-        { label: "Nalam CMS", href: "/#cms" },
+        { label: "HMS", href: "/#hms" },
+        { label: "LMS", href: "/#lms" },
+        { label: "CMS", href: "/#cms" },
       ],
     },
     { label: "Custom Solutions", href: "/#customization" },
@@ -145,28 +145,28 @@ export const organizationTypes = [
 ] as const;
 
 export const interestedSystems = [
-  { value: "lms", label: "Nalam LMS — Lab Management" },
-  { value: "hms", label: "Nalam HMS — Hospital Management" },
-  { value: "cms", label: "Nalam CMS — Clinic Management" },
+  { value: "lms", label: "LMS — Lab Management" },
+  { value: "hms", label: "HMS — Hospital Management" },
+  { value: "cms", label: "CMS — Clinic Management" },
   { value: "multiple", label: "Multiple Systems" },
   { value: "custom", label: "Custom Solution" },
 ] as const;
 
 export const faqs = [
   {
-    question: "What is Nalam Hospital Management System?",
+    question: "What is the Hospital Management System?",
     answer:
-      "Nalam Hospital Management System (Nalam HMS) is hospital management software that connects the complete patient journey — registration, appointments, consultation, admission, treatment, discharge and follow-up — along with laboratory, radiology, pharmacy, billing and insurance, all on one connected hospital platform.",
+      "The Hospital Management System (HMS) is hospital management software that connects the complete patient journey — registration, appointments, consultation, admission, treatment, discharge and follow-up — along with laboratory, radiology, pharmacy, billing and insurance, all on one connected hospital platform.",
   },
   {
-    question: "What is Nalam Lab Management System?",
+    question: "What is the Lab Management System?",
     answer:
-      "Nalam Lab Management System (Nalam LMS) is laboratory management software that manages the full lab workflow, from test order and sample collection to processing, result validation, authorization and report delivery, with direct lab machine integration and reagent stock management.",
+      "The Lab Management System (LMS) is laboratory management software that manages the full lab workflow, from test order and sample collection to processing, result validation, authorization and report delivery, with direct lab machine integration and reagent stock management.",
   },
   {
-    question: "What is Nalam Clinic Management System?",
+    question: "What is the Clinic Management System?",
     answer:
-      "Nalam Clinic Management System (Nalam CMS) is clinic management software that handles appointments, consultations, procedures, treatment plans, pharmacy and billing through one intelligent clinic platform, including KK AI, an assistant that answers questions using your own clinic data.",
+      "The Clinic Management System (CMS) is clinic management software that handles appointments, consultations, procedures, treatment plans, pharmacy and billing through one intelligent clinic platform, including KK AI, an assistant that answers questions using your own clinic data.",
   },
   {
     question: "Can Nalam Software be customized?",
@@ -176,27 +176,27 @@ export const faqs = [
   {
     question: "Can Nalam connect hospital and laboratory workflows?",
     answer:
-      "Yes. When Nalam HMS and Nalam LMS are connected, hospital doctors can order laboratory tests directly, and laboratory results flow back into the patient's hospital record, keeping hospital and lab teams working from the same patient information.",
+      "Yes. When HMS and LMS are connected, hospital doctors can order laboratory tests directly, and laboratory results flow back into the patient's hospital record, keeping hospital and lab teams working from the same patient information.",
   },
   {
     question: "Can Nalam connect clinic and laboratory workflows?",
     answer:
-      "Yes. Nalam CMS can be connected with Nalam LMS so that clinic consultations and prescriptions link with laboratory workflows and reports, giving clinic owners a single view of patient investigations without switching systems.",
+      "Yes. CMS can be connected with LMS so that clinic consultations and prescriptions link with laboratory workflows and reports, giving clinic owners a single view of patient investigations without switching systems.",
   },
   {
     question: "Can multiple Nalam systems be combined?",
     answer:
-      "Yes. Nalam Software can combine Nalam HMS, Nalam LMS and Nalam CMS into a single connected healthcare ecosystem, so patient information and workflows can move between hospital, clinic and laboratory departments.",
+      "Yes. Nalam Software can combine HMS, LMS and CMS into a single connected healthcare ecosystem, so patient information and workflows can move between hospital, clinic and laboratory departments.",
   },
   {
     question: "Does Nalam support laboratory machine integration?",
     answer:
-      "Yes. Nalam LMS supports direct lab machine integration, reducing manual result entry and helping laboratories deliver faster, more accurate reports.",
+      "Yes. LMS supports direct lab machine integration, reducing manual result entry and helping laboratories deliver faster, more accurate reports.",
   },
   {
     question: "Does Nalam provide patient history?",
     answer:
-      "Yes. Across Nalam HMS, Nalam LMS and Nalam CMS, patient history is maintained centrally, giving doctors and healthcare teams a complete view of past visits, treatments, lab results and prescriptions.",
+      "Yes. Across HMS, LMS and CMS, patient history is maintained centrally, giving doctors and healthcare teams a complete view of past visits, treatments, lab results and prescriptions.",
   },
   {
     question: "What type of healthcare organizations can use Nalam?",

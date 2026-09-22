@@ -26,14 +26,14 @@ export function CustomizationSection() {
   return (
     <section
       id="customization"
-      className="scroll-mt-32 relative isolate overflow-hidden bg-navy-950/55 py-10 backdrop-blur-sm sm:py-14 lg:py-16"
+      className="scroll-mt-32 relative isolate overflow-hidden bg-white/40 py-10 backdrop-blur-sm sm:py-14 lg:py-16"
     >
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "radial-gradient(circle at 20% 15%, rgba(57,255,136,0.08), transparent 45%), radial-gradient(circle at 82% 78%, rgba(57,255,136,0.06), transparent 40%)",
+            "radial-gradient(circle at 20% 15%, rgba(57,255,136,0.07), transparent 45%), radial-gradient(circle at 82% 78%, rgba(5,213,213,0.07), transparent 40%)",
         }}
       />
       <motion.div
@@ -52,7 +52,7 @@ export function CustomizationSection() {
       />
       <motion.div
         aria-hidden
-        className="pointer-events-none absolute -right-24 bottom-0 h-80 w-80 rounded-full bg-teal-400/10 blur-[120px]"
+        className="pointer-events-none absolute -right-24 bottom-0 h-80 w-80 rounded-full bg-ice-500/10 blur-[120px]"
         animate={
           shouldReduceMotion
             ? { opacity: 0.6, scale: 1 }
@@ -85,14 +85,14 @@ export function CustomizationSection() {
         >
           {customizationExamples.map((item) => (
             <RevealItem key={item} className="list-none">
-              <span className="inline-flex items-center rounded-full border border-teal-400/20 bg-white/[0.04] px-4 py-2 text-sm text-mist-100/90">
+              <span className="inline-flex items-center rounded-full border border-teal-500/20 bg-white/60 px-4 py-2 text-sm text-navy-800">
                 {item}
               </span>
             </RevealItem>
           ))}
         </StaggerGroup>
 
-        <Button href="/contact" size="lg" variant="onDark">
+        <Button href="/contact" size="lg" variant="primary">
           Discuss Your Requirements
         </Button>
       </Container>

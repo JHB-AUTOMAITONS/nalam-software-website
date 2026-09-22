@@ -8,22 +8,22 @@ type Variant = "primary" | "secondary" | "ghost" | "onDark" | "glass";
 type Size = "md" | "lg";
 
 const baseStyles =
-  "inline-flex items-center justify-center gap-2 rounded-full font-medium transition-colors duration-200 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-60";
+  "inline-flex max-w-full items-center justify-center gap-2 rounded-full text-center font-medium transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ice-500/50 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60";
 
 const variantStyles: Record<Variant, string> = {
   primary:
-    "bg-teal-400 text-navy-950 shadow-soft hover:bg-teal-600 hover:shadow-glow-teal",
+    "bg-teal-500 text-white shadow-soft hover:bg-ice-600 hover:shadow-glow-ice",
   secondary:
-    "bg-white text-navy-950 ring-1 ring-inset ring-navy-900/15 hover:ring-teal-500/50 hover:text-emerald-onlight",
-  ghost: "text-navy-800 hover:text-emerald-onlight",
-  onDark: "bg-white text-navy-950 hover:bg-teal-400 hover:text-navy-950 shadow-elevated",
+    "bg-white text-navy-950 ring-1 ring-inset ring-ice-500/35 hover:ring-ice-500/60 hover:text-ice-700",
+  ghost: "text-navy-800 hover:text-ice-700",
+  onDark: "bg-teal-500 text-white hover:bg-ice-600 shadow-elevated",
   glass:
-    "bg-[linear-gradient(135deg,rgba(25,200,120,0.22),rgba(57,255,136,0.10))] text-white ring-1 ring-inset ring-teal-400/40 backdrop-blur-sm hover:ring-teal-400/60 hover:shadow-glow-teal",
+    "bg-[rgba(221,247,250,0.55)] text-navy-950 ring-1 ring-inset ring-teal-500/40 backdrop-blur-sm hover:bg-[rgba(221,247,250,0.75)] hover:ring-teal-500/60 hover:shadow-[0_0_0_1px_rgba(24,200,120,0.25),0_10px_26px_-8px_rgba(24,200,120,0.4)]",
 };
 
 const sizeStyles: Record<Size, string> = {
-  md: "px-5 py-2.5 text-sm",
-  lg: "px-7 py-3.5 text-base",
+  md: "px-4 py-2.5 text-sm xs:px-5",
+  lg: "px-5 py-3 text-sm xs:px-7 xs:py-3.5 xs:text-base",
 };
 
 const TAP_TRANSITION = { duration: 0.15, ease: [0.16, 1, 0.3, 1] as const };

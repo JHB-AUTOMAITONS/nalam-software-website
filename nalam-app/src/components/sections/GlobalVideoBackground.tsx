@@ -18,17 +18,17 @@ export function GlobalVideoBackground() {
   }, []);
 
   return (
-    <div className="fixed inset-0 -z-50 overflow-hidden bg-navy-950" aria-hidden="true">
+    <div className="fixed inset-0 -z-50 overflow-hidden bg-[#F5F8F6]" aria-hidden="true">
       {shouldReduceMotion ? (
         // eslint-disable-next-line @next/next/no-img-element
         <img
           src="/images/nalam-background-poster.jpg"
           alt=""
-          className="h-full w-full object-cover"
+          className="h-full w-full object-cover grayscale-[35%]"
         />
       ) : (
         <video
-          className="h-full w-full object-cover"
+          className="h-full w-full object-cover grayscale-[35%]"
           autoPlay
           muted
           loop
@@ -40,12 +40,13 @@ export function GlobalVideoBackground() {
         </video>
       )}
 
-      {/* Dark emerald overlay: keeps the video subtle and premium, never fully hidden. */}
-      <div className="absolute inset-0 bg-[rgba(3,15,11,0.52)]" />
+      {/* Strong light overlay: the video reads as a barely-there, softly moving
+          texture behind a warm off-white backdrop, never as visible video playback. */}
+      <div className="absolute inset-0 bg-[rgba(245,248,246,0.88)]" />
 
-      {/* Directional gradient: slightly darker at top/bottom where content is densest,
-          lighter toward the middle so the video stays visible. */}
-      <div className="absolute inset-0 bg-gradient-to-b from-navy-950/35 via-transparent to-navy-950/45" />
+      {/* Directional gradient: slightly stronger at top/bottom where content is
+          densest, a touch lighter toward the middle so the faint motion still reads. */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#F5F8F6]/40 via-transparent to-[#F5F8F6]/50" />
     </div>
   );
 }

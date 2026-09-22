@@ -27,13 +27,13 @@ export default function ContactPage() {
       <JsonLd data={buildBreadcrumbSchema(breadcrumbItems)} />
       <Breadcrumbs items={breadcrumbItems} />
 
-      <section className="bg-navy-950 pt-32 pb-16 sm:pt-40 sm:pb-20">
+      <section className="bg-[#F5F8F6] pt-32 pb-16 sm:pt-40 sm:pb-20">
         <Container>
           <RevealOnScroll className="mx-auto flex max-w-2xl flex-col items-center gap-5 text-center">
-            <h1 className="text-balance font-display text-4xl font-medium leading-[1.1] tracking-tight text-white sm:text-5xl">
+            <h1 className="text-balance font-display text-4xl font-medium leading-[1.1] tracking-tight text-navy-950 sm:text-5xl">
               Talk to Our Team
             </h1>
-            <p className="text-balance text-base leading-relaxed text-mist-100/80 sm:text-lg">
+            <p className="text-balance text-base leading-relaxed text-slate-600 sm:text-lg">
               Tell us about your hospital, laboratory or clinic and we&apos;ll
               help you find the right Nalam system — or design a connected
               combination around your requirements.
@@ -43,8 +43,8 @@ export default function ContactPage() {
       </section>
 
       <section className="bg-mist-50 py-20 sm:py-24">
-        <Container className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)] lg:gap-16">
-          <RevealOnScroll className="flex flex-col gap-8">
+        <Container className="grid grid-cols-1 gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)] lg:gap-16">
+          <RevealOnScroll className="flex min-w-0 flex-col gap-8">
             <div>
               <h2 className="font-display text-xl font-medium text-navy-950">Email</h2>
               <a
@@ -65,7 +65,7 @@ export default function ContactPage() {
             </div>
             <div>
               <h2 className="font-display text-xl font-medium text-navy-950">Location</h2>
-              <p className="mt-1 text-sm text-slate-600">{siteConfig.contact.address}</p>
+              <p className="mt-1 text-sm text-slate-600 [overflow-wrap:anywhere]">{siteConfig.contact.address}</p>
             </div>
           </RevealOnScroll>
 

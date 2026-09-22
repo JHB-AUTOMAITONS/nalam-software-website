@@ -16,10 +16,10 @@ export function FeatureCard({ title, description }: FeatureCardProps) {
       variants={getStaggerItem(shouldReduceMotion)}
       whileHover={shouldReduceMotion ? undefined : { y: -4 }}
       transition={{ duration: 0.2 }}
-      className="flex list-none flex-col gap-2 rounded-2xl border border-teal-400/15 bg-white/[0.05] p-6 backdrop-blur-sm transition-colors hover:border-teal-400/30 hover:bg-white/[0.09] hover:shadow-soft"
+      className="glass-surface glass-surface-hover flex list-none flex-col gap-2 rounded-2xl border border-ice-500/15 p-6 backdrop-blur-sm transition-colors hover:border-ice-500/35 hover:shadow-soft"
     >
-      <h3 className="font-display text-base font-medium text-white">{title}</h3>
-      <p className="text-sm leading-relaxed text-mist-100/70">{description}</p>
+      <h3 className="font-display text-base font-medium text-navy-950">{title}</h3>
+      <p className="text-sm leading-relaxed text-slate-600">{description}</p>
     </motion.li>
   );
 }

@@ -19,17 +19,23 @@ function getPrefersReducedMotion() {
 }
 
 const GLASS_TOP = {
-  background: "rgba(6, 20, 15, 0.68)",
-  backdropFilter: "blur(20px) saturate(140%)",
-  WebkitBackdropFilter: "blur(20px) saturate(140%)",
-  boxShadow: "0 12px 40px rgba(0, 0, 0, 0.25)",
+  background:
+    "linear-gradient(155deg, rgba(221, 247, 250, 0.62) 0%, rgba(189, 239, 244, 0.48) 100%)",
+  backdropFilter: "blur(18px) saturate(140%)",
+  WebkitBackdropFilter: "blur(18px) saturate(140%)",
+  borderColor: "rgba(255, 255, 255, 0.65)",
+  boxShadow:
+    "0 12px 36px rgba(34, 207, 227, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.65)",
 };
 
 const GLASS_SCROLLED = {
-  background: "rgba(5, 17, 13, 0.95)",
-  backdropFilter: "blur(26px) saturate(140%)",
-  WebkitBackdropFilter: "blur(26px) saturate(140%)",
-  boxShadow: "0 12px 40px rgba(0, 0, 0, 0.32)",
+  background:
+    "linear-gradient(155deg, rgba(221, 247, 250, 0.82) 0%, rgba(189, 239, 244, 0.7) 100%)",
+  backdropFilter: "blur(22px) saturate(150%)",
+  WebkitBackdropFilter: "blur(22px) saturate(150%)",
+  borderColor: "rgba(255, 255, 255, 0.65)",
+  boxShadow:
+    "0 12px 36px rgba(34, 207, 227, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.7)",
 };
 
 function isActivePath(pathname: string, href: string) {
@@ -68,24 +74,24 @@ export function Header() {
 
   return (
     <motion.header
-      className="fixed inset-x-3 top-3 z-50 sm:inset-x-5 sm:top-5"
+      className="fixed inset-x-2 top-2 z-50 xs:inset-x-3 xs:top-3 sm:inset-x-5 sm:top-5"
       initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: -16 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: shouldReduceMotion ? 0 : 0.6, ease: [0.16, 1, 0.3, 1] }}
     >
       <motion.div
-        className="mx-auto w-full max-w-[1120px] rounded-[20px] border border-teal-400/20"
+        className="mx-auto w-full max-w-[1120px] rounded-[26px] border"
         initial={false}
         animate={scrolled ? GLASS_SCROLLED : GLASS_TOP}
         transition={barTransition}
       >
         <div
-          className={`flex w-full items-center justify-between px-5 transition-[padding] duration-300 sm:px-7 lg:px-8 ${
+          className={`flex w-full min-w-0 items-center justify-between gap-2 px-3 transition-[padding] duration-300 xs:px-5 sm:px-7 lg:px-8 ${
             scrolled ? "py-2" : "py-3"
           }`}
         >
-          <Link href="/" className="relative flex items-center overflow-hidden rounded-[15px] sm:rounded-[20px]">
-            <Logo className="h-9 w-auto sm:h-10" priority />
+          <Link href="/" className="relative flex min-w-0 shrink items-center overflow-hidden rounded-[15px] sm:rounded-[20px]">
+            <Logo className="h-7 w-auto xs:h-9 sm:h-10" priority />
           </Link>
 
           <nav aria-label="Primary" className="hidden items-center gap-1 lg:flex">
@@ -99,7 +105,7 @@ export function Header() {
                 >
                   <button
                     type="button"
-                    className="flex items-center gap-1 rounded-full px-3.5 py-2 text-sm font-medium text-mist-100/90 transition-colors hover:text-teal-400"
+                    className="flex items-center gap-1 rounded-full px-3.5 py-2 text-sm font-medium text-navy-800 transition-colors hover:text-teal-600"
                     aria-expanded={solutionsOpen}
                     aria-haspopup="true"
                     onClick={() => setSolutionsOpen(true)}
@@ -125,14 +131,14 @@ export function Header() {
                         className="absolute left-1/2 top-full w-64 -translate-x-1/2 pt-3"
                       >
                         <div
-                          className="overflow-hidden rounded-2xl border border-teal-400/20 p-2 shadow-elevated"
+                          className="overflow-hidden rounded-2xl border border-ice-500/20 p-2 shadow-elevated"
                           style={GLASS_SCROLLED}
                         >
                           {item.children.map((child) => (
                             <Link
                               key={child.href}
                               href={child.href}
-                              className="block rounded-xl px-4 py-3 text-sm font-medium text-mist-100/90 transition-colors hover:bg-white/[0.06] hover:text-teal-400"
+                              className="block rounded-xl px-4 py-3 text-sm font-medium text-navy-800 transition-colors hover:bg-ice-500/[0.08] hover:text-teal-600"
                             >
                               {child.label}
                             </Link>
@@ -146,13 +152,13 @@ export function Header() {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="relative rounded-full px-3.5 py-2 text-sm font-medium text-mist-100/90 transition-colors hover:text-teal-400"
+                  className="relative rounded-full px-3.5 py-2 text-sm font-medium text-navy-800 transition-colors hover:text-teal-600"
                 >
                   {item.label}
                   {isActivePath(pathname, item.href) ? (
                     <span
                       aria-hidden
-                      className="absolute inset-x-3.5 -bottom-0.5 h-px rounded-full bg-teal-400 shadow-[0_0_8px_rgba(57,255,136,0.8)]"
+                      className="absolute inset-x-3.5 -bottom-0.5 h-px rounded-full bg-teal-500 shadow-[0_0_8px_rgba(25,200,120,0.5)]"
                     />
                   ) : null}
                 </Link>
@@ -168,7 +174,7 @@ export function Header() {
 
           <button
             type="button"
-            className="flex h-10 w-10 items-center justify-center rounded-lg text-white lg:hidden"
+            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-navy-800 xs:h-10 xs:w-10 lg:hidden"
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileOpen}
             aria-controls="mobile-menu"
@@ -202,26 +208,26 @@ export function Header() {
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-              className="overflow-hidden border-t border-white/[0.14] lg:hidden"
+              className="overflow-hidden border-t border-navy-900/10 lg:hidden"
             >
-              <nav aria-label="Mobile" className="flex flex-col gap-1 px-5 pb-6 pt-4 sm:px-7">
+              <nav aria-label="Mobile" className="flex flex-col gap-1 px-3 pb-6 pt-4 xs:px-5 sm:px-7">
                 {navigation.main.map((item) => (
                   <div key={item.label}>
                     <Link
                       href={item.href}
                       onClick={() => setMobileOpen(false)}
-                      className="block rounded-xl px-3 py-3 text-base font-medium text-white"
+                      className="block rounded-xl px-3 py-3 text-base font-medium text-navy-950"
                     >
                       {item.label}
                     </Link>
                     {item.children ? (
-                      <div className="ml-3 flex flex-col gap-1 border-l border-white/[0.14] pl-4">
+                      <div className="ml-3 flex flex-col gap-1 border-l border-navy-900/10 pl-4">
                         {item.children.map((child) => (
                           <Link
                             key={child.href}
                             href={child.href}
                             onClick={() => setMobileOpen(false)}
-                            className="rounded-lg px-2 py-2 text-sm text-mist-100/75 hover:text-teal-400"
+                            className="rounded-lg px-2 py-2 text-sm text-navy-800/80 hover:text-teal-600"
                           >
                             {child.label}
                           </Link>

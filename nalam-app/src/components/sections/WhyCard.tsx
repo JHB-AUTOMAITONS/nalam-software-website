@@ -16,11 +16,11 @@ export function WhyCard({ title, description, index }: WhyCardProps) {
     <motion.li
       variants={getStaggerItem(shouldReduceMotion)}
       whileHover={shouldReduceMotion ? undefined : { y: -4 }}
-      className="list-none rounded-2xl border border-teal-400/15 bg-white/[0.05] p-7 shadow-soft backdrop-blur-sm"
+      className="glass-surface min-w-0 list-none rounded-2xl border border-ice-500/15 p-5 shadow-soft backdrop-blur-sm xs:p-7"
     >
-      <span className="font-mono text-xs text-teal-400">{String(index + 1).padStart(2, "0")}</span>
-      <h3 className="mt-3 font-display text-xl font-medium text-white">{title}</h3>
-      <p className="mt-2 text-sm leading-relaxed text-mist-100/70">{description}</p>
+      <span className="font-mono text-xs text-emerald-onlight">{String(index + 1).padStart(2, "0")}</span>
+      <h3 className="mt-3 font-display text-xl font-medium text-navy-950">{title}</h3>
+      <p className="mt-2 text-sm leading-relaxed text-slate-600">{description}</p>
     </motion.li>
   );
 }
