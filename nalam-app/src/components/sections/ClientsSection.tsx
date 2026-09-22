@@ -30,7 +30,7 @@ const clients = [
 
 export function ClientsSection() {
   return (
-    <section className="bg-white/40 py-11 backdrop-blur-sm sm:py-16 lg:py-20">
+    <section className="bg-white/40 py-14 backdrop-blur-sm sm:py-16 lg:py-20">
       <Container className="flex flex-col gap-8">
         <SectionHeading eyebrow="Trusted By" title="Our Valuable Clients" tone="dark" />
 

@@ -24,7 +24,7 @@ const features = [
 
 export function FeatureGrid() {
   return (
-    <section className="bg-white/40 py-11 backdrop-blur-sm sm:py-16 lg:py-20">
+    <section className="bg-white/40 py-14 backdrop-blur-sm sm:py-16 lg:py-20">
       <Container className="flex flex-col gap-8">
         <SectionHeading
           eyebrow="Platform Capabilities"

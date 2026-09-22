@@ -5,7 +5,7 @@ import { KKAiChatDemo } from "./KKAiChatDemo";
 
 export function KKAiSection() {
   return (
-    <section className="overflow-hidden bg-white/40 py-10 backdrop-blur-sm sm:py-14 lg:py-16">
+    <section className="overflow-hidden bg-white/40 py-14 backdrop-blur-sm sm:py-14 lg:py-16">
       <Container className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-14">
         <RevealOnScroll className="flex flex-col gap-5">
           <Badge tone="ice">CMS · Intelligent Assistant</Badge>

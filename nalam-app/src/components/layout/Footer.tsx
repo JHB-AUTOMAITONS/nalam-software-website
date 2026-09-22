@@ -22,7 +22,7 @@ export function Footer() {
 
   return (
     <footer className="border-t border-teal-500/15 bg-white/70 text-navy-800 backdrop-blur-md">
-      <Container className="grid grid-cols-1 gap-12 py-16 sm:grid-cols-2 lg:grid-cols-4 lg:py-20">
+      <Container className="grid grid-cols-1 gap-10 py-14 sm:grid-cols-2 sm:gap-12 sm:py-16 lg:grid-cols-4 lg:py-20">
         <div className="flex flex-col gap-4 sm:col-span-2 lg:col-span-1">
           <Link href="/" className="flex items-center">
             <Logo className="h-9 w-auto" />

@@ -4,7 +4,7 @@ import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
 
 export function FinalCta() {
   return (
-    <section className="relative overflow-hidden bg-white/40 py-11 backdrop-blur-sm sm:py-14 lg:py-16">
+    <section className="relative overflow-hidden bg-white/40 py-14 backdrop-blur-sm sm:py-14 lg:py-16">
       <div
         aria-hidden
         className="pointer-events-none absolute -right-24 top-1/2 h-72 w-72 -translate-y-1/2 rounded-full bg-teal-500/12 blur-3xl"

@@ -1,100 +1,17 @@
 "use client";
 
-import { useId, useState, type FormEvent } from "react";
+import { useId } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import { organizationTypes, interestedSystems, siteConfig } from "@/lib/constants";
-import { contactFormSchema, type ContactFormFieldErrors } from "@/lib/validation";
-import type { ContactApiResponse } from "@/types/forms";
+import { useRequirementsForm } from "@/hooks/useRequirementsForm";
 
-type Status = "idle" | "submitting" | "success" | "error";
 const isStaticExport = process.env.NEXT_PUBLIC_STATIC_EXPORT === "true";
 
-const initialValues = {
-  name: "",
-  email: "",
-  phone: "",
-  organization: "",
-  organizationType: "hospital" as const,
-  interestedSystem: "hms" as const,
-  requirements: "",
-  website: "",
-};
-
 export function RequirementsForm() {
-  const [values, setValues] = useState(initialValues);
-  const [errors, setErrors] = useState<ContactFormFieldErrors>({});
-  const [status, setStatus] = useState<Status>("idle");
-  const [statusMessage, setStatusMessage] = useState<string | null>(null);
+  const { values, errors, status, statusMessage, updateField, handleSubmit, resetStatus } =
+    useRequirementsForm();
   const formId = useId();
-
-  function updateField<K extends keyof typeof values>(key: K, value: (typeof values)[K]) {
-    setValues((prev) => ({ ...prev, [key]: value }));
-    if (errors[key]) {
-      setErrors((prev) => ({ ...prev, [key]: undefined }));
-    }
-  }
-
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-
-    const parsed = contactFormSchema.safeParse(values);
-    if (!parsed.success) {
-      const flattened = parsed.error.flatten().fieldErrors;
-      const nextErrors: ContactFormFieldErrors = {};
-      (Object.keys(flattened) as (keyof typeof flattened)[]).forEach((key) => {
-        const message = flattened[key]?.[0];
-        if (message) nextErrors[key as keyof ContactFormFieldErrors] = message;
-      });
-      setErrors(nextErrors);
-      setStatus("error");
-      setStatusMessage("Please check the highlighted fields.");
-      return;
-    }
-
-    if (isStaticExport) {
-      const data = parsed.data;
-      const body = [
-        `Name: ${data.name}`,
-        `Email: ${data.email}`,
-        `Phone: ${data.phone}`,
-        `Organization: ${data.organization}`,
-        `Organization type: ${data.organizationType}`,
-        `Interested system: ${data.interestedSystem}`,
-        "",
-        data.requirements,
-      ].join("\n");
-      window.location.href = `mailto:${siteConfig.contact.email}?subject=${encodeURIComponent(`Requirements from ${data.name}`)}&body=${encodeURIComponent(body)}`;
-      setStatus("idle");
-      setStatusMessage(null);
-      return;
-    }
-
-    setStatus("submitting");
-    setStatusMessage(null);
-
-    try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(parsed.data),
-      });
-
-      const data = (await response.json()) as ContactApiResponse;
-
-      if (!response.ok || !data.success) {
-        setStatus("error");
-        setStatusMessage(data.message ?? "Something went wrong. Please try again.");
-        return;
-      }
-
-      setStatus("success");
-      setValues(initialValues);
-    } catch {
-      setStatus("error");
-      setStatusMessage("We couldn't reach the server. Please check your connection and try again.");
-    }
-  }
 
   if (status === "success") {
     return (
@@ -115,7 +32,7 @@ export function RequirementsForm() {
           Thank you for sharing your requirements. Our team will review the
           details and get back to you shortly.
         </p>
-        <Button variant="secondary" onClick={() => setStatus("idle")}>
+        <Button variant="secondary" onClick={resetStatus}>
           Send another requirement
         </Button>
       </div>
@@ -138,7 +55,7 @@ export function RequirementsForm() {
       <div className="grid gap-5 sm:grid-cols-2">
         <Field
           id={`${formId}-name`}
-          label="Name"
+          label="Name *"
           error={errors.name}
         >
           <input
@@ -159,7 +76,6 @@ export function RequirementsForm() {
             id={`${formId}-email`}
             name="email"
             type="email"
-            required
             autoComplete="email"
             value={values.email}
             onChange={(e) => updateField("email", e.target.value)}
@@ -168,7 +84,7 @@ export function RequirementsForm() {
           />
         </Field>
 
-        <Field id={`${formId}-phone`} label="Phone Number" error={errors.phone}>
+        <Field id={`${formId}-phone`} label="Phone Number *" error={errors.phone}>
           <input
             id={`${formId}-phone`}
             name="phone"
@@ -191,7 +107,6 @@ export function RequirementsForm() {
             id={`${formId}-organization`}
             name="organization"
             type="text"
-            required
             autoComplete="organization"
             value={values.organization}
             onChange={(e) => updateField("organization", e.target.value)}
@@ -241,7 +156,6 @@ export function RequirementsForm() {
         <textarea
           id={`${formId}-requirements`}
           name="requirements"
-          required
           rows={5}
           value={values.requirements}
           onChange={(e) => updateField("requirements", e.target.value)}

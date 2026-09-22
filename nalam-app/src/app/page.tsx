@@ -5,7 +5,6 @@ import { ProductsOverview } from "@/components/sections/ProductsOverview";
 import { ProductDetail } from "@/components/sections/ProductDetail";
 import { CustomizationSection } from "@/components/sections/CustomizationSection";
 import { FeatureGrid } from "@/components/sections/FeatureGrid";
-import { WhyNalam } from "@/components/sections/WhyNalam";
 import { KKAiSection } from "@/components/sections/KKAiSection";
 import { ClientsSection } from "@/components/sections/ClientsSection";
 import { RequirementsSection } from "@/components/sections/RequirementsSection";
@@ -45,7 +44,6 @@ export default function HomePage() {
       <ProductDetail product={products.cms} index={3} />
       <CustomizationSection />
       <FeatureGrid />
-      <WhyNalam />
       <KKAiSection />
       <ClientsSection />
       <RequirementsSection />

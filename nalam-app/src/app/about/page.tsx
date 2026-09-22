@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
-import { WhyNalam } from "@/components/sections/WhyNalam";
 import { FinalCta } from "@/components/sections/FinalCta";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { JsonLd } from "@/components/structured-data/JsonLd";
@@ -79,7 +78,6 @@ export default function AboutPage() {
         </Container>
       </section>
 
-      <WhyNalam />
       <FinalCta />
     </>
   );

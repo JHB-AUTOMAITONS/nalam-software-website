@@ -1,46 +1,19 @@
 "use client";
 
-import { useEffect, useId, useRef, useState, type FormEvent, type KeyboardEvent } from "react";
+import { useEffect, useId, useRef, useState, type KeyboardEvent } from "react";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { organizationTypes, siteConfig } from "@/lib/constants";
-import { popupFormSchema, type PopupFormFieldErrors } from "@/lib/validation";
+import { organizationTypes, interestedSystems } from "@/lib/constants";
 import { PopupSelect } from "@/components/ui/PopupSelect";
-import type { ContactApiResponse } from "@/types/forms";
-
-const POPUP_INTERVAL_MS = 10_000;
-const SESSION_KEY = "nalam_requirement_popup_submitted";
-
-type Status = "idle" | "submitting" | "success" | "error";
-const isStaticExport = process.env.NEXT_PUBLIC_STATIC_EXPORT === "true";
-
-const initialValues = {
-  name: "",
-  phone: "",
-  organization: "",
-  organizationType: "hospital" as const,
-  requirements: "",
-  website: "",
-};
-
-function getSessionAlreadySubmitted() {
-  if (typeof window === "undefined") return true;
-  try {
-    return window.sessionStorage.getItem(SESSION_KEY) === "1";
-  } catch {
-    return false;
-  }
-}
+import { useRequirementsForm } from "@/hooks/useRequirementsForm";
+import { requirementsFormStore } from "@/lib/requirementsFormStore";
 
 export function RequirementsPopup() {
   const pathname = usePathname();
   const shouldReduceMotion = useReducedMotion();
-  const [open, setOpen] = useState(false);
-  const [hasSubmitted, setHasSubmitted] = useState(getSessionAlreadySubmitted);
-  const [values, setValues] = useState(initialValues);
-  const [errors, setErrors] = useState<PopupFormFieldErrors>({});
-  const [status, setStatus] = useState<Status>("idle");
-  const [statusMessage, setStatusMessage] = useState<string | null>(null);
+  const [open, setOpen] = useState(() => requirementsFormStore.isPopupOpen());
+  const { values, errors, status, statusMessage, updateField, handleSubmit } =
+    useRequirementsForm();
   const formId = useId();
   const dialogRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
@@ -49,14 +22,20 @@ export function RequirementsPopup() {
   const isContactPage = pathname === "/contact";
 
   useEffect(() => {
-    if (hasSubmitted || isContactPage) return;
+    return requirementsFormStore.subscribeOpen(setOpen);
+  }, []);
 
-    const interval = window.setInterval(() => {
-      setOpen(true);
-    }, POPUP_INTERVAL_MS);
+  useEffect(() => {
+    if (isContactPage) return;
+    requirementsFormStore.scheduleInitialTimer();
+    return () => requirementsFormStore.clearTimer();
+  }, [isContactPage]);
 
-    return () => window.clearInterval(interval);
-  }, [hasSubmitted, isContactPage]);
+  useEffect(() => {
+    if (isContactPage && requirementsFormStore.isPopupOpen()) {
+      requirementsFormStore.closePopup();
+    }
+  }, [isContactPage]);
 
   useEffect(() => {
     if (!open) return;
@@ -72,7 +51,7 @@ export function RequirementsPopup() {
   }, [open]);
 
   function closePopup() {
-    setOpen(false);
+    requirementsFormStore.closePopup();
   }
 
   function handleKeyDown(event: KeyboardEvent<HTMLDivElement>) {
@@ -101,79 +80,6 @@ export function RequirementsPopup() {
     } else if (!event.shiftKey && document.activeElement === last) {
       event.preventDefault();
       first.focus();
-    }
-  }
-
-  function updateField<K extends keyof typeof values>(key: K, value: (typeof values)[K]) {
-    setValues((prev) => ({ ...prev, [key]: value }));
-    if (errors[key]) {
-      setErrors((prev) => ({ ...prev, [key]: undefined }));
-    }
-  }
-
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-
-    const parsed = popupFormSchema.safeParse(values);
-    if (!parsed.success) {
-      const flattened = parsed.error.flatten().fieldErrors;
-      const nextErrors: PopupFormFieldErrors = {};
-      (Object.keys(flattened) as (keyof typeof flattened)[]).forEach((key) => {
-        const message = flattened[key]?.[0];
-        if (message) nextErrors[key as keyof PopupFormFieldErrors] = message;
-      });
-      setErrors(nextErrors);
-      setStatus("error");
-      setStatusMessage("Please check the highlighted fields.");
-      return;
-    }
-
-    if (isStaticExport) {
-      const data = parsed.data;
-      const body = [
-        `Name: ${data.name}`,
-        `Phone: ${data.phone}`,
-        `Organization: ${data.organization || "Not provided"}`,
-        `Organization type: ${data.organizationType ?? "Not provided"}`,
-        "",
-        data.requirements || "Not provided",
-      ].join("\n");
-      window.location.href = `mailto:${siteConfig.contact.email}?subject=${encodeURIComponent(`Requirements from ${data.name}`)}&body=${encodeURIComponent(body)}`;
-      setStatus("idle");
-      setStatusMessage(null);
-      return;
-    }
-
-    setStatus("submitting");
-    setStatusMessage(null);
-
-    try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(parsed.data),
-      });
-
-      const data = (await response.json()) as ContactApiResponse;
-
-      if (!response.ok || !data.success) {
-        setStatus("error");
-        setStatusMessage(data.message ?? "Something went wrong. Please try again.");
-        return;
-      }
-
-      setStatus("success");
-      setValues(initialValues);
-      setHasSubmitted(true);
-      try {
-        window.sessionStorage.setItem(SESSION_KEY, "1");
-      } catch {
-        // sessionStorage unavailable (private mode / disabled) — the in-memory
-        // hasSubmitted flag still stops the popup from reopening this session.
-      }
-    } catch {
-      setStatus("error");
-      setStatusMessage("We couldn't reach the server. Please check your connection and try again.");
     }
   }
 
@@ -300,6 +206,19 @@ export function RequirementsPopup() {
                         />
                       </PopupField>
 
+                      <PopupField id={`${formId}-email`} label="Email" error={errors.email}>
+                        <input
+                          id={`${formId}-email`}
+                          name="email"
+                          type="email"
+                          autoComplete="email"
+                          value={values.email}
+                          onChange={(e) => updateField("email", e.target.value)}
+                          className={inputClasses(Boolean(errors.email))}
+                          aria-invalid={Boolean(errors.email)}
+                        />
+                      </PopupField>
+
                       <PopupField id={`${formId}-phone`} label="Phone Number *" error={errors.phone}>
                         <input
                           id={`${formId}-phone`}
@@ -316,7 +235,7 @@ export function RequirementsPopup() {
 
                       <PopupField
                         id={`${formId}-organization`}
-                        label="Organization Name"
+                        label="Organization / Hospital / Lab / Clinic Name"
                         error={errors.organization}
                       >
                         <input
@@ -338,12 +257,28 @@ export function RequirementsPopup() {
                       >
                         <PopupSelect
                           id={`${formId}-org-type`}
-                          value={values.organizationType}
+                          value={values.organizationType ?? "hospital"}
                           options={organizationTypes}
                           onChange={(next) =>
                             updateField("organizationType", next as typeof values.organizationType)
                           }
                           hasError={Boolean(errors.organizationType)}
+                        />
+                      </PopupField>
+
+                      <PopupField
+                        id={`${formId}-system`}
+                        label="Which Nalam system are you interested in?"
+                        error={errors.interestedSystem}
+                      >
+                        <PopupSelect
+                          id={`${formId}-system`}
+                          value={values.interestedSystem ?? "hms"}
+                          options={interestedSystems}
+                          onChange={(next) =>
+                            updateField("interestedSystem", next as typeof values.interestedSystem)
+                          }
+                          hasError={Boolean(errors.interestedSystem)}
                         />
                       </PopupField>
 
@@ -359,7 +294,7 @@ export function RequirementsPopup() {
                             rows={3}
                             value={values.requirements}
                             onChange={(e) => updateField("requirements", e.target.value)}
-                            placeholder="Tell us briefly about your workflow or what you want to improve..."
+                            placeholder="Tell us briefly about your workflow, departments, integrations or anything specific you need..."
                             className={`${inputClasses(Boolean(errors.requirements))} h-16 resize-none xs:h-auto`}
                             aria-invalid={Boolean(errors.requirements)}
                           />

@@ -2,7 +2,10 @@ import { Resend } from "resend";
 import { siteConfig } from "./constants";
 import type { ContactFormValues } from "./validation";
 
-const organizationTypeLabels: Record<ContactFormValues["organizationType"], string> = {
+const organizationTypeLabels: Record<
+  Exclude<ContactFormValues["organizationType"], undefined>,
+  string
+> = {
   hospital: "Hospital",
   laboratory: "Laboratory",
   clinic: "Clinic",
@@ -11,7 +14,10 @@ const organizationTypeLabels: Record<ContactFormValues["organizationType"], stri
   other: "Other",
 };
 
-const interestedSystemLabels: Record<ContactFormValues["interestedSystem"], string> = {
+const interestedSystemLabels: Record<
+  Exclude<ContactFormValues["interestedSystem"], undefined>,
+  string
+> = {
   lms: "LMS — Lab Management",
   hms: "HMS — Hospital Management",
   cms: "CMS — Clinic Management",

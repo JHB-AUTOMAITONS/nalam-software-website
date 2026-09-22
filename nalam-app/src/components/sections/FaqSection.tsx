@@ -5,7 +5,7 @@ import { FaqAccordion } from "./FaqAccordion";
 
 export function FaqSection() {
   return (
-    <section id="faq" className="scroll-mt-32 bg-white/40 py-11 backdrop-blur-sm sm:py-16 lg:py-20">
+    <section id="faq" className="scroll-mt-32 bg-white/40 py-14 backdrop-blur-sm sm:py-16 lg:py-20">
       <Container className="flex flex-col gap-8">
         <SectionHeading
           eyebrow="Frequently Asked Questions"
