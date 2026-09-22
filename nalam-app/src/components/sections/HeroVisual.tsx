@@ -2,134 +2,116 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 
-const nodes = [
-  { id: "lab", label: "LAB", sub: "LMS", cy: 64, color: "var(--color-teal-400)" },
-  { id: "hospital", label: "HOSPITAL", sub: "HMS", cy: 184, color: "var(--color-teal-400)" },
-  { id: "clinic", label: "CLINIC", sub: "CMS", cy: 304, color: "var(--color-clinic-jade)" },
+const chips = [
+  { id: "ai", label: "AI", top: "10%", left: "8%", delay: 0 },
+  { id: "data", label: "Data", top: "14%", left: "62%", delay: 1.6 },
+  { id: "automation", label: "Automation", top: "70%", left: "6%", delay: 0.8 },
+  { id: "integration", label: "Integration", top: "74%", left: "58%", delay: 2.4 },
 ];
 
 export function HeroVisual() {
   const shouldReduceMotion = useReducedMotion();
 
   return (
-    <div className="relative mx-auto w-full max-w-md lg:max-w-none" aria-hidden="true">
+    <div
+      className="relative mx-auto aspect-[4/3.2] w-[280px] max-w-full xs:w-[300px] sm:w-[360px] lg:w-[440px]"
+      aria-hidden="true"
+    >
       <div
-        className="rounded-[30px] p-5 sm:p-8"
+        className="relative h-full w-full overflow-hidden rounded-[22px] sm:rounded-[26px]"
         style={{
           background:
-            "linear-gradient(155deg, rgba(255, 255, 255, 0.58) 0%, rgba(240, 253, 253, 0.42) 100%)",
-          border: "1px solid rgba(5, 213, 213, 0.22)",
-          backdropFilter: "blur(26px) saturate(150%)",
-          WebkitBackdropFilter: "blur(26px) saturate(150%)",
+            "linear-gradient(155deg, rgba(255, 255, 255, 0.6) 0%, rgba(224, 249, 251, 0.4) 100%)",
+          border: "1px solid rgba(5, 213, 213, 0.2)",
+          backdropFilter: "blur(20px) saturate(150%)",
+          WebkitBackdropFilter: "blur(20px) saturate(150%)",
           boxShadow: "var(--shadow-glass)",
         }}
       >
-        <svg viewBox="0 0 420 368" className="h-auto w-full" role="presentation">
-          <defs>
-            <linearGradient id="hub-glow" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stopColor="var(--color-ice-500)" />
-              <stop offset="100%" stopColor="var(--color-ice-700)" />
-            </linearGradient>
-          </defs>
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(circle at 50% 50%, rgba(255,255,255,0.5) 0%, transparent 65%)",
+          }}
+        />
 
-          {nodes.map((node, index) => {
-            // Curves terminate at x=254 (the hub's glow-circle edge, cx=300 r=44 minus a small gap)
-            // so every connector — including the hospital node's flat, same-height line — stays visible
-            // instead of disappearing under the opaque hub circle.
-            const pathD = `M 96 ${node.cy} C 170 ${node.cy}, 200 184, 254 184`;
-            return (
-              <motion.path
-                key={node.id}
-                d={pathD}
-                fill="none"
-                stroke="var(--color-ice-500)"
-                strokeWidth={1.5}
-                strokeLinecap="round"
-                initial={{ pathLength: shouldReduceMotion ? 1 : 0, opacity: shouldReduceMotion ? 0.55 : 0 }}
-                whileInView={{ pathLength: 1, opacity: 0.55 }}
-                viewport={{ once: true }}
-                transition={{
-                  duration: shouldReduceMotion ? 0 : 1.2,
-                  delay: shouldReduceMotion ? 0 : index * 0.22,
-                  ease: [0.65, 0, 0.35, 1],
-                }}
-              />
-            );
-          })}
-
-          {nodes.map((node, index) => (
-            <g key={node.id}>
-              <motion.circle
-                cx={96}
-                cy={node.cy}
-                r={7}
-                fill={node.color}
-                initial={{ scale: shouldReduceMotion ? 1 : 0.6, opacity: shouldReduceMotion ? 1 : 0 }}
-                whileInView={{ scale: 1, opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{
-                  duration: shouldReduceMotion ? 0 : 0.5,
-                  delay: shouldReduceMotion ? 0 : 0.3 + index * 0.22,
-                }}
-                style={{ transformOrigin: `96px ${node.cy}px` }}
-              />
-              <text
-                x={40}
-                y={node.cy - 14}
-                textAnchor="middle"
-                className="fill-navy-950/85 font-mono text-[11px] tracking-[0.12em]"
-              >
-                {node.label}
-              </text>
-              <text
-                x={40}
-                y={node.cy + 22}
-                textAnchor="middle"
-                className="fill-slate-500 text-[10px]"
-              >
-                {node.sub}
-              </text>
-            </g>
-          ))}
-
-          <motion.circle
-            cx={300}
-            cy={184}
-            r={44}
-            fill="url(#hub-glow)"
-            fillOpacity={0.14}
-            stroke="url(#hub-glow)"
-            strokeOpacity={0.6}
-            strokeWidth={1.5}
-            animate={shouldReduceMotion ? { scale: 1 } : { scale: [1, 1.05, 1] }}
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+          <motion.div
+            aria-hidden
+            className="absolute left-1/2 top-1/2 h-24 w-24 -translate-x-1/2 -translate-y-1/2 rounded-full sm:h-28 sm:w-28"
+            style={{
+              background:
+                "radial-gradient(circle, rgba(5,213,213,0.28) 0%, rgba(25,200,120,0.12) 55%, transparent 75%)",
+            }}
+            animate={
+              shouldReduceMotion
+                ? { opacity: 0.7 }
+                : { opacity: [0.55, 0.85, 0.55], scale: [1, 1.08, 1] }
+            }
             transition={
               shouldReduceMotion
                 ? { duration: 0 }
-                : { duration: 4, repeat: Infinity, ease: "easeInOut" }
+                : { duration: 7, repeat: Infinity, ease: "easeInOut" }
             }
-            style={{ transformOrigin: "300px 184px" }}
           />
-          <circle cx={300} cy={184} r={30} fill="var(--color-surface-raised)" stroke="var(--color-teal-500)" strokeWidth={1} />
-          <text
-            x={300}
-            y={180}
-            textAnchor="middle"
-            className="fill-navy-950 font-display text-[13px] font-medium"
+
+          <div
+            className="relative flex h-16 w-16 items-center justify-center rounded-full sm:h-[4.75rem] sm:w-[4.75rem]"
+            style={{
+              background: "rgba(255,255,255,0.75)",
+              border: "1px solid rgba(5,213,213,0.35)",
+              boxShadow: "0 8px 24px -8px rgba(5,213,213,0.35), inset 0 1px 0 rgba(255,255,255,0.8)",
+            }}
           >
-            Nalam
-          </text>
-          <text
-            x={300}
-            y={196}
-            textAnchor="middle"
-            className="fill-emerald-onlight font-mono text-[9px] uppercase tracking-[0.14em]"
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden>
+              <path
+                d="M12 3v18M3 12h18"
+                stroke="var(--color-teal-500)"
+                strokeWidth={2.75}
+                strokeLinecap="round"
+              />
+            </svg>
+          </div>
+        </div>
+
+        {chips.map((chip) => (
+          <motion.div
+            key={chip.id}
+            className="absolute rounded-xl px-3 py-1.5 text-[10px] font-medium tracking-wide text-navy-800/80 sm:text-xs"
+            style={{
+              top: chip.top,
+              left: chip.left,
+              background: "rgba(255,255,255,0.55)",
+              border: "1px solid rgba(5,213,213,0.22)",
+              backdropFilter: "blur(10px)",
+              WebkitBackdropFilter: "blur(10px)",
+              boxShadow: "0 6px 16px -8px rgba(16,35,27,0.18), inset 0 1px 0 rgba(255,255,255,0.6)",
+            }}
+            animate={
+              shouldReduceMotion
+                ? { opacity: 1, y: 0 }
+                : { y: [0, -6, 0], opacity: [0.75, 1, 0.75] }
+            }
+            transition={
+              shouldReduceMotion
+                ? { duration: 0 }
+                : {
+                    duration: 8,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: chip.delay,
+                  }
+            }
           >
-            Platform
-          </text>
-        </svg>
+            <span className="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-teal-500 align-middle" />
+            {chip.label}
+          </motion.div>
+        ))}
       </div>
 
-      <p className="mt-4 text-center font-mono text-xs uppercase tracking-[0.14em] text-slate-500">
+      <p className="mt-4 text-center font-mono text-[10px] uppercase tracking-[0.14em] text-slate-500 sm:text-xs">
         Independent by design. Connected on demand.
       </p>
     </div>
