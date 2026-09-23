@@ -10,9 +10,9 @@ import { siteConfig } from "@/lib/constants";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Contact Nalam Software",
+  title: "Contact",
   description:
-    "Talk to the Nalam Software team about hospital management software, lab management software or clinic management software, or share your custom healthcare requirements.",
+    "Talk to the Nalam Software team about hospital management software, laboratory management software or clinic management software, or share your custom healthcare requirements.",
   path: "/contact",
 });
 
@@ -27,7 +27,7 @@ export default function ContactPage() {
       <JsonLd data={buildBreadcrumbSchema(breadcrumbItems)} />
       <Breadcrumbs items={breadcrumbItems} />
 
-      <section className="bg-[#F5F8F6] pt-32 pb-16 sm:pt-40 sm:pb-20">
+      <section className="bg-[#F5F8F6] pt-16 pb-10 sm:pt-40 sm:pb-20">
         <Container>
           <RevealOnScroll className="mx-auto flex max-w-2xl flex-col items-center gap-5 text-center">
             <h1 className="text-balance font-display text-4xl font-medium leading-[1.1] tracking-tight text-navy-950 sm:text-5xl">
@@ -42,9 +42,9 @@ export default function ContactPage() {
         </Container>
       </section>
 
-      <section className="bg-mist-50 py-20 sm:py-24">
-        <Container className="grid grid-cols-1 gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)] lg:gap-16">
-          <RevealOnScroll className="flex min-w-0 flex-col gap-8">
+      <section className="bg-mist-50 py-12 sm:py-24">
+        <Container className="grid grid-cols-1 gap-10 sm:gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)] lg:gap-16">
+          <RevealOnScroll className="flex min-w-0 flex-col gap-6 sm:gap-8">
             <div>
               <h2 className="font-display text-xl font-medium text-navy-950">Email</h2>
               <a
@@ -77,7 +77,7 @@ export default function ContactPage() {
               align="left"
               title="Send Your Requirements"
               description="Share a few details and our team will follow up with next steps."
-              className="mb-8"
+              className="mb-6 sm:mb-8"
             />
             <RequirementsForm />
           </RevealOnScroll>

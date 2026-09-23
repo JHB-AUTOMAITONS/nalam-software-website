@@ -134,7 +134,7 @@ export function RequirementsPopup() {
               type="button"
               onClick={closePopup}
               aria-label="Close requirements popup"
-              className="absolute right-2.5 top-2.5 z-10 flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-white/60 bg-[rgba(221,247,250,0.35)] text-navy-800 backdrop-blur-sm transition-[color,box-shadow,border-color] hover:border-teal-500/40 hover:text-emerald-onlight hover:shadow-[0_0_0_1px_rgba(24,200,120,0.2),0_6px_18px_-6px_rgba(24,200,120,0.4)] xs:right-4 xs:top-4 xs:h-11 xs:w-11"
+              className="absolute right-2.5 top-2.5 z-10 flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/60 bg-[rgba(221,247,250,0.35)] text-navy-800 backdrop-blur-sm transition-[color,box-shadow,border-color] hover:border-teal-500/40 hover:text-emerald-onlight hover:shadow-[0_0_0_1px_rgba(24,200,120,0.2),0_6px_18px_-6px_rgba(24,200,120,0.4)] xs:right-4 xs:top-4 xs:h-11 xs:w-11"
             >
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden>
                 <path d="M3 3l10 10M13 3L3 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />

@@ -73,6 +73,36 @@ export function buildFaqSchema(items: { question: string; answer: string }[] = f
   };
 }
 
+export interface ArticleSchemaInput {
+  title: string;
+  description: string;
+  path: string;
+  publishedAt: string;
+  updatedAt?: string;
+  authorName: string;
+  authorType?: "Person" | "Organization";
+  image?: string;
+}
+
+/** BlogPosting schema for /blog/[slug] pages. */
+export function buildArticleSchema(article: ArticleSchemaInput) {
+  const url = `${siteConfig.url}${article.path}`;
+  return {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: article.title,
+    description: article.description,
+    url,
+    mainEntityOfPage: { "@type": "WebPage", "@id": url },
+    datePublished: article.publishedAt,
+    dateModified: article.updatedAt ?? article.publishedAt,
+    author: { "@type": article.authorType ?? "Organization", name: article.authorName },
+    publisher: { "@id": `${siteConfig.url}/#organization` },
+    ...(article.image ? { image: new URL(article.image, siteConfig.url).toString() } : {}),
+    inLanguage: "en-US",
+  };
+}
+
 export function buildBreadcrumbSchema(items: { name: string; path: string }[]) {
   return {
     "@context": "https://schema.org",

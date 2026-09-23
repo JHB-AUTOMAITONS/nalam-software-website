@@ -6,19 +6,7 @@ import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { StaggerGroup } from "@/components/ui/StaggerGroup";
 import { RevealItem } from "@/components/ui/RevealItem";
-
-const customizationExamples = [
-  "Custom workflows",
-  "Custom screens",
-  "Custom reports",
-  "Custom fields",
-  "Custom roles & permissions",
-  "Custom integrations",
-  "Custom dashboards",
-  "Custom automation",
-  "Custom billing workflows",
-  "Custom patient workflows",
-];
+import { customizationOptions, routes } from "@/lib/constants";
 
 export function CustomizationSection() {
   const shouldReduceMotion = useReducedMotion();
@@ -83,7 +71,7 @@ export function CustomizationSection() {
           className="flex flex-wrap justify-center gap-3"
           staggerDelay={0.05}
         >
-          {customizationExamples.map((item) => (
+          {customizationOptions.map((item) => (
             <RevealItem key={item} className="list-none">
               <span className="inline-flex items-center rounded-full border border-teal-500/20 bg-white/60 px-4 py-2 text-sm text-navy-800">
                 {item}
@@ -92,9 +80,19 @@ export function CustomizationSection() {
           ))}
         </StaggerGroup>
 
-        <Button href="/contact" size="lg" variant="primary">
-          Discuss Your Requirements
-        </Button>
+        <div className="flex w-full flex-col items-center justify-center gap-3 sm:w-auto sm:flex-row">
+          <Button href="/contact" size="lg" variant="primary" className="w-full sm:w-auto">
+            Discuss Your Requirements
+          </Button>
+          <Button
+            href={routes.customSolutions}
+            size="lg"
+            variant="secondary"
+            className="w-full sm:w-auto"
+          >
+            Explore Custom Healthcare Software
+          </Button>
+        </div>
       </Container>
     </section>
   );

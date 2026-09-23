@@ -210,7 +210,10 @@ export function Header() {
               transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
               className="overflow-hidden border-t border-navy-900/10 lg:hidden"
             >
-              <nav aria-label="Mobile" className="flex flex-col gap-1 px-3 pb-6 pt-4 xs:px-5 sm:px-7">
+              <nav
+                aria-label="Mobile"
+                className="flex max-h-[calc(100dvh-6rem)] flex-col gap-1 overflow-y-auto overscroll-contain px-3 pb-4 pt-3 xs:px-5 sm:px-7 sm:pb-6 sm:pt-4"
+              >
                 {navigation.main.map((item) => (
                   <div key={item.label}>
                     <Link

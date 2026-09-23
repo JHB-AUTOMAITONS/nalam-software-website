@@ -18,7 +18,7 @@ export function RequirementsForm() {
       <div
         role="status"
         aria-live="polite"
-        className="flex flex-col items-center gap-4 rounded-3xl border border-teal-500/20 bg-teal-500/5 px-8 py-16 text-center"
+        className="flex flex-col items-center gap-4 rounded-3xl border border-teal-500/20 bg-teal-500/5 px-5 py-10 text-center sm:px-8 sm:py-16"
       >
         <span className="flex h-14 w-14 items-center justify-center rounded-full bg-teal-500/15 text-emerald-onlight">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden>
@@ -40,7 +40,7 @@ export function RequirementsForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-6" aria-describedby={statusMessage ? `${formId}-status` : undefined}>
+    <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-5 sm:gap-6"aria-describedby={statusMessage ? `${formId}-status` : undefined}>
       <input
         type="text"
         name="website"
@@ -52,7 +52,7 @@ export function RequirementsForm() {
         aria-hidden="true"
       />
 
-      <div className="grid gap-5 sm:grid-cols-2">
+      <div className="grid gap-4 sm:grid-cols-2 sm:gap-5">
         <Field
           id={`${formId}-name`}
           label="Name *"

@@ -102,8 +102,10 @@ export function ProductDetail({ product, reverse = false, index }: ProductDetail
               </div>
 
               <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
-                <Button href="/#requirements" size="lg" className="w-full sm:w-auto">
-                  Tell Us Your Requirements
+                {/* Homepage sections are concise previews — the full product
+                    content lives on the dedicated solution page. */}
+                <Button href={product.landingSlug} size="lg" className="w-full sm:w-auto">
+                  {product.ctaLabel}
                 </Button>
                 <Button href="/contact" size="lg" variant="secondary" className="w-full sm:w-auto">
                   Talk to Our Team

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 
 interface FaqItem {
   question: string;
@@ -10,6 +10,7 @@ interface FaqItem {
 
 export function FaqAccordion({ items }: { items: FaqItem[] }) {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const shouldReduceMotion = useReducedMotion();
 
   return (
     <div className="glass-surface flex flex-col divide-y divide-ice-500/15 rounded-2xl border border-ice-500/15 backdrop-blur-sm">
@@ -53,7 +54,7 @@ export function FaqAccordion({ items }: { items: FaqItem[] }) {
                   initial={{ height: 0, opacity: 0 }}
                   animate={{ height: "auto", opacity: 1 }}
                   exit={{ height: 0, opacity: 0 }}
-                  transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                  transition={{ duration: shouldReduceMotion ? 0 : 0.25, ease: [0.16, 1, 0.3, 1] }}
                   className="overflow-hidden"
                 >
                   <p className="px-4 pb-4 text-sm leading-relaxed text-slate-600 sm:px-6 sm:pb-6">

@@ -8,9 +8,9 @@ export function FaqSection() {
     <section id="faq" className="scroll-mt-32 bg-white/40 py-10 backdrop-blur-sm sm:py-12 lg:py-14">
       <Container className="flex flex-col gap-8">
         <SectionHeading
-          eyebrow="Frequently Asked Questions"
-          title="Common Questions About Nalam Software"
-          description="Answers about our hospital, laboratory and clinic management software, and how Nalam systems can be customized and connected."
+          eyebrow="Support"
+          title="Frequently Asked Questions"
+          description="Answers about the Nalam platform, and how our hospital, laboratory and clinic management software can be customized and connected."
           tone="dark"
         />
 

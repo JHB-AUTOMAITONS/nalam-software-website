@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
@@ -7,13 +8,17 @@ import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { JsonLd } from "@/components/structured-data/JsonLd";
 import { buildBreadcrumbSchema } from "@/lib/structured-data";
 import { buildMetadata } from "@/lib/seo";
+import { products, routes } from "@/lib/constants";
 
 export const metadata: Metadata = buildMetadata({
-  title: "About Nalam Software",
+  title: "About",
   description:
-    "Nalam Software builds connected healthcare management software — Hospital Management System, Lab Management System and Clinic Management System — customized around how healthcare teams actually work.",
+    "Nalam Software builds connected healthcare management software — Hospital Management System, Laboratory Management System and Clinic Management System — customized around how healthcare teams actually work.",
   path: "/about",
 });
+
+const inlineLinkClass =
+  "font-medium text-emerald-onlight underline-offset-4 hover:underline";
 
 const breadcrumbItems = [
   { name: "Home", path: "/" },
@@ -26,7 +31,7 @@ export default function AboutPage() {
       <JsonLd data={buildBreadcrumbSchema(breadcrumbItems)} />
       <Breadcrumbs items={breadcrumbItems} />
 
-      <section className="bg-[#F5F8F6] pt-32 pb-20 sm:pt-40 sm:pb-24">
+      <section className="bg-[#F5F8F6] pt-16 pb-10 sm:pt-40 sm:pb-24">
         <Container>
           <RevealOnScroll className="mx-auto flex max-w-3xl flex-col items-center gap-6 text-center">
             <h1 className="text-balance font-display text-4xl font-medium leading-[1.1] tracking-tight text-navy-950 sm:text-5xl">
@@ -42,8 +47,8 @@ export default function AboutPage() {
         </Container>
       </section>
 
-      <section className="bg-white py-24 sm:py-28">
-        <Container className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16">
+      <section className="bg-white py-12 sm:py-28">
+        <Container className="grid grid-cols-1 gap-10 sm:gap-12 lg:grid-cols-2 lg:gap-16">
           <RevealOnScroll className="flex flex-col gap-4">
             <SectionHeading
               align="left"
@@ -51,8 +56,18 @@ export default function AboutPage() {
               title="Three Systems. One Design Philosophy."
             />
             <p className="text-base leading-relaxed text-slate-600">
-              Hospital Management System, Lab Management System
-              and Clinic Management System are each built to run
+              <Link href={products.hms.landingSlug} className={inlineLinkClass}>
+                Hospital Management System
+              </Link>
+              ,{" "}
+              <Link href={products.lms.landingSlug} className={inlineLinkClass}>
+                Laboratory Management System
+              </Link>{" "}
+              and{" "}
+              <Link href={products.cms.landingSlug} className={inlineLinkClass}>
+                Clinic Management System
+              </Link>{" "}
+              are each built to run
               independently for a single hospital, laboratory or clinic — or
               to connect together into one unified healthcare platform. That
               design decision shapes everything: shared patient records,
@@ -72,7 +87,11 @@ export default function AboutPage() {
               managers and clinic owners to understand how their teams
               actually operate, then configure Nalam Software around those
               workflows — including custom screens, reports, roles and
-              integrations where needed.
+              integrations where needed. Learn more about our{" "}
+              <Link href={routes.customSolutions} className={inlineLinkClass}>
+                custom healthcare software development
+              </Link>
+              .
             </p>
           </RevealOnScroll>
         </Container>

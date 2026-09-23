@@ -17,7 +17,7 @@ export function ClientCard({ name, subtitle, logoSrc }: ClientCardProps) {
     <motion.li
       variants={getStaggerItem(shouldReduceMotion)}
       whileHover={shouldReduceMotion ? undefined : { y: -4 }}
-      className="glass-surface flex list-none flex-col items-center gap-4 rounded-2xl border border-ice-500/15 p-6 text-center shadow-soft backdrop-blur-sm"
+      className="glass-surface flex list-none flex-col items-center gap-3 rounded-2xl border border-ice-500/15 p-5 text-center sm:gap-4 sm:p-6 shadow-soft backdrop-blur-sm"
     >
       <span className="flex h-20 w-full items-center justify-center rounded-xl bg-white p-3">
         <Image

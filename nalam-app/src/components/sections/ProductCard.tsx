@@ -35,7 +35,7 @@ export function ProductCard({ product }: { product: Product }) {
       variants={getStaggerItem(shouldReduceMotion)}
       whileHover={shouldReduceMotion ? undefined : { y: -6 }}
       transition={{ duration: 0.25, ease: "easeOut" }}
-      className={`glass-surface-strong group flex h-full min-w-0 flex-col gap-6 rounded-3xl border border-ice-500/20 p-5 shadow-soft ring-1 ring-transparent backdrop-blur-sm transition-shadow duration-300 xs:p-8 ${styles.ring}`}
+      className={`glass-surface-strong group flex h-full min-w-0 flex-col gap-5 rounded-3xl border border-ice-500/20 p-5 shadow-soft ring-1 ring-transparent backdrop-blur-sm transition-shadow duration-300 xs:p-6 sm:gap-6 sm:p-8 ${styles.ring}`}
     >
       <div className="flex min-w-0 items-start justify-between gap-4">
         <span
@@ -71,7 +71,7 @@ export function ProductCard({ product }: { product: Product }) {
         ))}
       </ul>
 
-      <div className="mt-auto flex flex-col gap-4 border-t border-mist-200 pt-6">
+      <div className="mt-auto flex flex-col gap-4 border-t border-mist-200 pt-5 sm:pt-6">
         <p className="text-sm font-medium text-navy-950">{product.valueStatement}</p>
         <Link
           href={product.landingSlug}

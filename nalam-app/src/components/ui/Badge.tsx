@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 interface BadgeProps {
   children: ReactNode;
   tone?: "teal" | "navy" | "coral" | "onDark" | "ice";
+  size?: "sm" | "md";
   className?: string;
 }
 
@@ -14,10 +15,15 @@ const toneStyles: Record<NonNullable<BadgeProps["tone"]>, string> = {
   ice: "bg-ice-500/10 text-ice-700 ring-1 ring-inset ring-ice-500/25",
 };
 
-export function Badge({ children, tone = "teal", className = "" }: BadgeProps) {
+const sizeStyles: Record<NonNullable<BadgeProps["size"]>, string> = {
+  sm: "px-2.5 py-1.5 text-[0.62rem] tracking-[0.1em] xs:px-3.5 xs:text-[0.7rem] xs:tracking-[0.16em]",
+  md: "px-3.5 py-2 text-[0.72rem] tracking-[0.12em] xs:px-4 xs:text-[0.82rem] xs:tracking-[0.18em]",
+};
+
+export function Badge({ children, tone = "teal", size = "sm", className = "" }: BadgeProps) {
   return (
     <span
-      className={`inline-flex max-w-full items-center gap-2 rounded-full px-2.5 py-1.5 font-mono text-[0.62rem] font-medium uppercase tracking-[0.1em] xs:px-3.5 xs:text-[0.7rem] xs:tracking-[0.16em] ${toneStyles[tone]} ${className}`}
+      className={`inline-flex max-w-full items-center gap-2 rounded-full font-mono font-medium uppercase ${sizeStyles[size]} ${toneStyles[tone]} ${className}`}
     >
       {children}
     </span>
