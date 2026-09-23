@@ -4,7 +4,7 @@ export const siteConfig = {
   tagline: "One Healthcare Platform. Three Powerful Systems.",
   description:
     "Nalam Software provides modern hospital, laboratory and clinic management software designed to connect healthcare workflows, automate operations and support customized healthcare solutions.",
-  url: "https://www.nalamsoftware.com",
+  url: "https://nalam.care",
   ogImage: "/images/og-default.jpg",
   contact: {
     email: "info@nalam.care",

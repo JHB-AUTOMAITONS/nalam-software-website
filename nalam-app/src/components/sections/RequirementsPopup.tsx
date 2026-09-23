@@ -3,17 +3,13 @@
 import { useEffect, useId, useRef, useState, type KeyboardEvent } from "react";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { organizationTypes } from "@/lib/constants";
-import { PopupSelect } from "@/components/ui/PopupSelect";
-import { useRequirementsForm } from "@/hooks/useRequirementsForm";
+import { ExternalLeadForm } from "@/components/sections/ExternalLeadForm";
 import { requirementsFormStore } from "@/lib/requirementsFormStore";
 
 export function RequirementsPopup() {
   const pathname = usePathname();
   const shouldReduceMotion = useReducedMotion();
   const [open, setOpen] = useState(() => requirementsFormStore.isPopupOpen());
-  const { values, errors, status, statusMessage, updateField, handleSubmit } =
-    useRequirementsForm("popup");
   const formId = useId();
   const dialogRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
@@ -67,7 +63,7 @@ export function RequirementsPopup() {
     if (!container) return;
 
     const focusable = container.querySelectorAll<HTMLElement>(
-      'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'
+      'a[href], button:not([disabled]), textarea, input, select, iframe, [tabindex]:not([tabindex="-1"])'
     );
     if (focusable.length === 0) return;
 
@@ -117,9 +113,8 @@ export function RequirementsPopup() {
                 : { opacity: 0, scale: 0.94, y: 12 }
             }
             transition={{ duration: shouldReduceMotion ? 0.15 : 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="relative flex w-full max-w-[400px] flex-col overflow-hidden rounded-[18px] xs:rounded-[24px] sm:max-w-none sm:w-[min(90vw,460px)] sm:rounded-[28px]"
+            className="relative flex max-h-[min(78vh,calc(100dvh-24px))] w-full max-w-[400px] flex-col overflow-hidden rounded-[18px] xs:rounded-[24px] sm:max-w-none sm:w-[min(90vw,620px)] sm:max-h-[min(80vh,calc(100dvh-24px))] sm:rounded-[28px]"
             style={{
-              maxHeight: "88vh",
               background:
                 "linear-gradient(160deg, rgba(225, 247, 251, 0.82) 0%, rgba(205, 239, 246, 0.68) 100%)",
               border: "1px solid rgba(255, 255, 255, 0.75)",
@@ -129,207 +124,51 @@ export function RequirementsPopup() {
                 "0 24px 70px -20px rgba(34, 207, 227, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.7)",
             }}
           >
-            <button
-              ref={closeButtonRef}
-              type="button"
-              onClick={closePopup}
-              aria-label="Close requirements popup"
-              className="absolute right-2.5 top-2.5 z-10 flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/60 bg-[rgba(221,247,250,0.35)] text-navy-800 backdrop-blur-sm transition-[color,box-shadow,border-color] hover:border-teal-500/40 hover:text-emerald-onlight hover:shadow-[0_0_0_1px_rgba(24,200,120,0.2),0_6px_18px_-6px_rgba(24,200,120,0.4)] xs:right-4 xs:top-4 xs:h-11 xs:w-11"
+            {/* Compact sticky header — stays put while the form area below scrolls on its own. */}
+            <div
+              className="relative shrink-0 border-b border-white/40 px-3.5 py-3 xs:px-6 xs:py-3.5 sm:px-8 sm:py-4"
+              style={{
+                background:
+                  "linear-gradient(160deg, rgba(225, 247, 251, 0.6) 0%, rgba(205, 239, 246, 0.4) 100%)",
+                backdropFilter: "blur(18px) saturate(140%)",
+                WebkitBackdropFilter: "blur(18px) saturate(140%)",
+              }}
             >
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden>
-                <path d="M3 3l10 10M13 3L3 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-              </svg>
-            </button>
+              <div className="pr-9 xs:pr-10">
+                <h2
+                  id={`${formId}-title`}
+                  className="text-balance font-display font-semibold leading-[1.08] text-navy-950"
+                  style={{ fontSize: "clamp(1.625rem, 5.5vw, 2rem)" }}
+                >
+                  Tell Us What You Need
+                </h2>
+              </div>
 
-            <div className="overflow-y-auto px-3.5 pb-4 pt-4 xs:px-6 xs:pb-6 xs:pt-6 sm:px-8 sm:pb-7 sm:pt-7" style={{ maxHeight: "88vh" }}>
-              {status === "success" ? (
-                <div className="flex flex-col items-center gap-4 py-6 text-center">
-                  <span className="flex h-14 w-14 items-center justify-center rounded-full bg-teal-500/15 text-emerald-onlight">
-                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden>
-                      <path d="M5 12.5l4.5 4.5L19 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                  </span>
-                  <h2 id={`${formId}-title`} className="font-display text-2xl font-medium text-navy-950">
-                    Requirements Received
-                  </h2>
-                  <p className="max-w-sm text-sm leading-relaxed text-slate-600">
-                    Thank you. Our team will review your requirements and get back to you.
-                  </p>
-                  <button
-                    type="button"
-                    onClick={closePopup}
-                    className="mt-2 rounded-full bg-teal-500 px-6 py-2.5 text-sm font-medium text-white transition-colors hover:bg-teal-600"
-                  >
-                    Close
-                  </button>
-                </div>
-              ) : (
-                <>
-                  <div className="pr-6 xs:pr-8">
-                    <h2
-                      id={`${formId}-title`}
-                      className="text-balance font-display text-xl font-semibold leading-[1.15] text-navy-950 xs:text-2xl sm:text-[1.75rem]"
-                    >
-                      Tell Us What You Need
-                    </h2>
-                  </div>
+              <button
+                ref={closeButtonRef}
+                type="button"
+                onClick={closePopup}
+                aria-label="Close requirements popup"
+                className="absolute right-2 top-1/2 z-10 flex h-9 w-9 -translate-y-1/2 shrink-0 items-center justify-center rounded-full border border-white/60 bg-[rgba(221,247,250,0.35)] text-navy-800 backdrop-blur-sm transition-[color,box-shadow,border-color] hover:border-teal-500/40 hover:text-emerald-onlight hover:shadow-[0_0_0_1px_rgba(24,200,120,0.2),0_6px_18px_-6px_rgba(24,200,120,0.4)] xs:right-3 xs:h-10 xs:w-10"
+              >
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden>
+                  <path d="M3 3l10 10M13 3L3 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                </svg>
+              </button>
+            </div>
 
-                  <form
-                    onSubmit={handleSubmit}
-                    noValidate
-                    className="mt-3 flex flex-col gap-3 xs:mt-4"
-                    aria-describedby={statusMessage ? `${formId}-status` : undefined}
-                  >
-                    <input
-                      type="text"
-                      name="website"
-                      value={values.website}
-                      onChange={(e) => updateField("website", e.target.value)}
-                      className="hidden"
-                      tabIndex={-1}
-                      autoComplete="off"
-                      aria-hidden="true"
-                    />
-
-                    <div className="grid gap-3 sm:grid-cols-2">
-                      <PopupField id={`${formId}-name`} label="Name *" error={errors.name}>
-                        <input
-                          id={`${formId}-name`}
-                          name="name"
-                          type="text"
-                          required
-                          autoComplete="name"
-                          placeholder="Enter your name"
-                          value={values.name}
-                          onChange={(e) => updateField("name", e.target.value)}
-                          className={inputClasses(Boolean(errors.name))}
-                          aria-invalid={Boolean(errors.name)}
-                        />
-                      </PopupField>
-
-                      <PopupField id={`${formId}-phone`} label="Phone Number *" error={errors.phone}>
-                        <input
-                          id={`${formId}-phone`}
-                          name="phone"
-                          type="tel"
-                          required
-                          autoComplete="tel"
-                          placeholder="Enter your phone number"
-                          value={values.phone}
-                          onChange={(e) => updateField("phone", e.target.value)}
-                          className={inputClasses(Boolean(errors.phone))}
-                          aria-invalid={Boolean(errors.phone)}
-                        />
-                      </PopupField>
-
-                      <div className="sm:col-span-2">
-                        <PopupField
-                          id={`${formId}-org-type`}
-                          label="Organization Type"
-                          error={errors.organizationType}
-                        >
-                          <PopupSelect
-                            id={`${formId}-org-type`}
-                            value={values.organizationType ?? "hospital"}
-                            options={organizationTypes}
-                            onChange={(next) =>
-                              updateField("organizationType", next as typeof values.organizationType)
-                            }
-                            hasError={Boolean(errors.organizationType)}
-                          />
-                        </PopupField>
-                      </div>
-
-                      <div className="sm:col-span-2">
-                        <PopupField
-                          id={`${formId}-requirements`}
-                          label="Requirements"
-                          error={errors.requirements}
-                        >
-                          <textarea
-                            id={`${formId}-requirements`}
-                            name="requirements"
-                            rows={3}
-                            value={values.requirements}
-                            onChange={(e) => updateField("requirements", e.target.value)}
-                            placeholder="Tell us briefly about your workflow, requirements or anything specific you need..."
-                            className={`${inputClasses(Boolean(errors.requirements))} h-16 resize-none xs:h-auto`}
-                            aria-invalid={Boolean(errors.requirements)}
-                          />
-                        </PopupField>
-                      </div>
-                    </div>
-
-                    <AnimatePresence>
-                      {statusMessage && status === "error" ? (
-                        <motion.p
-                          id={`${formId}-status`}
-                          role="alert"
-                          initial={{ opacity: 0, y: -8 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, y: -8 }}
-                          className="rounded-xl bg-signal-coral/10 px-4 py-3 text-sm text-signal-coral"
-                        >
-                          {statusMessage}
-                        </motion.p>
-                      ) : null}
-                    </AnimatePresence>
-
-                    <button
-                      type="submit"
-                      disabled={status === "submitting"}
-                      className="mt-1 flex h-11 w-full items-center justify-center gap-2 rounded-xl bg-teal-500 text-sm font-semibold text-white transition-[background-color,box-shadow,transform] duration-200 ease-out hover:-translate-y-px hover:bg-teal-600 hover:shadow-glow-teal disabled:cursor-not-allowed disabled:opacity-60 xs:h-[50px]"
-                    >
-                      {status === "submitting" ? (
-                        "Sending…"
-                      ) : (
-                        <>
-                          Send My Requirements
-                          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden>
-                            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                          </svg>
-                        </>
-                      )}
-                    </button>
-                  </form>
-                </>
-              )}
+            {/* The ONLY scrollable area in the popup — the iframe below has a
+                fixed height taller than its content, so it never scrolls
+                internally and this stays the single scrollbar. */}
+            <div
+              className="min-h-0 flex-1 overflow-y-auto overscroll-contain"
+              style={{ WebkitOverflowScrolling: "touch" }}
+            >
+              <ExternalLeadForm onSubmitDetected={() => requirementsFormStore.markCompleted()} />
             </div>
           </motion.div>
         </div>
       ) : null}
     </AnimatePresence>
-  );
-}
-
-function inputClasses(hasError: boolean) {
-  return `w-full rounded-xl border bg-[rgba(255,255,255,0.55)] px-3.5 text-sm text-navy-950 shadow-[inset_0_1px_0_rgba(255,255,255,0.6)] backdrop-blur-sm transition-colors placeholder:text-slate-400 focus-visible:outline-none focus-visible:border-teal-500/55 focus-visible:ring-[3px] focus-visible:ring-teal-500/[0.14] min-h-[44px] py-2 xs:min-h-[46px] xs:py-2.5 ${
-    hasError ? "border-signal-coral/60" : "border-ice-500/25"
-  }`;
-}
-
-function PopupField({
-  id,
-  label,
-  error,
-  children,
-}: {
-  id: string;
-  label: string;
-  error?: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <div className="flex flex-col gap-1.5">
-      <label htmlFor={id} className="text-xs font-medium text-navy-800/80">
-        {label}
-      </label>
-      {children}
-      {error ? (
-        <p className="text-xs text-signal-coral" role="alert">
-          {error}
-        </p>
-      ) : null}
-    </div>
   );
 }
