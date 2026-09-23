@@ -1,9 +1,9 @@
 import { Resend } from "resend";
 import { siteConfig } from "./constants";
-import type { ContactFormValues } from "./validation";
+import type { RequirementsFormValues } from "./validation";
 
 const organizationTypeLabels: Record<
-  Exclude<ContactFormValues["organizationType"], undefined>,
+  Exclude<RequirementsFormValues["organizationType"], undefined>,
   string
 > = {
   hospital: "Hospital",
@@ -14,15 +14,9 @@ const organizationTypeLabels: Record<
   other: "Other",
 };
 
-const interestedSystemLabels: Record<
-  Exclude<ContactFormValues["interestedSystem"], undefined>,
-  string
-> = {
-  lms: "LMS — Lab Management",
-  hms: "HMS — Hospital Management",
-  cms: "CMS — Clinic Management",
-  multiple: "Multiple Systems",
-  custom: "Custom Solution",
+const sourceLabels: Record<Exclude<RequirementsFormValues["source"], undefined>, string> = {
+  popup: "Popup",
+  contact_page: "Contact Page",
 };
 
 function escapeHtml(value: string) {
@@ -34,20 +28,7 @@ function escapeHtml(value: string) {
     .replace(/'/g, "&#39;");
 }
 
-// The full Contact-page form always sends every field; the short popup form
-// only guarantees name + phone, so every other field arrives possibly empty
-// or undefined here — read defensively rather than assuming ContactFormValues'
-// stricter shape.
-type NotificationPayload = Omit<
-  ContactFormValues,
-  "email" | "organizationType" | "interestedSystem"
-> & {
-  email?: string;
-  organizationType?: ContactFormValues["organizationType"];
-  interestedSystem?: ContactFormValues["interestedSystem"];
-};
-
-export async function sendContactNotification(data: NotificationPayload) {
+export async function sendContactNotification(data: RequirementsFormValues) {
   const apiKey = process.env.RESEND_API_KEY;
   const toAddress = process.env.CONTACT_NOTIFICATION_EMAIL ?? siteConfig.contact.email;
   const fromAddress = process.env.CONTACT_FROM_EMAIL ?? "Nalam Software <onboarding@resend.dev>";
@@ -65,24 +46,19 @@ export async function sendContactNotification(data: NotificationPayload) {
   const organizationTypeLabel = data.organizationType
     ? organizationTypeLabels[data.organizationType]
     : "Not provided";
-  const interestedSystemLabel = data.interestedSystem
-    ? interestedSystemLabels[data.interestedSystem]
-    : "Not provided";
-  const email = data.email?.trim() || "";
-  const organization = data.organization?.trim() || "Not provided";
+  const sourceLabel = sourceLabels[data.source ?? "contact_page"];
   const requirements = data.requirements?.trim() || "Not provided";
 
   const html = `
     <h2>New requirements submission — Nalam Software</h2>
     <table cellpadding="6" cellspacing="0" style="border-collapse:collapse;font-family:sans-serif;font-size:14px;">
       <tbody>
+        <tr><td><strong>Timestamp</strong></td><td>${escapeHtml(new Date().toISOString())}</td></tr>
         <tr><td><strong>Name</strong></td><td>${escapeHtml(data.name)}</td></tr>
-        <tr><td><strong>Email</strong></td><td>${email ? escapeHtml(email) : "Not provided"}</td></tr>
         <tr><td><strong>Phone</strong></td><td>${escapeHtml(data.phone)}</td></tr>
-        <tr><td><strong>Organization</strong></td><td>${escapeHtml(organization)}</td></tr>
         <tr><td><strong>Organization type</strong></td><td>${escapeHtml(organizationTypeLabel)}</td></tr>
-        <tr><td><strong>Interested system</strong></td><td>${escapeHtml(interestedSystemLabel)}</td></tr>
         <tr><td valign="top"><strong>Requirements</strong></td><td>${escapeHtml(requirements).replace(/\n/g, "<br />")}</td></tr>
+        <tr><td><strong>Source</strong></td><td>${escapeHtml(sourceLabel)}</td></tr>
       </tbody>
     </table>
   `;
@@ -90,7 +66,6 @@ export async function sendContactNotification(data: NotificationPayload) {
   const { error } = await resend.emails.send({
     from: fromAddress,
     to: toAddress,
-    ...(email ? { replyTo: email } : {}),
     subject: `New requirements from ${data.name} — ${organizationTypeLabel}`,
     html,
   });

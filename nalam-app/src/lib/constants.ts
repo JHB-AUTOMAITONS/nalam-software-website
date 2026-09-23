@@ -144,14 +144,6 @@ export const organizationTypes = [
   { value: "other", label: "Other" },
 ] as const;
 
-export const interestedSystems = [
-  { value: "lms", label: "LMS — Lab Management" },
-  { value: "hms", label: "HMS — Hospital Management" },
-  { value: "cms", label: "CMS — Clinic Management" },
-  { value: "multiple", label: "Multiple Systems" },
-  { value: "custom", label: "Custom Solution" },
-] as const;
-
 export const faqs = [
   {
     question: "What is the Hospital Management System?",

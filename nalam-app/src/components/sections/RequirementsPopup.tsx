@@ -3,7 +3,7 @@
 import { useEffect, useId, useRef, useState, type KeyboardEvent } from "react";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { organizationTypes, interestedSystems } from "@/lib/constants";
+import { organizationTypes } from "@/lib/constants";
 import { PopupSelect } from "@/components/ui/PopupSelect";
 import { useRequirementsForm } from "@/hooks/useRequirementsForm";
 import { requirementsFormStore } from "@/lib/requirementsFormStore";
@@ -13,7 +13,7 @@ export function RequirementsPopup() {
   const shouldReduceMotion = useReducedMotion();
   const [open, setOpen] = useState(() => requirementsFormStore.isPopupOpen());
   const { values, errors, status, statusMessage, updateField, handleSubmit } =
-    useRequirementsForm();
+    useRequirementsForm("popup");
   const formId = useId();
   const dialogRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
@@ -117,7 +117,7 @@ export function RequirementsPopup() {
                 : { opacity: 0, scale: 0.94, y: 12 }
             }
             transition={{ duration: shouldReduceMotion ? 0.15 : 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="relative flex w-full max-w-[420px] flex-col overflow-hidden rounded-[18px] xs:rounded-[24px] sm:max-w-none sm:w-[min(92vw,560px)] sm:rounded-[30px]"
+            className="relative flex w-full max-w-[400px] flex-col overflow-hidden rounded-[18px] xs:rounded-[24px] sm:max-w-none sm:w-[min(90vw,460px)] sm:rounded-[28px]"
             style={{
               maxHeight: "88vh",
               background:
@@ -141,7 +141,7 @@ export function RequirementsPopup() {
               </svg>
             </button>
 
-            <div className="overflow-y-auto px-3.5 pb-4 pt-4 xs:px-6 xs:pb-7 xs:pt-6 sm:px-9 sm:pb-9 sm:pt-7" style={{ maxHeight: "88vh" }}>
+            <div className="overflow-y-auto px-3.5 pb-4 pt-4 xs:px-6 xs:pb-6 xs:pt-6 sm:px-8 sm:pb-7 sm:pt-7" style={{ maxHeight: "88vh" }}>
               {status === "success" ? (
                 <div className="flex flex-col items-center gap-4 py-6 text-center">
                   <span className="flex h-14 w-14 items-center justify-center rounded-full bg-teal-500/15 text-emerald-onlight">
@@ -177,7 +177,7 @@ export function RequirementsPopup() {
                   <form
                     onSubmit={handleSubmit}
                     noValidate
-                    className="mt-3 flex flex-col gap-3 xs:mt-4 xs:gap-4"
+                    className="mt-3 flex flex-col gap-3 xs:mt-4"
                     aria-describedby={statusMessage ? `${formId}-status` : undefined}
                   >
                     <input
@@ -191,7 +191,7 @@ export function RequirementsPopup() {
                       aria-hidden="true"
                     />
 
-                    <div className="grid gap-3 xs:gap-4 sm:grid-cols-2">
+                    <div className="grid gap-3 sm:grid-cols-2">
                       <PopupField id={`${formId}-name`} label="Name *" error={errors.name}>
                         <input
                           id={`${formId}-name`}
@@ -199,23 +199,11 @@ export function RequirementsPopup() {
                           type="text"
                           required
                           autoComplete="name"
+                          placeholder="Enter your name"
                           value={values.name}
                           onChange={(e) => updateField("name", e.target.value)}
                           className={inputClasses(Boolean(errors.name))}
                           aria-invalid={Boolean(errors.name)}
-                        />
-                      </PopupField>
-
-                      <PopupField id={`${formId}-email`} label="Email" error={errors.email}>
-                        <input
-                          id={`${formId}-email`}
-                          name="email"
-                          type="email"
-                          autoComplete="email"
-                          value={values.email}
-                          onChange={(e) => updateField("email", e.target.value)}
-                          className={inputClasses(Boolean(errors.email))}
-                          aria-invalid={Boolean(errors.email)}
                         />
                       </PopupField>
 
@@ -226,6 +214,7 @@ export function RequirementsPopup() {
                           type="tel"
                           required
                           autoComplete="tel"
+                          placeholder="Enter your phone number"
                           value={values.phone}
                           onChange={(e) => updateField("phone", e.target.value)}
                           className={inputClasses(Boolean(errors.phone))}
@@ -233,54 +222,23 @@ export function RequirementsPopup() {
                         />
                       </PopupField>
 
-                      <PopupField
-                        id={`${formId}-organization`}
-                        label="Organization / Hospital / Lab / Clinic Name"
-                        error={errors.organization}
-                      >
-                        <input
-                          id={`${formId}-organization`}
-                          name="organization"
-                          type="text"
-                          autoComplete="organization"
-                          value={values.organization}
-                          onChange={(e) => updateField("organization", e.target.value)}
-                          className={inputClasses(Boolean(errors.organization))}
-                          aria-invalid={Boolean(errors.organization)}
-                        />
-                      </PopupField>
-
-                      <PopupField
-                        id={`${formId}-org-type`}
-                        label="Organization Type"
-                        error={errors.organizationType}
-                      >
-                        <PopupSelect
+                      <div className="sm:col-span-2">
+                        <PopupField
                           id={`${formId}-org-type`}
-                          value={values.organizationType ?? "hospital"}
-                          options={organizationTypes}
-                          onChange={(next) =>
-                            updateField("organizationType", next as typeof values.organizationType)
-                          }
-                          hasError={Boolean(errors.organizationType)}
-                        />
-                      </PopupField>
-
-                      <PopupField
-                        id={`${formId}-system`}
-                        label="Which Nalam system are you interested in?"
-                        error={errors.interestedSystem}
-                      >
-                        <PopupSelect
-                          id={`${formId}-system`}
-                          value={values.interestedSystem ?? "hms"}
-                          options={interestedSystems}
-                          onChange={(next) =>
-                            updateField("interestedSystem", next as typeof values.interestedSystem)
-                          }
-                          hasError={Boolean(errors.interestedSystem)}
-                        />
-                      </PopupField>
+                          label="Organization Type"
+                          error={errors.organizationType}
+                        >
+                          <PopupSelect
+                            id={`${formId}-org-type`}
+                            value={values.organizationType ?? "hospital"}
+                            options={organizationTypes}
+                            onChange={(next) =>
+                              updateField("organizationType", next as typeof values.organizationType)
+                            }
+                            hasError={Boolean(errors.organizationType)}
+                          />
+                        </PopupField>
+                      </div>
 
                       <div className="sm:col-span-2">
                         <PopupField
@@ -294,7 +252,7 @@ export function RequirementsPopup() {
                             rows={3}
                             value={values.requirements}
                             onChange={(e) => updateField("requirements", e.target.value)}
-                            placeholder="Tell us briefly about your workflow, departments, integrations or anything specific you need..."
+                            placeholder="Tell us briefly about your workflow, requirements or anything specific you need..."
                             className={`${inputClasses(Boolean(errors.requirements))} h-16 resize-none xs:h-auto`}
                             aria-invalid={Boolean(errors.requirements)}
                           />
@@ -345,7 +303,7 @@ export function RequirementsPopup() {
 }
 
 function inputClasses(hasError: boolean) {
-  return `w-full rounded-xl border bg-[rgba(255,255,255,0.55)] px-3.5 text-sm text-navy-950 shadow-[inset_0_1px_0_rgba(255,255,255,0.6)] backdrop-blur-sm transition-colors placeholder:text-slate-400 focus-visible:outline-none focus-visible:border-teal-500/55 focus-visible:ring-[3px] focus-visible:ring-teal-500/[0.14] min-h-[40px] py-2 xs:min-h-[46px] xs:py-2.5 ${
+  return `w-full rounded-xl border bg-[rgba(255,255,255,0.55)] px-3.5 text-sm text-navy-950 shadow-[inset_0_1px_0_rgba(255,255,255,0.6)] backdrop-blur-sm transition-colors placeholder:text-slate-400 focus-visible:outline-none focus-visible:border-teal-500/55 focus-visible:ring-[3px] focus-visible:ring-teal-500/[0.14] min-h-[44px] py-2 xs:min-h-[46px] xs:py-2.5 ${
     hasError ? "border-signal-coral/60" : "border-ice-500/25"
   }`;
 }

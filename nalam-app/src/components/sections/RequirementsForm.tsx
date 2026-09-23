@@ -3,14 +3,14 @@
 import { useId } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/Button";
-import { organizationTypes, interestedSystems, siteConfig } from "@/lib/constants";
+import { organizationTypes, siteConfig } from "@/lib/constants";
 import { useRequirementsForm } from "@/hooks/useRequirementsForm";
 
 const isStaticExport = process.env.NEXT_PUBLIC_STATIC_EXPORT === "true";
 
 export function RequirementsForm() {
   const { values, errors, status, statusMessage, updateField, handleSubmit, resetStatus } =
-    useRequirementsForm();
+    useRequirementsForm("contact_page");
   const formId = useId();
 
   if (status === "success") {
@@ -64,23 +64,11 @@ export function RequirementsForm() {
             type="text"
             required
             autoComplete="name"
+            placeholder="Enter your name"
             value={values.name}
             onChange={(e) => updateField("name", e.target.value)}
             className={inputClasses(Boolean(errors.name))}
             aria-invalid={Boolean(errors.name)}
-          />
-        </Field>
-
-        <Field id={`${formId}-email`} label="Email" error={errors.email}>
-          <input
-            id={`${formId}-email`}
-            name="email"
-            type="email"
-            autoComplete="email"
-            value={values.email}
-            onChange={(e) => updateField("email", e.target.value)}
-            className={inputClasses(Boolean(errors.email))}
-            aria-invalid={Boolean(errors.email)}
           />
         </Field>
 
@@ -91,6 +79,7 @@ export function RequirementsForm() {
             type="tel"
             required
             autoComplete="tel"
+            placeholder="Enter your phone number"
             value={values.phone}
             onChange={(e) => updateField("phone", e.target.value)}
             className={inputClasses(Boolean(errors.phone))}
@@ -98,58 +87,23 @@ export function RequirementsForm() {
           />
         </Field>
 
-        <Field
-          id={`${formId}-organization`}
-          label="Organization / Hospital / Lab / Clinic Name"
-          error={errors.organization}
-        >
-          <input
-            id={`${formId}-organization`}
-            name="organization"
-            type="text"
-            autoComplete="organization"
-            value={values.organization}
-            onChange={(e) => updateField("organization", e.target.value)}
-            className={inputClasses(Boolean(errors.organization))}
-            aria-invalid={Boolean(errors.organization)}
-          />
-        </Field>
-
-        <Field id={`${formId}-org-type`} label="Organization Type" error={errors.organizationType}>
-          <select
-            id={`${formId}-org-type`}
-            name="organizationType"
-            value={values.organizationType}
-            onChange={(e) => updateField("organizationType", e.target.value as typeof values.organizationType)}
-            className={inputClasses(Boolean(errors.organizationType))}
-          >
-            {organizationTypes.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </select>
-        </Field>
-
-        <Field
-          id={`${formId}-system`}
-          label="Which Nalam system are you interested in?"
-          error={errors.interestedSystem}
-        >
-          <select
-            id={`${formId}-system`}
-            name="interestedSystem"
-            value={values.interestedSystem}
-            onChange={(e) => updateField("interestedSystem", e.target.value as typeof values.interestedSystem)}
-            className={inputClasses(Boolean(errors.interestedSystem))}
-          >
-            {interestedSystems.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </select>
-        </Field>
+        <div className="sm:col-span-2">
+          <Field id={`${formId}-org-type`} label="Organization Type" error={errors.organizationType}>
+            <select
+              id={`${formId}-org-type`}
+              name="organizationType"
+              value={values.organizationType}
+              onChange={(e) => updateField("organizationType", e.target.value as typeof values.organizationType)}
+              className={inputClasses(Boolean(errors.organizationType))}
+            >
+              {organizationTypes.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </Field>
+        </div>
       </div>
 
       <Field id={`${formId}-requirements`} label="Requirements" error={errors.requirements}>
@@ -159,7 +113,7 @@ export function RequirementsForm() {
           rows={5}
           value={values.requirements}
           onChange={(e) => updateField("requirements", e.target.value)}
-          placeholder="Tell us about your workflow, departments, integrations or anything specific you need."
+          placeholder="Tell us briefly about your workflow, requirements or anything specific you need..."
           className={inputClasses(Boolean(errors.requirements))}
           aria-invalid={Boolean(errors.requirements)}
         />

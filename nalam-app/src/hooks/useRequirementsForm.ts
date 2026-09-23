@@ -15,7 +15,7 @@ const isStaticExport = process.env.NEXT_PUBLIC_STATIC_EXPORT === "true";
 // Shared submit + validation logic consumed by both the Contact-page form
 // and the automatic popup, so there is exactly one implementation of
 // "what happens when the requirements form is submitted."
-export function useRequirementsForm() {
+export function useRequirementsForm(source: "popup" | "contact_page" = "contact_page") {
   const values = useSyncExternalStore(
     requirementsFormStore.subscribe,
     requirementsFormStore.getValues,
@@ -37,7 +37,7 @@ export function useRequirementsForm() {
     async (event: FormEvent<HTMLFormElement>) => {
       event.preventDefault();
 
-      const parsed = requirementsFormSchema.safeParse(values);
+      const parsed = requirementsFormSchema.safeParse({ ...values, source });
       if (!parsed.success) {
         const flattened = parsed.error.flatten().fieldErrors;
         const nextErrors: RequirementsFormFieldErrors = {};
@@ -55,11 +55,8 @@ export function useRequirementsForm() {
         const data = parsed.data;
         const body = [
           `Name: ${data.name}`,
-          `Email: ${data.email || "Not provided"}`,
           `Phone: ${data.phone}`,
-          `Organization: ${data.organization || "Not provided"}`,
           `Organization type: ${data.organizationType ?? "Not provided"}`,
-          `Interested system: ${data.interestedSystem ?? "Not provided"}`,
           "",
           data.requirements || "Not provided",
         ].join("\n");
@@ -95,7 +92,7 @@ export function useRequirementsForm() {
         setStatusMessage("We couldn't reach the server. Please check your connection and try again.");
       }
     },
-    [values]
+    [values, source]
   );
 
   const resetStatus = useCallback(() => {

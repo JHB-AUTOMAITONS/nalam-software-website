@@ -16,12 +16,10 @@ const VALUES_KEY = "nalam_requirements_form_values";
 
 export const initialFormValues: RequirementsFormValues = {
   name: "",
-  email: "",
   phone: "",
-  organization: "",
   organizationType: "hospital",
-  interestedSystem: "hms",
   requirements: "",
+  source: "contact_page",
   website: "",
 };
 
