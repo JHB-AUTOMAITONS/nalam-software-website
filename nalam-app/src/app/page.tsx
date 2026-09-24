@@ -4,7 +4,6 @@ import { Hero } from "@/components/sections/Hero";
 import { ProductsOverview } from "@/components/sections/ProductsOverview";
 import { CustomizationSection } from "@/components/sections/CustomizationSection";
 import { FeatureGrid } from "@/components/sections/FeatureGrid";
-import { KKAiSection } from "@/components/sections/KKAiSection";
 import { ClientsSection } from "@/components/sections/ClientsSection";
 import { RequirementsSection } from "@/components/sections/RequirementsSection";
 import { FinalCta } from "@/components/sections/FinalCta";
@@ -40,7 +39,6 @@ export default function HomePage() {
       <ProductsOverview />
       <CustomizationSection />
       <FeatureGrid />
-      <KKAiSection />
       <ClientsSection />
       <RequirementsSection />
       <FinalCta />

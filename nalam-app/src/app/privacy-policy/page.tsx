@@ -3,7 +3,6 @@ import Link from "next/link";
 import {
   LegalContactDetails,
   LegalDocument,
-  LegalPlaceholder,
   type LegalSection,
 } from "@/components/sections/LegalDocument";
 import { routes, siteConfig } from "@/lib/constants";
@@ -35,7 +34,7 @@ const sections: LegalSection[] = [
         uses and protects information when you visit {siteHost} (the &ldquo;Website&rdquo;) or
         contact us through it. This policy covers the Website only; data processed within
         Nalam&apos;s hospital, laboratory and clinic software for customers is governed by the
-        relevant customer agreement. <LegalPlaceholder>confirm scope statement</LegalPlaceholder>
+        relevant customer agreement.
       </p>
     ),
   },
@@ -80,9 +79,6 @@ const sections: LegalSection[] = [
           <li>understand how visitors use the Website so we can improve it; and</li>
           <li>measure the effectiveness of our advertising.</li>
         </ul>
-        <p>
-          <LegalPlaceholder>confirm lawful basis / consent requirements for each purpose</LegalPlaceholder>
-        </p>
       </>
     ),
   },
@@ -96,10 +92,7 @@ const sections: LegalSection[] = [
           service. Analytics and advertising data is processed by the providers named above under
           their own privacy policies. The Website is hosted by a third-party hosting provider.
         </p>
-        <p>
-          We do not sell the personal information you submit through the Website.{" "}
-          <LegalPlaceholder>confirm this commitment and any other disclosures</LegalPlaceholder>
-        </p>
+        <p>We do not sell the personal information you submit through the Website.</p>
       </>
     ),
   },
@@ -125,8 +118,7 @@ const sections: LegalSection[] = [
         </ul>
         <p>
           You can clear or block cookies and browser storage in your browser settings. Some
-          Website features may not work as intended if you do.{" "}
-          <LegalPlaceholder>confirm cookie consent requirements</LegalPlaceholder>
+          Website features may not work as intended if you do.
         </p>
       </>
     ),
@@ -137,7 +129,7 @@ const sections: LegalSection[] = [
     body: (
       <p>
         We keep enquiry information for as long as needed to respond to you and for our
-        legitimate business records. <LegalPlaceholder>specify retention period</LegalPlaceholder>
+        legitimate business records.
       </p>
     ),
   },
@@ -158,8 +150,7 @@ const sections: LegalSection[] = [
     body: (
       <p>
         You may contact us to request access to, correction of or deletion of the personal
-        information you have submitted through the Website.{" "}
-        <LegalPlaceholder>confirm applicable data protection law, user rights and grievance officer details</LegalPlaceholder>
+        information you have submitted through the Website.
       </p>
     ),
   },

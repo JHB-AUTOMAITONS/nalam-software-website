@@ -4,18 +4,8 @@ import { PageBackdrop } from "@/components/sections/PageBackdrop";
 import { PageHero } from "@/components/sections/PageHero";
 import { routes, siteConfig } from "@/lib/constants";
 
-/**
- * Visible inline marker for text that must be reviewed by legal counsel
- * before launch. Search the codebase for "LegalPlaceholder" to find every
- * outstanding item.
- */
-export function LegalPlaceholder({ children }: { children?: ReactNode }) {
-  return (
-    <mark className="rounded bg-signal-amber/15 px-1 py-0.5 font-medium text-signal-amber ring-1 ring-inset ring-signal-amber/30">
-      [Placeholder — confirm with legal{children ? <>: {children}</> : null}]
-    </mark>
-  );
-}
+/** Date this page's content was last published. Update when the Terms or Privacy Policy text changes. */
+export const legalLastUpdated = "24 September 2026";
 
 export interface LegalSection {
   id: string;
@@ -69,9 +59,7 @@ export function LegalDocument({ title, path, intro, sections }: LegalDocumentPro
         eyebrow="Legal"
         title={title}
       >
-        <p className="text-sm text-slate-500">
-          Last updated: <LegalPlaceholder>effective date</LegalPlaceholder>
-        </p>
+        <p className="text-sm text-slate-500">Last updated: {legalLastUpdated}</p>
         <div className="text-balance">{intro}</div>
       </PageHero>
 

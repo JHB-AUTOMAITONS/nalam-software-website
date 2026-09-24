@@ -69,7 +69,7 @@ const systemCustomization: { id: ProductId; body: string }[] = [
   },
   {
     id: "cms",
-    body: "Tailor consultations, treatment plans, packages, pharmacy and billing to the way your clinic runs, with KK AI working from your own clinic data.",
+    body: "Tailor consultations, treatment plans, packages, pharmacy and billing to the way your clinic runs.",
   },
 ];
 

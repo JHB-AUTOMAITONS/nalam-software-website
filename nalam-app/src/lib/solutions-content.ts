@@ -6,7 +6,7 @@ import type { ProductId } from "./constants";
  * Content rule: every sentence here elaborates on facts that already exist
  * elsewhere in the project — the product definitions in constants.ts
  * (positioning, description, features, valueStatement, closingStatement,
- * audience), the FAQ answers, the homepage FeatureGrid/KK AI copy and the
+ * audience), the FAQ answers, the homepage FeatureGrid copy and the
  * About page. Do not add new named features, integrations, figures or claims
  * here without confirming them with the product team first.
  */
@@ -147,21 +147,21 @@ export const solutionContent: Record<ProductId, SolutionPageContent> = {
   },
 
   cms: {
-    h1: "Clinic Management Software",
+    h1: "Clinic Management System",
     intro: [
       "Nalam's clinic management software manages appointments, consultations, procedures, treatment plans, pharmacy, billing and complete patient history through one intelligent clinic platform.",
-      "Built into the Clinic Management System is KK AI — your clinic's intelligent assistant — which answers questions about your clinic in simple language, using your own clinic data.",
+      "Every step of the clinic journey — from appointment to billing — runs on the same connected system, so staff spend less time switching between screens and patient information never ends up scattered.",
     ],
     overviewTitle: "Everything Your Clinic Runs On, in One Place",
     overview: [
       "A clinic handles a lot in a single day: booking appointments, running consultations, carrying out procedures, managing treatment plans and packages, dispensing medicines and collecting payments. When those tasks live in different tools, staff spend their time switching between screens and patient information ends up scattered.",
-      "Nalam's clinic management system software brings the whole clinic journey — from appointment to billing — onto one platform, with a complete Patient 360 view so everyone in the clinic works from the same picture of each patient. And when you need an answer about your clinic, you can simply ask KK AI.",
+      "Nalam's clinic management system software brings the whole clinic journey — from appointment to billing — onto one platform, with a complete Patient 360 view so everyone in the clinic works from the same picture of each patient.",
     ],
     audience:
       "The Clinic Management System is built for single-location and multi-location clinics, and connects with Nalam's laboratory system for connected clinic-laboratory operations.",
     featuresTitle: "Clinic Management System Features",
     featuresDescription:
-      "The clinic software capabilities that take a patient from appointment to billing — with one intelligent assistant alongside.",
+      "The clinic software capabilities that take a patient from appointment to billing, all on one connected platform.",
     featureDetails: {
       "Appointment to Billing":
         "Manage the full clinic visit — appointment, consultation, procedures, pharmacy and billing — as one connected flow, so each step builds on the information captured before it.",
@@ -176,15 +176,15 @@ export const solutionContent: Record<ProductId, SolutionPageContent> = {
       "Complete Patient 360":
         "See each patient's complete history — visits, treatments, prescriptions and results — in one view, so every consultation starts with the full picture.",
     },
-    benefitsTitle: "One Assistant. Instant Answers. Total Clarity.",
+    benefitsTitle: "Less Switching. Faster Consultations. Total Clarity.",
     benefits: [
       {
-        title: "One Assistant",
-        body: "KK AI sits inside your Clinic Management System, so instead of searching through multiple screens or reports, you ask one assistant in simple language.",
+        title: "Less Switching",
+        body: "Appointments, consultations, procedures, pharmacy and billing all run on the same platform, so staff aren't moving between separate tools to get through a visit.",
       },
       {
-        title: "Instant Answers",
-        body: "KK AI answers from your own clinic records, so the information you need comes back as an answer — not a report you have to compile yourself.",
+        title: "Faster Consultations",
+        body: "Predefined consultation presets and a connected patient record mean doctors spend less time on repetitive entry and more time with patients.",
       },
       {
         title: "Total Clarity",
@@ -199,7 +199,7 @@ export const solutionContent: Record<ProductId, SolutionPageContent> = {
       hms: "HMS, LMS and CMS can be combined into one connected healthcare ecosystem, so patient information and workflows move between clinic, hospital and laboratory.",
     },
     closing:
-      "Tell us how your clinic runs today, and our team will walk you through how the Clinic Management Software — and KK AI — fit your workflow.",
+      "Tell us how your clinic runs today, and our team will walk you through how the Clinic Management System fits your workflow.",
   },
 };
 

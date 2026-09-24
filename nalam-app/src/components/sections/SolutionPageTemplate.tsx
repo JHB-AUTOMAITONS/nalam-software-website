@@ -18,6 +18,12 @@ interface SolutionPageTemplateProps {
   extraSections?: ReactNode;
   /** Optional hero visual (see SolutionHeroMedia) — a full-bleed background at every breakpoint. */
   heroMedia?: ReactNode;
+  /**
+   * Overrides the small label shown above the hero H1, without changing
+   * `product.eyebrow` used elsewhere (homepage cards, /solutions, structured
+   * data). Defaults to `product.eyebrow` when omitted.
+   */
+  heroEyebrow?: string;
 }
 
 const accentText: Record<Product["accent"], string> = {
@@ -63,7 +69,13 @@ function ArrowIcon() {
   );
 }
 
-export function SolutionPageTemplate({ product, content, extraSections, heroMedia }: SolutionPageTemplateProps) {
+export function SolutionPageTemplate({
+  product,
+  content,
+  extraSections,
+  heroMedia,
+  heroEyebrow,
+}: SolutionPageTemplateProps) {
   const otherProducts = Object.values(products).filter((item) => item.id !== product.id);
   const breadcrumbs = [
     { name: "Home", path: routes.home },
@@ -78,7 +90,7 @@ export function SolutionPageTemplate({ product, content, extraSections, heroMedi
 
       <PageHero
         breadcrumbs={breadcrumbs}
-        eyebrow={product.eyebrow}
+        eyebrow={heroEyebrow ?? product.eyebrow}
         title={content.h1}
         tagline={product.positioning}
         media={heroMedia}

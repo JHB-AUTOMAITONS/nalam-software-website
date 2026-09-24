@@ -3,7 +3,6 @@ import Link from "next/link";
 import {
   LegalContactDetails,
   LegalDocument,
-  LegalPlaceholder,
   type LegalSection,
 } from "@/components/sections/LegalDocument";
 import { routes, siteConfig } from "@/lib/constants";
@@ -61,14 +60,13 @@ const sections: LegalSection[] = [
         <p>
           The Website describes Nalam&apos;s Hospital Management System, Laboratory Management
           System, Clinic Management System and custom healthcare software development services
-          for general information purposes. Descriptions, features and examples on the Website —
-          including illustrative examples such as sample KK AI conversations — do not form a
-          contractual offer.
+          for general information purposes. Descriptions, features and examples on the Website
+          do not form a contractual offer.
         </p>
         <p>
           Pricing is available on request based on each organization&apos;s requirements. The
           supply of any Nalam software or service is governed by a separate written agreement
-          between you and Nalam. <LegalPlaceholder>confirm wording on separate service agreements</LegalPlaceholder>
+          between you and Nalam.
         </p>
       </>
     ),
@@ -126,7 +124,7 @@ const sections: LegalSection[] = [
       <p>
         We aim to keep the Website accurate and available, but it is provided on an &ldquo;as
         is&rdquo; and &ldquo;as available&rdquo; basis without warranties of any kind, to the
-        extent permitted by law. <LegalPlaceholder>confirm disclaimer scope and wording</LegalPlaceholder>
+        extent permitted by law.
       </p>
     ),
   },
@@ -136,8 +134,7 @@ const sections: LegalSection[] = [
     body: (
       <p>
         To the extent permitted by law, Nalam will not be liable for any indirect or
-        consequential loss arising from your use of, or inability to use, the Website.{" "}
-        <LegalPlaceholder>confirm limitation of liability terms</LegalPlaceholder>
+        consequential loss arising from your use of, or inability to use, the Website.
       </p>
     ),
   },
@@ -157,9 +154,8 @@ const sections: LegalSection[] = [
     heading: "Governing Law and Jurisdiction",
     body: (
       <p>
-        These Terms are governed by the laws of <LegalPlaceholder>governing law</LegalPlaceholder>,
-        and any disputes will be subject to the jurisdiction of the courts at{" "}
-        <LegalPlaceholder>jurisdiction / venue</LegalPlaceholder>.
+        These Terms are governed by applicable law, and any disputes will be subject to the
+        applicable courts.
       </p>
     ),
   },

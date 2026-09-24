@@ -9,7 +9,7 @@ export const siteConfig = {
   contact: {
     email: "info@nalam.care",
     phone: "+91 86087 92718",
-    address: "2nd Floor, DNO: 30, Indira Nagar, Narasothipatti, Salem, Tamil Nadu 636004",
+    address: "D.No: 30, 2nd Floor, Indira Nagar, Narasothipatti, Salem, Tamil Nadu 636004",
   },
   social: {
     linkedin: "https://www.linkedin.com/company/nalam-software",
@@ -99,7 +99,7 @@ export const products: Record<ProductId, Product> = {
     fullName: "Clinic Management System",
     slug: "cms",
     landingSlug: "/solutions/clinic-management-system",
-    positioning: "One Platform. One Patient Journey. One Intelligent Assistant.",
+    positioning: "One Platform. One Patient Journey. Fully Connected.",
     description:
       "Manage appointments, consultations, procedures, treatment plans, pharmacy, billing and complete patient history through one intelligent clinic platform.",
     features: [
@@ -110,7 +110,7 @@ export const products: Record<ProductId, Product> = {
       { title: "Integrated Pharmacy & Inventory" },
       { title: "Complete Patient 360" },
     ],
-    valueStatement: "One Assistant. Instant Answers. Total Clarity.",
+    valueStatement: "Less Switching. Faster Consultations. Total Clarity.",
     closingStatement: "Run Your Entire Clinic from One Intelligent Platform.",
     ctaLabel: "Explore Clinic Management System",
     audience: "Clinic owners and medical management teams",
@@ -321,11 +321,6 @@ export const cmsFaqs = [
     question: "Does CMS provide a complete view of each patient?",
     answer:
       "Yes. CMS provides a complete Patient 360 view — visits, treatments, prescriptions and results — in one place, so every consultation starts with the full picture.",
-  },
-  {
-    question: "What is KK AI in the Clinic Management System?",
-    answer:
-      "KK AI is your clinic's intelligent assistant, built into CMS. It answers questions about your clinic in simple language, using your own clinic data, instead of you having to search through multiple screens or reports.",
   },
   {
     question: "Can CMS be customized for our clinic?",
