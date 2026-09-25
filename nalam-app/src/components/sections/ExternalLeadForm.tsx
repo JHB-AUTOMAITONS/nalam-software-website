@@ -4,6 +4,11 @@ import { useEffect, useRef, useState } from "react";
 
 const FORM_URL = "https://connect.automationclub.in/widget/form/ubInACG4r1dH4FnSTh6P";
 const FORM_ORIGIN = "https://connect.automationclub.in";
+// Fallback in case the iframe's onLoad never fires (cross-origin SPA content
+// can be unreliable about firing load events) — hide the loading overlay
+// after this even if we never got a definitive "loaded" signal, so visitors
+// are never stuck looking at "Loading form..." forever.
+const LOADING_FALLBACK_MS = 4000;
 
 interface ExternalLeadFormProps {
   /** Called once, best-effort, if the embedded form posts a submission signal. */
@@ -27,13 +32,26 @@ interface ExternalLeadFormProps {
  * popup/page area around this component. Do not add overflow/scrolling to
  * the iframe or this wrapper — that reintroduces a second, nested scrollbar.
  *
+ * IMPORTANT — the iframe is always rendered (never `display: none`), because
+ * some browsers don't reliably fire `onLoad` for cross-origin SPA content
+ * that does its own client-side routing after the initial load. Gating the
+ * iframe's visibility on `onLoad` previously left visitors stuck on a
+ * permanent "Loading form..." screen if that event never fired. A brief
+ * overlay is shown on top instead, cleared by either the load event or a
+ * timed fallback, whichever comes first.
+ *
  * We listen for a postMessage from the iframe as a best-effort signal (some
  * GHL forms post one on submit); this is not officially documented or
  * guaranteed, so nothing here depends on it firing.
  */
 export function ExternalLeadForm({ onSubmitDetected, className = "" }: ExternalLeadFormProps) {
-  const [loaded, setLoaded] = useState(false);
+  const [showOverlay, setShowOverlay] = useState(true);
   const firedRef = useRef(false);
+
+  useEffect(() => {
+    const fallback = window.setTimeout(() => setShowOverlay(false), LOADING_FALLBACK_MS);
+    return () => window.clearTimeout(fallback);
+  }, []);
 
   useEffect(() => {
     function handleMessage(event: MessageEvent) {
@@ -60,8 +78,11 @@ export function ExternalLeadForm({ onSubmitDetected, className = "" }: ExternalL
 
   return (
     <div className={`relative w-full ${className}`}>
-      {!loaded ? (
-        <div className="flex h-[900px] items-center justify-center">
+      {showOverlay ? (
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 z-10 flex h-[900px] items-center justify-center bg-[#F5F8F6] transition-opacity duration-300"
+        >
           <span className="font-mono text-xs uppercase tracking-[0.14em] text-slate-500">
             Loading form…
           </span>
@@ -71,8 +92,8 @@ export function ExternalLeadForm({ onSubmitDetected, className = "" }: ExternalL
         src={FORM_URL}
         title="Nalam requirements form"
         scrolling="no"
-        onLoad={() => setLoaded(true)}
-        className={`w-full border-0 bg-transparent transition-opacity duration-300 ${loaded ? "block opacity-100" : "hidden opacity-0"}`}
+        onLoad={() => setShowOverlay(false)}
+        className="w-full border-0 bg-transparent"
         style={{ height: 900 }}
       />
     </div>
