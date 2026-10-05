@@ -91,9 +91,9 @@ export const solutionContent: Record<ProductId, SolutionPageContent> = {
   },
 
   lms: {
-    h1: "Laboratory Management System",
+    h1: "Laboratory Management System Software",
     intro: [
-      "Nalam's Laboratory Management System is laboratory management software that manages your entire laboratory workflow — from test registration and sample collection to processing, validation, authorization and final report delivery.",
+      "Nalam's Laboratory Management System is laboratory management system software that manages your entire laboratory workflow — from test registration and sample collection to processing, validation, authorization and final report delivery.",
       "With direct lab machine integration, smart sample and barcode management and built-in reagent and stock control, it is designed around one outcome: less manual entry, faster reports and better lab control.",
     ],
     overviewTitle: "Your Entire Lab Workflow on One Platform",
@@ -103,7 +103,7 @@ export const solutionContent: Record<ProductId, SolutionPageContent> = {
     ],
     audience:
       "The Laboratory Management System runs independently for a standalone diagnostic lab, and connects with Nalam's hospital and clinic systems for connected hospital-laboratory or clinic-laboratory operations.",
-    featuresTitle: "Laboratory Management Software Features",
+    featuresTitle: "Key Features of Our Laboratory Management System Software",
     featuresDescription:
       "Everything a diagnostic laboratory needs to move a test from order to authorized report — in one connected system.",
     featureDetails: {

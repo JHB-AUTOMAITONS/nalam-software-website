@@ -12,7 +12,7 @@ import { buildMetadata } from "@/lib/seo";
 export const metadata: Metadata = buildMetadata({
   title: "Healthcare Software Blog | Nalam Software",
   description:
-    "Insights on hospital, laboratory and clinic management software from the Nalam team. New articles are on the way.",
+    "Insights on hospital, laboratory and clinic management software from the Nalam team, including guides to laboratory management systems and lab management software.",
   path: routes.blog,
   absoluteTitle: true,
 });

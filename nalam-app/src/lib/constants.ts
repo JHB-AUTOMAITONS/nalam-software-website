@@ -259,9 +259,9 @@ export const hmsFaqs = [
 /** Laboratory Management System page FAQ — laboratory-specific questions only. */
 export const lmsFaqs = [
   {
-    question: "What is the Laboratory Management System?",
+    question: "What is laboratory management system software?",
     answer:
-      "The Laboratory Management System (LMS) is laboratory management software that manages the full lab workflow, from test order and sample collection to processing, result validation, authorization and report delivery, with direct lab machine integration and reagent stock management.",
+      "Laboratory management system software manages the full lab workflow, from test order and sample collection to processing, result validation, authorization and report delivery. Nalam's Laboratory Management System (LMS) adds direct lab machine integration and reagent stock management to that workflow.",
   },
   {
     question: "Does LMS support sample and barcode management?",
@@ -287,6 +287,16 @@ export const lmsFaqs = [
     question: "Does LMS track reagents and stock?",
     answer:
       "Yes. LMS tracks reagents, stock and consumables with expiry visibility, so your team knows what is available and what needs attention before it affects testing.",
+  },
+  {
+    question: "How does laboratory management software help reduce manual errors?",
+    answer:
+      "LMS reduces manual entry by capturing results directly from connected lab machines, keeps samples matched to the right patient and test with barcodes, and adds a validation and authorization step before reports are released.",
+  },
+  {
+    question: "Can LMS work with hospital and clinic systems?",
+    answer:
+      "Yes. LMS runs independently for a standalone laboratory and can also be connected with Nalam's Hospital Management System and Clinic Management System, so test orders and results move between departments without being re-keyed.",
   },
   {
     question: "Can LMS be customized for our laboratory?",
