@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
+import type { ReactNode } from "react";
 import { notFound } from "next/navigation";
 import { Badge } from "@/components/ui/Badge";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
@@ -10,7 +12,7 @@ import { PageBackdrop } from "@/components/sections/PageBackdrop";
 import { formatPostDate, getBlogPost, getBlogPosts, type BlogContentBlock } from "@/lib/blog";
 import { routes } from "@/lib/constants";
 import { buildMetadata } from "@/lib/seo";
-import { buildArticleSchema } from "@/lib/structured-data";
+import { buildArticleSchema, buildFaqSchema } from "@/lib/structured-data";
 
 interface BlogPostPageProps {
   params: Promise<{ slug: string }>;
@@ -31,13 +33,43 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
   const post = await getBlogPost(slug);
   if (!post) return {};
 
+  const keywords = [post.primaryKeyword, ...(post.secondaryKeywords ?? [])].filter(
+    (keyword): keyword is string => Boolean(keyword)
+  );
+
   return buildMetadata({
-    title: `${post.title} | Nalam Blog`,
-    description: post.description,
+    title: post.seoTitle ?? `${post.title} | Nalam Blog`,
+    description: post.metaDescription ?? post.description,
     path: `${routes.blog}/${post.slug}`,
+    keywords: keywords.length > 0 ? keywords : undefined,
     ogImage: post.coverImage?.src,
     absoluteTitle: true,
   });
+}
+
+const inlineLinkClass = "font-medium text-emerald-onlight underline underline-offset-4 hover:text-navy-950";
+
+/**
+ * Renders paragraph text, turning `[anchor](/internal-path)` into a Next.js
+ * <Link>. Only site-relative hrefs are linked; anything else stays plain text.
+ */
+function renderInline(text: string): ReactNode[] {
+  const nodes: ReactNode[] = [];
+  const pattern = /\[([^\]]+)\]\((\/[^)\s]*)\)/g;
+  let lastIndex = 0;
+  let match: RegExpExecArray | null;
+
+  while ((match = pattern.exec(text)) !== null) {
+    if (match.index > lastIndex) nodes.push(text.slice(lastIndex, match.index));
+    nodes.push(
+      <Link key={`${match[2]}-${match.index}`} href={match[2]} className={inlineLinkClass}>
+        {match[1]}
+      </Link>
+    );
+    lastIndex = match.index + match[0].length;
+  }
+  if (lastIndex < text.length) nodes.push(text.slice(lastIndex));
+  return nodes;
 }
 
 function ArticleBlock({ block }: { block: BlogContentBlock }) {
@@ -53,13 +85,13 @@ function ArticleBlock({ block }: { block: BlogContentBlock }) {
         </h3>
       );
     case "paragraph":
-      return <p>{block.text}</p>;
+      return <p>{renderInline(block.text)}</p>;
     case "list": {
       const ListTag = block.ordered ? "ol" : "ul";
       return (
         <ListTag className={`flex flex-col gap-2 pl-5 ${block.ordered ? "list-decimal" : "list-disc"} marker:text-emerald-onlight`}>
           {block.items.map((item) => (
-            <li key={item}>{item}</li>
+            <li key={item}>{renderInline(item)}</li>
           ))}
         </ListTag>
       );
@@ -105,6 +137,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           image: post.coverImage?.src,
         })}
       />
+      {post.faqs && post.faqs.length > 0 ? <JsonLd data={buildFaqSchema(post.faqs)} /> : null}
       <PageBackdrop />
 
       <article>
@@ -153,6 +186,19 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               {post.content.map((block, index) => (
                 <ArticleBlock key={`${block.type}-${index}`} block={block} />
               ))}
+              {post.faqs && post.faqs.length > 0 ? (
+                <>
+                  <h2 id="faqs" className="scroll-mt-32 pt-4 font-display text-2xl font-medium leading-tight text-navy-950 sm:text-3xl">
+                    FAQs
+                  </h2>
+                  {post.faqs.map((faq) => (
+                    <div key={faq.question} className="flex flex-col gap-2">
+                      <h3 className="font-display text-xl font-medium leading-snug text-navy-950">{faq.question}</h3>
+                      <p>{faq.answer}</p>
+                    </div>
+                  ))}
+                </>
+              ) : null}
             </div>
           </Container>
         </div>
