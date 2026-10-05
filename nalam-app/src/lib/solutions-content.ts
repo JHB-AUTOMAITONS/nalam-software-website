@@ -147,9 +147,9 @@ export const solutionContent: Record<ProductId, SolutionPageContent> = {
   },
 
   cms: {
-    h1: "Clinic Management System",
+    h1: "Clinic Management System Software",
     intro: [
-      "Nalam's clinic management software manages appointments, consultations, procedures, treatment plans, pharmacy, billing and complete patient history through one intelligent clinic platform.",
+      "Nalam's Clinic Management System is clinic management system software that manages appointments, consultations, procedures, treatment plans, pharmacy, billing and complete patient history through one intelligent clinic platform.",
       "Every step of the clinic journey — from appointment to billing — runs on the same connected system, so staff spend less time switching between screens and patient information never ends up scattered.",
     ],
     overviewTitle: "Everything Your Clinic Runs On, in One Place",
@@ -159,7 +159,7 @@ export const solutionContent: Record<ProductId, SolutionPageContent> = {
     ],
     audience:
       "The Clinic Management System is built for single-location and multi-location clinics, and connects with Nalam's laboratory system for connected clinic-laboratory operations.",
-    featuresTitle: "Clinic Management System Features",
+    featuresTitle: "Key Features of Our Clinic Management System Software",
     featuresDescription:
       "The clinic software capabilities that take a patient from appointment to billing, all on one connected platform.",
     featureDetails: {

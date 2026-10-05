@@ -9,15 +9,15 @@ import { showcaseInfoChips, solutionContent } from "@/lib/solutions-content";
 import { buildFaqSchema } from "@/lib/structured-data";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Clinic Management Software | Nalam Software",
+  title: "Clinic Management System Software | Nalam Software",
   description:
-    "Nalam Clinic Management Software connects appointments, consultations, procedures, treatment plans, pharmacy, billing and patient history in one intelligent clinic platform.",
+    "Clinic management system software from Nalam: manage appointments, consultations, procedures, treatment plans, pharmacy and billing in one platform.",
   path: products.cms.landingSlug,
   absoluteTitle: true,
   keywords: [
-    "Clinic Management Software",
     "Clinic Management System Software",
     "Clinic Management System",
+    "Clinic Management Software",
     "Clinic Software",
   ],
 });
@@ -33,7 +33,7 @@ export default function ClinicManagementSystemPage() {
         heroMedia={
           <SolutionHeroMedia
             photoSrc={products.cms.photoSrc}
-            alt="Clinic Management Software for connected patient care"
+            alt="Doctor consulting a patient beside a screen showing Nalam clinic management system software with patient records"
             chips={showcaseInfoChips.cms}
           />
         }

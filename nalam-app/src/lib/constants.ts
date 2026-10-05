@@ -308,9 +308,9 @@ export const lmsFaqs = [
 /** Clinic Management System page FAQ — clinic-specific questions only. */
 export const cmsFaqs = [
   {
-    question: "What is the Clinic Management System?",
+    question: "What is clinic management system software?",
     answer:
-      "The Clinic Management System (CMS) is clinic management software that handles appointments, consultations, procedures, treatment plans, pharmacy and billing through one intelligent clinic platform.",
+      "Clinic management system software handles appointments, consultations, procedures, treatment plans, pharmacy and billing through one connected platform. Nalam's Clinic Management System (CMS) does this through one intelligent clinic platform.",
   },
   {
     question: "Does CMS manage appointments and consultations?",
