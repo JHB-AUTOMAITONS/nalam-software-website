@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { JsonLd } from "@/components/structured-data/JsonLd";
+import { RelatedArticlesSection } from "@/components/sections/RelatedArticlesSection";
 import { SolutionFaqSection } from "@/components/sections/SolutionFaqSection";
 import { SolutionHeroMedia } from "@/components/sections/SolutionHeroMedia";
 import { SolutionPageTemplate } from "@/components/sections/SolutionPageTemplate";
@@ -37,11 +38,31 @@ export default function HospitalManagementSystemPage() {
           />
         }
         extraSections={
-          <SolutionFaqSection
-            title="Hospital Management System FAQ"
-            description="Common questions about admissions, departments, billing and customization for Nalam's Hospital Management System."
-            items={hmsFaqs}
-          />
+          <>
+            <RelatedArticlesSection
+              title="Guides to Hospital Management Software"
+              description="Read more on patient flow and the features to look for in hospital management software."
+              articles={[
+                {
+                  title: "How Hospital Patient Management Software Improves Patient Flow and Reduces Waiting Time",
+                  description:
+                    "How a hospital patient management system addresses OPD queues, appointment scheduling and admission handoffs.",
+                  slug: "hospital-patient-flow-management",
+                },
+                {
+                  title: "Essential Features to Look for in Hospital Management Software",
+                  description:
+                    "A practical checklist of the modules the best hospital management software should cover.",
+                  slug: "hospital-management-software-features",
+                },
+              ]}
+            />
+            <SolutionFaqSection
+              title="Hospital Management System FAQ"
+              description="Common questions about admissions, departments, billing and customization for Nalam's Hospital Management System."
+              items={hmsFaqs}
+            />
+          </>
         }
       />
     </>

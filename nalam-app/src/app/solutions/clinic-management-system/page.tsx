@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { JsonLd } from "@/components/structured-data/JsonLd";
+import { RelatedArticlesSection } from "@/components/sections/RelatedArticlesSection";
 import { SolutionFaqSection } from "@/components/sections/SolutionFaqSection";
 import { SolutionHeroMedia } from "@/components/sections/SolutionHeroMedia";
 import { SolutionPageTemplate } from "@/components/sections/SolutionPageTemplate";
@@ -38,11 +39,31 @@ export default function ClinicManagementSystemPage() {
           />
         }
         extraSections={
-          <SolutionFaqSection
-            title="Clinic Management System FAQ"
-            description="Common questions about appointments, treatment plans and customization for Nalam's Clinic Management System."
-            items={cmsFaqs}
-          />
+          <>
+            <RelatedArticlesSection
+              title="Guides to Clinic Management Software"
+              description="Read more on appointment scheduling and on digital patient records and billing for clinics."
+              articles={[
+                {
+                  title: "How Clinic Management Software Streamlines Appointment Scheduling and Daily Operations",
+                  description:
+                    "How clinic management software in India handles booking, doctor availability, walk-ins and check-in.",
+                  slug: "clinic-appointment-scheduling-software",
+                },
+                {
+                  title: "How Digital Patient Records and Billing Software Help Clinics Work More Efficiently",
+                  description:
+                    "How clinic patient management software connects records, prescriptions, treatment plans and billing.",
+                  slug: "clinic-patient-records-and-billing",
+                },
+              ]}
+            />
+            <SolutionFaqSection
+              title="Clinic Management System FAQ"
+              description="Common questions about appointments, treatment plans and customization for Nalam's Clinic Management System."
+              items={cmsFaqs}
+            />
+          </>
         }
       />
     </>

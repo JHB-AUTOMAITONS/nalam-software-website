@@ -14,6 +14,10 @@
  * body of `loadPosts()`.
  */
 
+import { clinicAppointmentSchedulingSoftware } from "./blog-posts/clinic-appointment-scheduling-software";
+import { clinicPatientRecordsAndBilling } from "./blog-posts/clinic-patient-records-and-billing";
+import { hospitalManagementSoftwareFeatures } from "./blog-posts/hospital-management-software-features";
+import { hospitalPatientFlowManagement } from "./blog-posts/hospital-patient-flow-management";
 import { labManagementSoftwareKeyFeatures } from "./blog-posts/lab-management-software-key-features";
 import { laboratoryManagementSystemKeyFeatures } from "./blog-posts/laboratory-management-system-key-features";
 
@@ -57,7 +61,14 @@ export interface BlogPost {
 }
 
 async function loadPosts(): Promise<BlogPost[]> {
-  return [laboratoryManagementSystemKeyFeatures, labManagementSoftwareKeyFeatures];
+  return [
+    laboratoryManagementSystemKeyFeatures,
+    labManagementSoftwareKeyFeatures,
+    hospitalPatientFlowManagement,
+    hospitalManagementSoftwareFeatures,
+    clinicAppointmentSchedulingSoftware,
+    clinicPatientRecordsAndBilling,
+  ];
 }
 
 /** All published posts, newest first. */
