@@ -170,7 +170,7 @@ export const labManagementSoftwareKeyFeatures: BlogPost = {
     },
     {
       type: "paragraph",
-      text: "To compare these points against a specific product, read through the full [Laboratory Management System overview](/solutions/laboratory-management-system), or see our earlier guide to the [key features of a laboratory management system](/blog/laboratory-management-system-key-features).",
+      text: "To compare these points against a specific product, read through the full [Laboratory Management System overview](/solutions/laboratory-management-system), see our earlier guide to the [key features of a laboratory management system](/blog/laboratory-management-system-key-features), or read our buyer's guide on [how to choose pathology lab software in India](/blog/pathology-lab-software-guide), which covers pricing factors and a selection checklist.",
     },
   ],
   faqs: [
