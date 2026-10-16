@@ -20,6 +20,7 @@ import { hospitalManagementSoftwareFeatures } from "./blog-posts/hospital-manage
 import { hospitalPatientFlowManagement } from "./blog-posts/hospital-patient-flow-management";
 import { labManagementSoftwareKeyFeatures } from "./blog-posts/lab-management-software-key-features";
 import { laboratoryManagementSystemKeyFeatures } from "./blog-posts/laboratory-management-system-key-features";
+import { medicalPracticeManagementSoftware } from "./blog-posts/medical-practice-management-software";
 import { pathologyLabSoftwareGuide } from "./blog-posts/pathology-lab-software-guide";
 
 /** Structured article body. Swap for MDX/rich text if the CMS provides it. */
@@ -63,6 +64,7 @@ export interface BlogPost {
 
 async function loadPosts(): Promise<BlogPost[]> {
   return [
+    medicalPracticeManagementSoftware,
     pathologyLabSoftwareGuide,
     laboratoryManagementSystemKeyFeatures,
     labManagementSoftwareKeyFeatures,

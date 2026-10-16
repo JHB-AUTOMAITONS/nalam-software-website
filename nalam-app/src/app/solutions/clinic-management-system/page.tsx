@@ -42,7 +42,7 @@ export default function ClinicManagementSystemPage() {
           <>
             <RelatedArticlesSection
               title="Guides to Clinic Management Software"
-              description="Read more on appointment scheduling and on digital patient records and billing for clinics."
+              description="Read more on appointment scheduling, digital patient records and billing, and choosing medical practice management software."
               articles={[
                 {
                   title: "How Clinic Management Software Streamlines Appointment Scheduling and Daily Operations",
@@ -55,6 +55,12 @@ export default function ClinicManagementSystemPage() {
                   description:
                     "How clinic patient management software connects records, prescriptions, treatment plans and billing.",
                   slug: "clinic-patient-records-and-billing",
+                },
+                {
+                  title: "Medical Practice Management Software: Features, Benefits, and How to Choose the Right Solution",
+                  description:
+                    "What medical practice management software is, the features to evaluate, and how to choose the right solution.",
+                  slug: "medical-practice-management-software",
                 },
               ]}
             />

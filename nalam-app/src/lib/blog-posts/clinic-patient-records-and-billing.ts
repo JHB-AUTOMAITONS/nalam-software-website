@@ -134,7 +134,7 @@ export const clinicPatientRecordsAndBilling: BlogPost = {
     },
     {
       type: "paragraph",
-      text: "To see how records and billing fit into the complete clinic workflow, explore the [Clinic Management System](/solutions/clinic-management-system) overview, or read our companion guide on [appointment scheduling and daily clinic operations](/blog/clinic-appointment-scheduling-software).",
+      text: "To see how records and billing fit into the complete clinic workflow, explore the [Clinic Management System](/solutions/clinic-management-system) overview, read our companion guide on [appointment scheduling and daily clinic operations](/blog/clinic-appointment-scheduling-software), or see our broader guide to [medical practice management software](/blog/medical-practice-management-software) if you are comparing options for your practice.",
     },
   ],
   faqs: [
