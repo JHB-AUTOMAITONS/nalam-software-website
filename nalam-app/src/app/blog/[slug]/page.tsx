@@ -51,20 +51,33 @@ const inlineLinkClass = "font-medium text-emerald-onlight underline underline-of
 
 /**
  * Renders paragraph text, turning `[anchor](/internal-path)` into a Next.js
- * <Link>. Only site-relative hrefs are linked; anything else stays plain text.
+ * <Link> and `[anchor](https://…)` into an external link that opens in a new
+ * tab. Anything else stays plain text.
  */
 function renderInline(text: string): ReactNode[] {
   const nodes: ReactNode[] = [];
-  const pattern = /\[([^\]]+)\]\((\/[^)\s]*)\)/g;
+  const pattern = /\[([^\]]+)\]\((\/[^)\s]*|https?:\/\/[^)\s]+)\)/g;
   let lastIndex = 0;
   let match: RegExpExecArray | null;
 
   while ((match = pattern.exec(text)) !== null) {
     if (match.index > lastIndex) nodes.push(text.slice(lastIndex, match.index));
     nodes.push(
-      <Link key={`${match[2]}-${match.index}`} href={match[2]} className={inlineLinkClass}>
-        {match[1]}
-      </Link>
+      match[2].startsWith("/") ? (
+        <Link key={`${match[2]}-${match.index}`} href={match[2]} className={inlineLinkClass}>
+          {match[1]}
+        </Link>
+      ) : (
+        <a
+          key={`${match[2]}-${match.index}`}
+          href={match[2]}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={inlineLinkClass}
+        >
+          {match[1]}
+        </a>
+      )
     );
     lastIndex = match.index + match[0].length;
   }
@@ -102,6 +115,33 @@ function ArticleBlock({ block }: { block: BlogContentBlock }) {
           <p>{block.text}</p>
           {block.cite ? <cite className="mt-2 block font-sans text-sm not-italic text-slate-500">— {block.cite}</cite> : null}
         </blockquote>
+      );
+    case "table":
+      return (
+        <div className="overflow-x-auto rounded-2xl border border-navy-900/10">
+          <table className="w-full min-w-[34rem] border-collapse text-left text-sm sm:text-base">
+            <thead className="bg-teal-500/[0.08] text-navy-950">
+              <tr>
+                {block.headers.map((header) => (
+                  <th key={header} scope="col" className="px-4 py-3 font-medium">
+                    {header}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {block.rows.map((row) => (
+                <tr key={row.join("|")} className="border-t border-navy-900/10 align-top">
+                  {row.map((cell, index) => (
+                    <td key={`${cell}-${index}`} className={`px-4 py-3 ${index === 0 ? "font-medium text-navy-950" : ""}`}>
+                      {cell}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       );
     default:
       return null;

@@ -16,6 +16,7 @@
 
 import { clinicAppointmentSchedulingSoftware } from "./blog-posts/clinic-appointment-scheduling-software";
 import { clinicPatientRecordsAndBilling } from "./blog-posts/clinic-patient-records-and-billing";
+import { hospitalInformationSystemVsHospitalManagementSystem } from "./blog-posts/hospital-information-system-vs-hospital-management-system";
 import { hospitalManagementSoftwareFeatures } from "./blog-posts/hospital-management-software-features";
 import { hospitalPatientFlowManagement } from "./blog-posts/hospital-patient-flow-management";
 import { labManagementSoftwareKeyFeatures } from "./blog-posts/lab-management-software-key-features";
@@ -26,10 +27,12 @@ import { pathologyLabSoftwareGuide } from "./blog-posts/pathology-lab-software-g
 /** Structured article body. Swap for MDX/rich text if the CMS provides it. */
 export type BlogContentBlock =
   | { type: "heading"; level: 2 | 3; text: string; id?: string }
-  /** `text` may contain internal links written as `[anchor text](/path)`. */
+  /** `text` may contain internal links written as `[anchor text](/path)`, or external
+  sources as `[anchor text](https://…)`. */
   | { type: "paragraph"; text: string }
   | { type: "list"; ordered?: boolean; items: string[] }
-  | { type: "quote"; text: string; cite?: string };
+  | { type: "quote"; text: string; cite?: string }
+  | { type: "table"; headers: string[]; rows: string[][] };
 
 export interface BlogPost {
   /** URL segment: /blog/{slug} */
@@ -64,6 +67,7 @@ export interface BlogPost {
 
 async function loadPosts(): Promise<BlogPost[]> {
   return [
+    hospitalInformationSystemVsHospitalManagementSystem,
     medicalPracticeManagementSoftware,
     pathologyLabSoftwareGuide,
     laboratoryManagementSystemKeyFeatures,
