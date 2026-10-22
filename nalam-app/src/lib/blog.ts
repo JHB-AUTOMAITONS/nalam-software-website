@@ -16,6 +16,7 @@
 
 import { clinicAppointmentSchedulingSoftware } from "./blog-posts/clinic-appointment-scheduling-software";
 import { clinicPatientRecordsAndBilling } from "./blog-posts/clinic-patient-records-and-billing";
+import { healthManagementInformationSystemsVsFragmentedTools } from "./blog-posts/health-management-information-systems-vs-fragmented-tools";
 import { hospitalInformationSystemVsHospitalManagementSystem } from "./blog-posts/hospital-information-system-vs-hospital-management-system";
 import { hospitalManagementSoftwareFeatures } from "./blog-posts/hospital-management-software-features";
 import { hospitalPatientFlowManagement } from "./blog-posts/hospital-patient-flow-management";
@@ -67,6 +68,7 @@ export interface BlogPost {
 
 async function loadPosts(): Promise<BlogPost[]> {
   return [
+    healthManagementInformationSystemsVsFragmentedTools,
     hospitalInformationSystemVsHospitalManagementSystem,
     medicalPracticeManagementSoftware,
     pathologyLabSoftwareGuide,
