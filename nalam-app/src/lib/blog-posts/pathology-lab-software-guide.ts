@@ -217,7 +217,7 @@ export const pathologyLabSoftwareGuide: BlogPost = {
     },
     {
       type: "paragraph",
-      text: "Whether it suits your lab depends on your requirements, so use the checklist above when you evaluate it, as you would with any vendor. If you would like to see how it handles your workflow, you can [request a demo or talk to the Nalam team](/contact). Our earlier article on [choosing lab management software](/blog/lab-management-software-key-features) covers more practical points on evaluation.",
+      text: "Whether it suits your lab depends on your requirements, so use the checklist above when you evaluate it, as you would with any vendor. If you would like to see how it handles your workflow, you can [request a demo or talk to the Nalam team](/contact). Our earlier article on [choosing lab management software](/blog/lab-management-software-key-features) covers more practical points on evaluation, and if you work in Singapore, see our guide to [pathology report software for Singapore laboratories](/blog/pathology-report-software-singapore).",
     },
 
     { type: "heading", level: 2, text: "Conclusion" },

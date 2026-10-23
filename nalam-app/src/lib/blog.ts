@@ -24,6 +24,7 @@ import { labManagementSoftwareKeyFeatures } from "./blog-posts/lab-management-so
 import { laboratoryManagementSystemKeyFeatures } from "./blog-posts/laboratory-management-system-key-features";
 import { medicalPracticeManagementSoftware } from "./blog-posts/medical-practice-management-software";
 import { pathologyLabSoftwareGuide } from "./blog-posts/pathology-lab-software-guide";
+import { pathologyReportSoftwareSingapore } from "./blog-posts/pathology-report-software-singapore";
 
 /** Structured article body. Swap for MDX/rich text if the CMS provides it. */
 export type BlogContentBlock =
@@ -68,6 +69,7 @@ export interface BlogPost {
 
 async function loadPosts(): Promise<BlogPost[]> {
   return [
+    pathologyReportSoftwareSingapore,
     healthManagementInformationSystemsVsFragmentedTools,
     hospitalInformationSystemVsHospitalManagementSystem,
     medicalPracticeManagementSoftware,
