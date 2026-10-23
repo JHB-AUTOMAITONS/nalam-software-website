@@ -163,7 +163,7 @@ export const pathologyReportSoftwareSingapore: BlogPost = {
     },
     {
       type: "paragraph",
-      text: "On that last point, laboratories in Singapore handle personal data and should consider the Personal Data Protection Act 2012 (PDPA), which sets out obligations for how organizations collect, use, disclose and protect personal data. Clinical laboratory services are also a healthcare service regulated in Singapore, under the Healthcare Services Act, by the Ministry of Health. Software does not make a laboratory compliant on its own; compliance depends on how the laboratory operates and configures its systems. Check current requirements with the authorities or your own advisers, and treat any vendor claim of compliance as something to verify in writing.",
+      text: "On that last point, laboratories in Singapore handle personal data and should consider the Personal Data Protection Act 2012 (PDPA), which sets out obligations for how organizations collect, use, disclose and protect personal data. Separately, the Ministry of Health lists clinical laboratory service as a licensable healthcare service under the Healthcare Services Act, with a licence required where testing is done for purposes such as diagnosing a condition. This article is general information, not legal advice. Software does not make a laboratory compliant on its own; compliance depends on how the laboratory operates and configures its systems. Check current requirements with the authorities or your own advisers, and treat any vendor claim of compliance as something to verify in writing.",
     },
     {
       type: "paragraph",
