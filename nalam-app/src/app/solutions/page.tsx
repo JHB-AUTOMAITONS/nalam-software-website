@@ -10,6 +10,7 @@ import { PageBackdrop } from "@/components/sections/PageBackdrop";
 import { PageHero } from "@/components/sections/PageHero";
 import { ProductCard } from "@/components/sections/ProductCard";
 import { productList, products, routes, siteConfig } from "@/lib/constants";
+import { countryPageList } from "@/lib/country-pages";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = buildMetadata({
@@ -132,6 +133,29 @@ export default function SolutionsPage() {
                     </li>
                   ))}
                 </ul>
+              </RevealOnScroll>
+            ))}
+          </ul>
+        </Container>
+      </section>
+
+      <section className={sectionClass}>
+        <Container className="flex flex-col gap-8">
+          <SectionHeading
+            eyebrow="By Country"
+            title="Healthcare Software for Your Country"
+            description="Country guides cover the operational needs and local requirements worth checking before you evaluate software."
+          />
+          <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-5">
+            {countryPageList.map((country, index) => (
+              <RevealOnScroll as="li" key={country.slug} delay={0.05 + index * 0.04} className="min-w-0">
+                <Link
+                  href={country.path}
+                  className="glass-surface flex h-full min-w-0 flex-col gap-1 rounded-2xl border border-ice-500/15 p-4 backdrop-blur-sm transition-[border-color,box-shadow] duration-200 hover:border-ice-500/35 hover:shadow-soft"
+                >
+                  <span className="font-display text-base font-medium text-navy-950">{country.country}</span>
+                  <span className="text-sm text-emerald-onlight">Hospital management software &rarr;</span>
+                </Link>
               </RevealOnScroll>
             ))}
           </ul>

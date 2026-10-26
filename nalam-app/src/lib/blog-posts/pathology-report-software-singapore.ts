@@ -192,7 +192,7 @@ export const pathologyReportSoftwareSingapore: BlogPost = {
     },
     {
       type: "paragraph",
-      text: "To judge whether it fits a Singapore laboratory, share your workflow, your analyzers and your reporting and data-handling requirements with the team, and ask for a walk-through of your own test journey. Questions about local deployment, support arrangements and regulatory requirements should be raised at this stage and confirmed in writing. You can [contact the Nalam team](/contact) to start that conversation. Our articles on [laboratory management system features](/blog/laboratory-management-system-key-features) and [choosing lab management software](/blog/lab-management-software-key-features) offer further evaluation points.",
+      text: "To judge whether it fits a Singapore laboratory, share your workflow, your analyzers and your reporting and data-handling requirements with the team, and ask for a walk-through of your own test journey. Questions about local deployment, support arrangements and regulatory requirements should be raised at this stage and confirmed in writing. You can [contact the Nalam team](/contact) to start that conversation, or read our overview of [hospital management software in Singapore](/hospital-management-software-singapore). Our articles on [laboratory management system features](/blog/laboratory-management-system-key-features) and [choosing lab management software](/blog/lab-management-software-key-features) offer further evaluation points.",
     },
 
     { type: "heading", level: 2, text: "Conclusion" },

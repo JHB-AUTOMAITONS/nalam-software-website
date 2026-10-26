@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { Logo } from "@/components/ui/Logo";
 import { products, routes, siteConfig } from "@/lib/constants";
+import { countryPageList } from "@/lib/country-pages";
 
 const solutionLinks = [
   { label: "All Solutions", href: routes.solutions },
@@ -111,6 +112,23 @@ export function Footer() {
           </ul>
         </div>
       </Container>
+
+      <div className="border-t border-navy-900/10">
+        <Container className="py-4 sm:py-5">
+          <nav aria-label="Healthcare software by country">
+            <h2 className="sr-only">Healthcare software by country</h2>
+            <ul className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs text-slate-500 lg:justify-start">
+              {countryPageList.map((country) => (
+                <li key={country.slug}>
+                  <Link href={country.path} className="transition-colors hover:text-navy-950">
+                    Hospital Software {country.country}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </Container>
+      </div>
 
       <div className="border-t border-navy-900/10">
         <Container className="flex flex-col items-center justify-between gap-2 py-5 text-center sm:gap-3 sm:py-6 text-xs text-slate-500 lg:flex-row lg:text-left">
