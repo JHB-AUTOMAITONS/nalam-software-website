@@ -175,7 +175,7 @@ export const countryPages: Record<CountrySlug, CountryPage> = {
       },
       {
         title: "National digital health direction",
-        body: "The Ministry of Health's 2023 Digital Health Blueprint centres on a National Electronic Health Record, and its companion guidelines describe an API for electronic medical record systems to communicate with it. We could not confirm whether or when private providers must connect, and Nalam makes no claim of integration with any national system. Check the Ministry's current guidance and raise any data-exchange needs early.",
+        body: "The Ministry of Health's 2023 Digital Health Blueprint centres on a National Electronic Health Record, and the Ministry's companion National Digital Health Guidelines and Standards describe an API for electronic medical record systems to communicate with it. Those guidelines say private institutions follow them on an opt-in basis, while adherence is mandatory in the Ministry's own software enlisting process. Nalam makes no claim of enlistment or integration with any national system, so check which of these applies to you and raise it early.",
       },
       {
         title: "Language, hosting, training and support",
@@ -185,13 +185,17 @@ export const countryPages: Record<CountrySlug, CountryPage> = {
     sourcesNote: "Check current requirements directly with these official sources:",
     sources: [
       {
-        label: "Private Medical Institutions Registration Act, No. 21 of 2006 (Government of Sri Lanka)",
-        url: "https://documents.gov.lk/view/acts/2006/7/21-2006_E.pdf",
+        label: "Private Medical Institutions Registration Act, No. 21 of 2006 (Sri Lanka Law)",
+        url: "https://www.srilankalaw.lk/revised-statutes/alphabetical-list-of-statutes/938-private-medical-institutions-registration-act.html",
       },
       { label: "Data Protection Authority of Sri Lanka", url: "https://dpa.gov.lk/" },
       {
         label: "Sri Lanka Digital Health Blueprint (Ministry of Health, 2023)",
         url: "https://www.health.gov.lk/wp-content/uploads/2022/08/Digital-Health-Blue-Print-Full-Book-01.11.2023-Final.pdf",
+      },
+      {
+        label: "National Digital Health Guidelines and Standards (Ministry of Health)",
+        url: "https://www.health.gov.lk/wp-content/uploads/2023/11/NDHGS-v2.pdf",
       },
       { label: "Ministry of Health, Sri Lanka", url: "https://www.health.gov.lk/" },
     ],
@@ -214,7 +218,7 @@ export const countryPages: Record<CountrySlug, CountryPage> = {
       {
         question: "Will it work in Sinhala or Tamil?",
         answer:
-          "We have not verified language support for Sinhala or Tamil on this page, so we do not promise it. Share the languages you need for screens, prescriptions and reports, and our team can confirm what is possible, including through customization.",
+          "We have not verified language support for Sinhala or Tamil on this page, so we do not promise it. Share the languages you need for screens, prescriptions and reports, and ask our team to confirm in writing what is supported.",
       },
       {
         question: "Does the software make us compliant with Sri Lankan data protection law?",
@@ -316,10 +320,6 @@ export const countryPages: Record<CountrySlug, CountryPage> = {
     sourcesNote: "Check current requirements directly with these official sources:",
     sources: [
       { label: "Personal Data Protection Department, Malaysia", url: "https://www.pdp.gov.my/" },
-      {
-        label: "Personal Data Protection (Amendment) Act 2024, Act A1727 (Attorney General's Chambers)",
-        url: "https://lom.agc.gov.my/act-detail.php?language=BI&type=amendment&act=A1727",
-      },
       { label: "Ministry of Health Malaysia", url: "https://www.moh.gov.my/" },
     ],
     faqs: [
@@ -336,7 +336,7 @@ export const countryPages: Record<CountrySlug, CountryPage> = {
       {
         question: "Does Nalam integrate with Malaysian insurers or government systems?",
         answer:
-          "We do not claim any such integration. If you need data exchange with a specific payer or system, tell us which one and the team can confirm what is possible, including through custom integrations.",
+          "We do not claim any such integration. If you need data exchange with a specific payer or system, tell us which one and ask the team to confirm in writing whether and how it could be supported.",
       },
       {
         question: "Does the software make us PDPA-compliant?",
@@ -441,7 +441,7 @@ export const countryPages: Record<CountrySlug, CountryPage> = {
       },
       {
         title: "Health Information Act and NEHR",
-        body: "The Health Information Act 2026 was passed in January 2026 and comes into operation on a date the Minister appoints by gazette notice; Singapore Statutes Online listed it as uncommenced when we last checked. MOH has indicated that licensed providers will be expected to contribute key health information to the National Electronic Health Record, with cybersecurity and breach-notification duties, but published summaries differ on phasing and scope. Confirm timing and scope with MOH, and raise any NEHR integration need with us explicitly, because we do not claim one.",
+        body: "The Health Information Act 2026 was passed in January 2026 and comes into operation on a date the Minister appoints by gazette notice; Singapore Statutes Online listed it as uncommenced when we last checked. In Parliament, MOH said the Act would require all licensed healthcare providers to contribute to the National Electronic Health Record and that it planned to commence the Act from early 2027; later published summaries describe phased deadlines and differ on scope, and cybersecurity and breach-notification duties also apply. Confirm timing and scope with MOH, and raise any NEHR integration need with us explicitly, because we do not claim one.",
       },
       {
         title: "Hosting, support and onboarding",
@@ -452,7 +452,14 @@ export const countryPages: Record<CountrySlug, CountryPage> = {
     sources: [
       { label: "Ministry of Health, Singapore", url: "https://www.moh.gov.sg/" },
       { label: "Personal Data Protection Commission, Singapore", url: "https://www.pdpc.gov.sg/" },
-      { label: "Health Information Act 2026 (Singapore Statutes Online)", url: "https://sso.agc.gov.sg/Act/HIA2026" },
+      {
+        label: "Health Information Act 2026, as published (Singapore Statutes Online)",
+        url: "https://sso.agc.gov.sg/Acts-Supp/1-2026/Published/20260212?DocDate=20260212",
+      },
+      {
+        label: "MOH second reading speech, Health Information Bill",
+        url: "https://www.moh.gov.sg/newsroom/health-information-bill-second-reading-opening-speech-for-sms-tan-kiat-how/",
+      },
       {
         label: "Clinical Laboratory Service licensing (Healthcare Services Act)",
         url: "https://www.hcsa.gov.sg/clinical-support-services/clinical-laboratory-service/",
@@ -561,7 +568,7 @@ export const countryPages: Record<CountrySlug, CountryPage> = {
     considerations: [
       {
         title: "Protection of Personal Information Act (POPIA)",
-        body: "POPIA, regulated by the Information Regulator, treats health information as special personal information with additional conditions for processing. The Regulator published draft regulations on processing health information for comment in September 2025, and we could not confirm their final status. The transfer of personal information outside South Africa is restricted in defined circumstances. Ask where data would be hosted, and take legal advice on your obligations.",
+        body: "POPIA, regulated by the Information Regulator, generally prohibits processing health information (section 26) but provides an exception for healthcare institutions and professionals where processing is necessary for treatment and care or for administering the practice (section 32). The Regulator published draft regulations on processing health information for comment in September 2025, and we could not confirm their final status. Under section 72, the transfer of personal information outside South Africa is restricted in defined circumstances. Ask where data would be hosted, and take legal advice on your obligations.",
       },
       {
         title: "Patient record-keeping",
@@ -690,7 +697,7 @@ export const countryPages: Record<CountrySlug, CountryPage> = {
     considerations: [
       {
         title: "Nigeria Data Protection Act 2023",
-        body: "The Act, enforced by the Nigeria Data Protection Commission, classes health status as sensitive personal data with specific conditions for processing. Published summaries report that the Commission's General Application and Implementation Directive took effect in September 2025 and sets registration rules for data controllers and processors of major importance, with healthcare among the sectors discussed. Confirm with the Commission whether your organization must register, and ask vendors how patient data is protected.",
+        body: "The Act, enforced by the Nigeria Data Protection Commission, defines health status as sensitive personal data (section 30 sets conditions for processing it) and requires data controllers and processors of major importance to register with the Commission (section 44). The Commission's General Application and Implementation Directive 2025 includes a schedule that places hospitals providing secondary or tertiary care, primary health centres and independent medical laboratories in registration categories; published summaries report it took effect in September 2025. Confirm with the Commission whether and how your organization must register, and ask vendors how patient data is protected.",
       },
       {
         title: "Laboratory registration",
@@ -712,7 +719,11 @@ export const countryPages: Record<CountrySlug, CountryPage> = {
         url: "https://ndpc.gov.ng/wp-content/uploads/2024/03/Nigeria_Data_Protection_Act_2023.pdf",
       },
       { label: "National Health Insurance Authority (NHIA)", url: "https://nhia.gov.ng/" },
-      { label: "Medical Laboratory Science Council of Nigeria", url: "https://web.mlscn.gov.ng/" },
+      {
+        label: "General Application and Implementation Directive 2025 (Nigeria Data Protection Commission)",
+        url: "https://ndpc.gov.ng/wp-content/uploads/2025/07/NDP-ACT-GAID-2025-MARCH-20TH.pdf",
+      },
+      { label: "Medical Laboratory Science Council of Nigeria", url: "https://mlscn.gov.ng/" },
       { label: "Federal Ministry of Health and Social Welfare", url: "https://health.gov.ng/" },
     ],
     faqs: [
