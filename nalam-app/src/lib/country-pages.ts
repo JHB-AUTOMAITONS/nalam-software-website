@@ -127,7 +127,7 @@ export const countryPages: Record<CountrySlug, CountryPage> = {
       },
       {
         title: "Billing patients can follow",
-        body: "In private care, patients and families often settle bills directly, so itemized charges across consultations, tests, procedures and pharmacy need to be accurate and easy to explain. If you also handle insurer claims, that adds a second workflow.",
+        body: "Where patients and families settle bills directly, itemized charges across consultations, tests, procedures and pharmacy need to be accurate and easy to explain. If you also handle insurer claims, that adds a second workflow.",
       },
       {
         title: "Laboratory turnaround and traceability",
@@ -167,15 +167,15 @@ export const countryPages: Record<CountrySlug, CountryPage> = {
     considerations: [
       {
         title: "Registration of private medical institutions",
-        body: "Under the Private Medical Institutions Registration Act, No. 21 of 2006, a private medical institution must hold a certificate of registration issued through the Private Health Services Regulatory Council. Confirm which registration applies to your hospital, laboratory or clinic, and whether any record-keeping it expects affects how you configure software.",
+        body: "Under the Private Medical Institutions Registration Act, No. 21 of 2006, a private medical institution may not be established or operated without a Certificate of Registration, and applications go to the Private Health Services Regulatory Council through the Provincial Director of Health Services. Confirm which registration applies to your hospital, laboratory or clinic, and whether any record-keeping it expects affects how you configure software.",
       },
       {
         title: "Personal data protection",
-        body: "The Personal Data Protection Act, No. 9 of 2022 established a Data Protection Authority and is being brought into operation in stages. Published commencement dates for the remaining parts have changed more than once, so confirm the current position with the Authority and ask any vendor how access control, storage and breach handling would be handled for patient data.",
+        body: "The Personal Data Protection Act, No. 9 of 2022 established a Data Protection Authority and is being brought into operation in stages. Published commencement dates for the remaining parts have changed, and the Authority's own background page may lag behind, so confirm the current position with the Authority and ask any vendor how access control, storage and breach handling would be handled for patient data.",
       },
       {
         title: "National digital health direction",
-        body: "The Ministry of Health has published a Digital Health Blueprint centred on a national electronic health record. We are not aware of a confirmed requirement or integration for private providers, and Nalam makes no claim of integration with any national system. Check the Ministry's current guidance and raise any data-exchange needs early.",
+        body: "The Ministry of Health's 2023 Digital Health Blueprint centres on a National Electronic Health Record, and its companion guidelines describe an API for electronic medical record systems to communicate with it. We could not confirm whether or when private providers must connect, and Nalam makes no claim of integration with any national system. Check the Ministry's current guidance and raise any data-exchange needs early.",
       },
       {
         title: "Language, hosting, training and support",
@@ -189,6 +189,10 @@ export const countryPages: Record<CountrySlug, CountryPage> = {
         url: "https://documents.gov.lk/view/acts/2006/7/21-2006_E.pdf",
       },
       { label: "Data Protection Authority of Sri Lanka", url: "https://dpa.gov.lk/" },
+      {
+        label: "Sri Lanka Digital Health Blueprint (Ministry of Health, 2023)",
+        url: "https://www.health.gov.lk/wp-content/uploads/2022/08/Digital-Health-Blue-Print-Full-Book-01.11.2023-Final.pdf",
+      },
       { label: "Ministry of Health, Sri Lanka", url: "https://www.health.gov.lk/" },
     ],
     faqs: [
@@ -294,11 +298,11 @@ export const countryPages: Record<CountrySlug, CountryPage> = {
     considerations: [
       {
         title: "Personal Data Protection Act 2010, as amended in 2024",
-        body: "The 2024 amendments introduced duties such as appointing a data protection officer and notifying the regulator of data breaches, with the main provisions taking effect during 2025. Confirm what applies to your organization with the Personal Data Protection Department, and ask any vendor how patient data access, storage and incident handling work.",
+        body: "The 2024 amendments introduced duties such as appointing a data protection officer and notifying the regulator of data breaches, with provisions taking effect in stages during 2025. Confirm what applies to your organization with the Personal Data Protection Department, and ask any vendor how patient data access, storage and incident handling work.",
       },
       {
         title: "Licensing of private healthcare facilities",
-        body: "The Ministry of Health states that health facilities, other than government hospitals under the Ministry, need approval and operating licences under the Private Healthcare Facilities and Services Act 1998. Confirm which licence category covers your hospital, clinic or laboratory and any record-keeping it expects.",
+        body: "Private healthcare facilities and services are licensed by the Ministry of Health under the Private Healthcare Facilities and Services Act 1998 (Act 586). We could not confirm from official text which licence category applies to every laboratory or clinic type, so confirm yours with the Ministry, along with any record-keeping it expects.",
       },
       {
         title: "Payers, claims and reporting",
@@ -312,6 +316,10 @@ export const countryPages: Record<CountrySlug, CountryPage> = {
     sourcesNote: "Check current requirements directly with these official sources:",
     sources: [
       { label: "Personal Data Protection Department, Malaysia", url: "https://www.pdp.gov.my/" },
+      {
+        label: "Personal Data Protection (Amendment) Act 2024, Act A1727 (Attorney General's Chambers)",
+        url: "https://lom.agc.gov.my/act-detail.php?language=BI&type=amendment&act=A1727",
+      },
       { label: "Ministry of Health Malaysia", url: "https://www.moh.gov.my/" },
     ],
     faqs: [
@@ -425,7 +433,7 @@ export const countryPages: Record<CountrySlug, CountryPage> = {
     considerations: [
       {
         title: "Healthcare Services Act licensing",
-        body: "The Ministry of Health licenses healthcare services under the Healthcare Services Act 2020, and clinical laboratory service is a licensable service. Confirm which licences apply to your organization and how record-keeping requirements affect system configuration.",
+        body: "Healthcare services in Singapore are licensed under the Healthcare Services Act 2020, and clinical laboratory service has its own licence. Confirm which licences apply to your organization and how record-keeping requirements affect system configuration.",
       },
       {
         title: "Personal Data Protection Act 2012",
@@ -433,7 +441,7 @@ export const countryPages: Record<CountrySlug, CountryPage> = {
       },
       {
         title: "Health Information Act and NEHR",
-        body: "The Health Information Bill was passed by Parliament on 12 January 2026, and MOH has said it intends the Act to take effect from early 2027. Reported provisions include contribution of key health information to the National Electronic Health Record by licensed providers, plus cybersecurity and breach-notification duties. Scope and timing should be confirmed with MOH, and any NEHR integration need should be discussed with us explicitly, because we do not claim one.",
+        body: "The Health Information Act 2026 was passed in January 2026 and comes into operation on a date the Minister appoints by gazette notice; Singapore Statutes Online listed it as uncommenced when we last checked. MOH has indicated that licensed providers will be expected to contribute key health information to the National Electronic Health Record, with cybersecurity and breach-notification duties, but published summaries differ on phasing and scope. Confirm timing and scope with MOH, and raise any NEHR integration need with us explicitly, because we do not claim one.",
       },
       {
         title: "Hosting, support and onboarding",
@@ -444,9 +452,10 @@ export const countryPages: Record<CountrySlug, CountryPage> = {
     sources: [
       { label: "Ministry of Health, Singapore", url: "https://www.moh.gov.sg/" },
       { label: "Personal Data Protection Commission, Singapore", url: "https://www.pdpc.gov.sg/" },
+      { label: "Health Information Act 2026 (Singapore Statutes Online)", url: "https://sso.agc.gov.sg/Act/HIA2026" },
       {
-        label: "MOH Health Information Act resources for healthcare professionals",
-        url: "https://www.hpp.moh.gov.sg/all-healthcare-professionals/health-information-act",
+        label: "Clinical Laboratory Service licensing (Healthcare Services Act)",
+        url: "https://www.hcsa.gov.sg/clinical-support-services/clinical-laboratory-service/",
       },
     ],
     faqs: [
@@ -552,7 +561,7 @@ export const countryPages: Record<CountrySlug, CountryPage> = {
     considerations: [
       {
         title: "Protection of Personal Information Act (POPIA)",
-        body: "POPIA, regulated by the Information Regulator, treats health information as special personal information with additional conditions for processing. The Regulator has also consulted on regulations for processing health information, and the transfer of personal information outside South Africa is restricted in defined circumstances. Ask where data would be hosted, and take legal advice on your obligations.",
+        body: "POPIA, regulated by the Information Regulator, treats health information as special personal information with additional conditions for processing. The Regulator published draft regulations on processing health information for comment in September 2025, and we could not confirm their final status. The transfer of personal information outside South Africa is restricted in defined circumstances. Ask where data would be hosted, and take legal advice on your obligations.",
       },
       {
         title: "Patient record-keeping",
@@ -560,7 +569,7 @@ export const countryPages: Record<CountrySlug, CountryPage> = {
       },
       {
         title: "Medical schemes and the changing funding landscape",
-        body: "Medical schemes are regulated by the Council for Medical Schemes. The National Health Insurance Act was signed in 2024 and its implementation and legal status continue to develop, so confirm the current position rather than planning around assumptions. Nalam does not claim integration with medical schemes, switching houses or any government system.",
+        body: "Medical schemes are regulated by the Council for Medical Schemes. The National Health Insurance Act was signed in May 2024, and its implementation has been subject to court challenges, with reports of a pause pending Constitutional Court proceedings. Confirm the current position rather than planning around assumptions. Nalam does not claim integration with medical schemes, switching houses or any government system.",
       },
       {
         title: "Language, hosting, training and support",
@@ -570,6 +579,10 @@ export const countryPages: Record<CountrySlug, CountryPage> = {
     sourcesNote: "Check current requirements directly with these official sources:",
     sources: [
       { label: "Information Regulator (South Africa)", url: "https://inforegulator.org.za/" },
+      {
+        label: "Protection of Personal Information Act 4 of 2013 (Department of Justice)",
+        url: "https://www.justice.gov.za/legislation/acts/2013-004.pdf",
+      },
       { label: "National Department of Health", url: "https://www.health.gov.za/" },
       { label: "Health Professions Council of South Africa", url: "https://www.hpcsa.co.za/" },
       { label: "Council for Medical Schemes", url: "https://www.medicalschemes.co.za/" },
@@ -677,11 +690,11 @@ export const countryPages: Record<CountrySlug, CountryPage> = {
     considerations: [
       {
         title: "Nigeria Data Protection Act 2023",
-        body: "The Act, enforced by the Nigeria Data Protection Commission, classes health status as sensitive personal data with specific conditions for processing. The Commission's General Application and Implementation Directive took effect in September 2025 and includes registration rules for data controllers and processors of major importance; healthcare is among the sectors discussed. Confirm with the Commission whether your organization must register, and ask vendors how patient data is protected.",
+        body: "The Act, enforced by the Nigeria Data Protection Commission, classes health status as sensitive personal data with specific conditions for processing. Published summaries report that the Commission's General Application and Implementation Directive took effect in September 2025 and sets registration rules for data controllers and processors of major importance, with healthcare among the sectors discussed. Confirm with the Commission whether your organization must register, and ask vendors how patient data is protected.",
       },
       {
         title: "Laboratory registration",
-        body: "The Medical Laboratory Science Council of Nigeria registers and licenses medical laboratories and has linked registration to a quality management system. Confirm current requirements with the Council before configuring laboratory records and reports.",
+        body: "The Medical Laboratory Science Council of Nigeria registers medical laboratories, and its published guidelines for setting up a laboratory ask for items such as a quality manual and standard operating procedures. Confirm current requirements with the Council before configuring laboratory records and reports.",
       },
       {
         title: "Health insurance and HMOs",
@@ -689,7 +702,7 @@ export const countryPages: Record<CountrySlug, CountryPage> = {
       },
       {
         title: "Federal and state differences, hosting and support",
-        body: "Healthcare is regulated at both federal and state level, so check local requirements for your state. Also confirm where data would be hosted, and how onboarding, training and support would work for your sites.",
+        body: "Health regulation in Nigeria can involve both federal and state authorities, so check requirements for your state. Also confirm where data would be hosted, and how onboarding, training and support would work for your sites.",
       },
     ],
     sourcesNote: "Check current requirements directly with these official sources:",
@@ -699,6 +712,7 @@ export const countryPages: Record<CountrySlug, CountryPage> = {
         url: "https://ndpc.gov.ng/wp-content/uploads/2024/03/Nigeria_Data_Protection_Act_2023.pdf",
       },
       { label: "National Health Insurance Authority (NHIA)", url: "https://nhia.gov.ng/" },
+      { label: "Medical Laboratory Science Council of Nigeria", url: "https://web.mlscn.gov.ng/" },
       { label: "Federal Ministry of Health and Social Welfare", url: "https://health.gov.ng/" },
     ],
     faqs: [

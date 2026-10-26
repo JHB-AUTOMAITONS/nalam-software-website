@@ -16,11 +16,11 @@ import { productList, routes } from "@/lib/constants";
 const sectionClass =
   "relative border-t border-teal-500/15 bg-white/40 py-10 backdrop-blur-sm sm:py-12 lg:py-14";
 
-/** Country-qualified link text for each product, so anchors differ from the product pages' own wording. */
-const productLinkText: Record<string, (country: string) => string> = {
-  hms: (country) => `Hospital management system for ${country}`,
-  lms: (country) => `Laboratory management software for ${country}`,
-  cms: (country) => `Clinic management software for ${country}`,
+/** Neutral anchors: the country keyword stays on the country page, not on the generic product pages' inbound links. */
+const productLinkText: Record<string, string> = {
+  hms: "Explore the Hospital Management System",
+  lms: "Explore the Laboratory Management System",
+  cms: "Explore the Clinic Management System",
 };
 
 export function CountryLandingPage({ page }: { page: CountryPage }) {
@@ -116,7 +116,7 @@ export function CountryLandingPage({ page }: { page: CountryPage }) {
                   <h3 className="font-display text-lg font-medium text-navy-950">{product.fullName}</h3>
                   <p className="text-sm leading-relaxed text-slate-600">{product.description}</p>
                   <span className="mt-auto pt-2 text-sm font-semibold text-navy-950 transition-colors group-hover:text-emerald-onlight">
-                    {productLinkText[product.id](page.country)} &rarr;
+                    {productLinkText[product.id]} &rarr;
                   </span>
                 </Link>
               </RevealOnScroll>
