@@ -12,6 +12,29 @@ import {
 import { Button } from "@/components/ui/Button";
 import { Logo } from "@/components/ui/Logo";
 import { navigation } from "@/lib/constants";
+import { countryPageList } from "@/lib/country-pages";
+
+interface NavChild {
+  label: string;
+  href: string;
+}
+
+interface NavItem {
+  label: string;
+  /** Omitted for dropdown-only items such as Countries (there is no overview page). */
+  href?: string;
+  children?: NavChild[];
+}
+
+const countriesItem: NavItem = {
+  label: "Countries",
+  children: countryPageList.map((country) => ({ label: country.country, href: country.path })),
+};
+
+/** Existing primary navigation with the Countries dropdown placed after Solutions. */
+const navItems: NavItem[] = (navigation.main as NavItem[]).flatMap((item) =>
+  item.label === "Solutions" ? [item, countriesItem] : [item]
+);
 
 function getPrefersReducedMotion() {
   if (typeof window === "undefined" || !window.matchMedia) return false;
@@ -47,7 +70,8 @@ function isActivePath(pathname: string, href: string) {
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [solutionsOpen, setSolutionsOpen] = useState(false);
+  const [openMenu, setOpenMenu] = useState<string | null>(null);
+  const [mobileExpanded, setMobileExpanded] = useState<string | null>(null);
   const [shouldReduceMotion, setShouldReduceMotion] = useState(getPrefersReducedMotion);
   const { scrollY } = useScroll();
   const pathname = usePathname();
@@ -69,6 +93,26 @@ export function Header() {
       document.body.style.overflow = "";
     };
   }, [mobileOpen]);
+
+  // Desktop dropdowns: close on Escape (returning focus to the trigger) and on outside click.
+  useEffect(() => {
+    if (!openMenu) return;
+    const menu = openMenu;
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key !== "Escape") return;
+      setOpenMenu(null);
+      document.querySelector<HTMLElement>(`[data-menu="${menu}"] button`)?.focus();
+    }
+    function handlePointerDown(event: PointerEvent) {
+      if (!(event.target as Element).closest(`[data-menu="${menu}"]`)) setOpenMenu(null);
+    }
+    document.addEventListener("keydown", handleKeyDown);
+    document.addEventListener("pointerdown", handlePointerDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener("pointerdown", handlePointerDown);
+    };
+  }, [openMenu]);
 
   const barTransition = { duration: shouldReduceMotion ? 0 : 0.4, ease: [0.16, 1, 0.3, 1] as const };
 
@@ -95,20 +139,25 @@ export function Header() {
           </Link>
 
           <nav aria-label="Primary" className="hidden items-center gap-1 lg:flex">
-            {navigation.main.map((item) =>
+            {navItems.map((item) =>
               item.children ? (
                 <div
                   key={item.label}
+                  data-menu={item.label}
                   className="group relative"
-                  onMouseEnter={() => setSolutionsOpen(true)}
-                  onMouseLeave={() => setSolutionsOpen(false)}
+                  onMouseEnter={() => setOpenMenu(item.label)}
+                  onMouseLeave={() => setOpenMenu(null)}
+                  onBlur={(event) => {
+                    if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setOpenMenu(null);
+                  }}
                 >
                   <button
                     type="button"
-                    className="flex items-center gap-1 rounded-full px-3.5 py-2 text-sm font-medium text-navy-800 transition-colors hover:text-teal-600"
-                    aria-expanded={solutionsOpen}
+                    className="flex items-center gap-1 rounded-full px-3.5 py-2 text-sm font-medium text-navy-800 transition-colors hover:text-teal-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ice-500/50"
+                    aria-expanded={openMenu === item.label}
                     aria-haspopup="true"
-                    onClick={() => setSolutionsOpen(true)}
+                    aria-controls={`menu-${item.label}`}
+                    onClick={() => setOpenMenu(item.label)}
                   >
                     {item.label}
                     <svg
@@ -121,41 +170,42 @@ export function Header() {
                       <path d="M1 1l4 4 4-4" stroke="currentColor" strokeWidth="1.5" fill="none" />
                     </svg>
                   </button>
-                  <AnimatePresence>
-                    {solutionsOpen && (
-                      <motion.div
-                        initial={{ opacity: 0, y: 8 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 8 }}
-                        transition={{ duration: 0.18 }}
-                        className="absolute left-1/2 top-full w-64 -translate-x-1/2 pt-3"
-                      >
-                        <div
-                          className="overflow-hidden rounded-2xl border border-ice-500/20 p-2 shadow-elevated"
-                          style={GLASS_SCROLLED}
+                  {/* Always in the DOM (hidden with CSS) so the links are crawlable and
+                      server-rendered; `invisible` also removes them from the tab order while closed. */}
+                  <div
+                    id={`menu-${item.label}`}
+                    className={`absolute left-1/2 top-full w-64 -translate-x-1/2 pt-3 transition-[opacity,transform,visibility] duration-200 motion-reduce:transition-none ${
+                      openMenu === item.label
+                        ? "visible translate-y-0 opacity-100"
+                        : "invisible pointer-events-none translate-y-2 opacity-0"
+                    }`}
+                  >
+                    <div
+                      className="overflow-hidden rounded-2xl border border-ice-500/20 p-2 shadow-elevated"
+                      style={GLASS_SCROLLED}
+                    >
+                      {item.children.map((child) => (
+                        <Link
+                          key={child.href}
+                          href={child.href}
+                          aria-current={pathname === child.href ? "page" : undefined}
+                          onClick={() => setOpenMenu(null)}
+                          className="block rounded-xl px-4 py-3 text-sm font-medium text-navy-800 transition-colors hover:bg-ice-500/[0.08] hover:text-teal-600 focus-visible:bg-ice-500/[0.08] focus-visible:text-teal-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ice-500/50"
                         >
-                          {item.children.map((child) => (
-                            <Link
-                              key={child.href}
-                              href={child.href}
-                              className="block rounded-xl px-4 py-3 text-sm font-medium text-navy-800 transition-colors hover:bg-ice-500/[0.08] hover:text-teal-600"
-                            >
-                              {child.label}
-                            </Link>
-                          ))}
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
+                          {child.label}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               ) : (
                 <Link
                   key={item.href}
-                  href={item.href}
+                  href={item.href as string}
                   className="relative rounded-full px-3.5 py-2 text-sm font-medium text-navy-800 transition-colors hover:text-teal-600"
                 >
                   {item.label}
-                  {isActivePath(pathname, item.href) ? (
+                  {isActivePath(pathname, item.href as string) ? (
                     <span
                       aria-hidden
                       className="absolute inset-x-3.5 -bottom-0.5 h-px rounded-full bg-teal-500 shadow-[0_0_8px_rgba(25,200,120,0.5)]"
@@ -178,7 +228,10 @@ export function Header() {
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileOpen}
             aria-controls="mobile-menu"
-            onClick={() => setMobileOpen((v) => !v)}
+            onClick={() => {
+              setMobileOpen((v) => !v);
+              setMobileExpanded(null);
+            }}
           >
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden>
               {mobileOpen ? (
@@ -214,31 +267,74 @@ export function Header() {
                 aria-label="Mobile"
                 className="flex max-h-[calc(100dvh-6rem)] flex-col gap-1 overflow-y-auto overscroll-contain px-3 pb-4 pt-3 xs:px-5 sm:px-7 sm:pb-6 sm:pt-4"
               >
-                {navigation.main.map((item) => (
-                  <div key={item.label}>
-                    <Link
-                      href={item.href}
-                      onClick={() => setMobileOpen(false)}
-                      className="block rounded-xl px-3 py-3 text-base font-medium text-navy-950"
-                    >
-                      {item.label}
-                    </Link>
-                    {item.children ? (
-                      <div className="ml-3 flex flex-col gap-1 border-l border-navy-900/10 pl-4">
-                        {item.children.map((child) => (
+                {navItems.map((item) =>
+                  item.href ? (
+                    <div key={item.label}>
+                      <Link
+                        href={item.href}
+                        onClick={() => setMobileOpen(false)}
+                        className="block rounded-xl px-3 py-3 text-base font-medium text-navy-950"
+                      >
+                        {item.label}
+                      </Link>
+                      {item.children ? (
+                        <div className="ml-3 flex flex-col gap-1 border-l border-navy-900/10 pl-4">
+                          {item.children.map((child) => (
+                            <Link
+                              key={child.href}
+                              href={child.href}
+                              onClick={() => setMobileOpen(false)}
+                              className="rounded-lg px-2 py-2 text-sm text-navy-800/80 hover:text-teal-600"
+                            >
+                              {child.label}
+                            </Link>
+                          ))}
+                        </div>
+                      ) : null}
+                    </div>
+                  ) : (
+                    <div key={item.label}>
+                      <button
+                        type="button"
+                        aria-expanded={mobileExpanded === item.label}
+                        aria-controls={`mobile-${item.label}`}
+                        onClick={() => setMobileExpanded((v) => (v === item.label ? null : item.label))}
+                        className="flex w-full items-center justify-between rounded-xl px-3 py-3 text-left text-base font-medium text-navy-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ice-500/50"
+                      >
+                        {item.label}
+                        <svg
+                          width="12"
+                          height="8"
+                          viewBox="0 0 10 6"
+                          aria-hidden
+                          className={`shrink-0 transition-transform motion-reduce:transition-none ${
+                            mobileExpanded === item.label ? "rotate-180" : ""
+                          }`}
+                        >
+                          <path d="M1 1l4 4 4-4" stroke="currentColor" strokeWidth="1.5" fill="none" />
+                        </svg>
+                      </button>
+                      {/* Links stay in the DOM; `hidden` collapses them. */}
+                      <div
+                        id={`mobile-${item.label}`}
+                        hidden={mobileExpanded !== item.label}
+                        className="ml-3 flex flex-col gap-1 border-l border-navy-900/10 pl-4"
+                      >
+                        {item.children?.map((child) => (
                           <Link
                             key={child.href}
                             href={child.href}
+                            aria-current={pathname === child.href ? "page" : undefined}
                             onClick={() => setMobileOpen(false)}
-                            className="rounded-lg px-2 py-2 text-sm text-navy-800/80 hover:text-teal-600"
+                            className="rounded-lg px-2 py-3 text-sm text-navy-800/80 hover:text-teal-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ice-500/50"
                           >
                             {child.label}
                           </Link>
                         ))}
                       </div>
-                    ) : null}
-                  </div>
-                ))}
+                    </div>
+                  )
+                )}
                 <Button
                   href="/contact"
                   variant="glass"

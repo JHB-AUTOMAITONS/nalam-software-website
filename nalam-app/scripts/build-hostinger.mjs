@@ -35,7 +35,7 @@ try {
   // Both removal targets are fixed children of this project, never user input.
   await rm(dist, { recursive: true, force: true });
   await cp(path.join(staging, "out"), dist, { recursive: true });
-  await writeFile(path.join(dist, ".htaccess"), "DirectoryIndex index.html\nErrorDocument 404 /404.html\nOptions -Indexes\n");
+  await writeFile(path.join(dist, ".htaccess"), "DirectoryIndex index.html\nErrorDocument 404 /404.html\nOptions -Indexes\n\n# /logo is an extensionless static export of the PNG logo.\n<Files \"logo\">\n  ForceType image/png\n</Files>\n");
   console.log(`\nHostinger files ready: ${dist}`);
 } finally {
   await rm(staging, { recursive: true, force: true });
