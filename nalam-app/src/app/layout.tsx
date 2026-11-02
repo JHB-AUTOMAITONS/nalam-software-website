@@ -4,6 +4,7 @@ import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { RequirementsPopup } from "@/components/sections/RequirementsPopup";
+import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
 import { Analytics } from "@/components/analytics/Analytics";
 import { JsonLd } from "@/components/structured-data/JsonLd";
 import { buildOrganizationSchema, buildWebsiteSchema } from "@/lib/structured-data";
@@ -103,6 +104,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           {children}
         </main>
         <Footer />
+        <WhatsAppButton />
         <RequirementsPopup />
       </body>
     </html>

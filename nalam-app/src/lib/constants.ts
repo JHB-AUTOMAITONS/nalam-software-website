@@ -9,6 +9,9 @@ export const siteConfig = {
   contact: {
     email: "info@nalam.care",
     phone: "+91 86087 92718",
+    whatsappNumber: "918608792718",
+    whatsappMessage:
+      "Hello Nalam Team, I would like to know more about your healthcare management software.",
     address: "D.No: 30, 2nd Floor, Indira Nagar, Narasothipatti, Salem, Tamil Nadu 636004",
   },
   social: {
