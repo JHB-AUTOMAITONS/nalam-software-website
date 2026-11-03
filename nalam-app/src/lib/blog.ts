@@ -19,6 +19,7 @@ import { clinicPatientRecordsAndBilling } from "./blog-posts/clinic-patient-reco
 import { electronicMedicalRecordsSoftwareGuide } from "./blog-posts/electronic-medical-records-software-guide";
 import { healthManagementInformationSystemsVsFragmentedTools } from "./blog-posts/health-management-information-systems-vs-fragmented-tools";
 import { healthcareItSolutionsHospitalsClinicsLaboratories } from "./blog-posts/healthcare-it-solutions-hospitals-clinics-laboratories";
+import { hospitalAdministrationSoftwareGuide } from "./blog-posts/hospital-administration-software-guide";
 import { hospitalInformationSystemVsHospitalManagementSystem } from "./blog-posts/hospital-information-system-vs-hospital-management-system";
 import { hospitalManagementSoftwareFeatures } from "./blog-posts/hospital-management-software-features";
 import { hospitalPatientFlowManagement } from "./blog-posts/hospital-patient-flow-management";
@@ -72,6 +73,7 @@ export interface BlogPost {
 
 async function loadPosts(): Promise<BlogPost[]> {
   return [
+    hospitalAdministrationSoftwareGuide,
     healthcareItSolutionsHospitalsClinicsLaboratories,
     electronicMedicalRecordsSoftwareGuide,
     medicalAppointmentSchedulingSoftware,
