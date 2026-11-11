@@ -25,6 +25,7 @@ import { hospitalAdministrationSoftwareGuide } from "./blog-posts/hospital-admin
 import { hospitalInformationSystemVsHospitalManagementSystem } from "./blog-posts/hospital-information-system-vs-hospital-management-system";
 import { hospitalManagementSoftwareCostIndia } from "./blog-posts/hospital-management-software-cost-india";
 import { hospitalManagementSoftwareFeatures } from "./blog-posts/hospital-management-software-features";
+import { hospitalManagementSoftwarePatientDataSecurity } from "./blog-posts/hospital-management-software-patient-data-security";
 import { hospitalPatientFlowManagement } from "./blog-posts/hospital-patient-flow-management";
 import { labManagementSoftwareKeyFeatures } from "./blog-posts/lab-management-software-key-features";
 import { laboratoryManagementSystemKeyFeatures } from "./blog-posts/laboratory-management-system-key-features";
@@ -77,6 +78,7 @@ export interface BlogPost {
 
 async function loadPosts(): Promise<BlogPost[]> {
   return [
+    hospitalManagementSoftwarePatientDataSecurity,
     howToDigitizeHospitalOperations,
     hospitalManagementSoftwareCostIndia,
     cloudBasedVsOnPremiseHospitalManagementSoftware,
