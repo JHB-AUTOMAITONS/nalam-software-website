@@ -8,7 +8,17 @@ interface FaqItem {
   answer: string;
 }
 
-export function FaqAccordion({ items }: { items: FaqItem[] }) {
+interface FaqAccordionProps {
+  items: FaqItem[];
+  /**
+   * When true, every answer is rendered in the HTML and collapsed with the
+   * `hidden` attribute, so crawlers see all answers without a click. Default
+   * false keeps the original behaviour (only the open panel is rendered).
+   */
+  renderAllAnswers?: boolean;
+}
+
+export function FaqAccordion({ items, renderAllAnswers = false }: FaqAccordionProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
   const shouldReduceMotion = useReducedMotion();
 
@@ -45,8 +55,20 @@ export function FaqAccordion({ items }: { items: FaqItem[] }) {
                 </span>
               </button>
             </h3>
+            {renderAllAnswers ? (
+              <div
+                id={panelId}
+                role="region"
+                aria-labelledby={buttonId}
+                hidden={!isOpen}
+              >
+                <p className="px-4 pb-4 text-sm leading-relaxed text-slate-600 sm:px-6 sm:pb-6">
+                  {item.answer}
+                </p>
+              </div>
+            ) : null}
             <AnimatePresence initial={false}>
-              {isOpen ? (
+              {!renderAllAnswers && isOpen ? (
                 <motion.div
                   id={panelId}
                   role="region"

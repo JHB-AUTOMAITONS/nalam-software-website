@@ -306,6 +306,46 @@ export const lmsFaqs = [
     answer:
       "Yes. LMS can be customized around your laboratory's workflow, including custom screens, reports, fields, roles and permissions, integrations, dashboards and automation.",
   },
+  {
+    question: "What are the benefits of laboratory management software?",
+    answer:
+      "Laboratory management software reduces repeated data entry, keeps samples matched to the right patient and test, adds a review step before reports are released, and gives managers one view of laboratory activity and stock. In practice that means fewer transcription errors and reports that are easier to deliver on time.",
+  },
+  {
+    question: "How does a Laboratory Management System work?",
+    answer:
+      "It follows each test through one connected record: the order is registered, the sample is collected and barcoded, the result is captured from the instrument, the result is validated and authorized, and the report is delivered. Each stage adds to the same record instead of starting a new one.",
+  },
+  {
+    question: "What is the difference between LIMS and LIS?",
+    answer:
+      "The terms overlap, and vendors use them differently. LIMS usually refers to systems that manage samples, tests and data across many kinds of laboratory, while LIS usually refers to systems for clinical or diagnostic laboratories that handle patient orders, results and reports. Compare the functions a product covers rather than its label. Nalam's Laboratory Management System is built for diagnostic laboratory workflows, from test order to final report.",
+  },
+  {
+    question: "Why do diagnostic laboratories need LIMS software?",
+    answer:
+      "Diagnostic laboratories handle many samples with several steps each, and a mistake at any step can delay or change a report. LIMS software keeps those steps in one system, so identification, results, review and reporting follow one consistent path instead of relying on paper and memory.",
+  },
+  {
+    question: "Can LIMS integrate with laboratory machines?",
+    answer:
+      "Yes. Nalam's LMS supports direct lab machine integration, so results are captured from the instrument rather than typed in by hand. Since instruments and connection methods vary, confirm that your specific analyser models are covered during a demonstration.",
+  },
+  {
+    question: "How does laboratory software manage quality control?",
+    answer:
+      "Laboratory quality control has two parts: analytical checks on instruments and methods, and workflow checks that keep the right sample, result and report together. In Nalam's LMS, barcodes keep samples matched to the right patient and test, direct integration reduces manual entry, and results pass through validation and authorization before a report is released. If your laboratory follows particular QC procedures, ask for them to be shown in a demonstration, and note that the LMS can be customized around your workflow.",
+  },
+  {
+    question: "How can laboratory management software track turnaround time?",
+    answer:
+      "By keeping every test in one system, so its stage is visible from order to report. Nalam's lab dashboard gives managers an overview of laboratory activity, so delays can be seen without chasing status updates. If you need specific turnaround reports, ask to see them in a demonstration.",
+  },
+  {
+    question: "What should I look for when choosing laboratory management software?",
+    answer:
+      "Look for coverage of your whole order-to-report workflow, support for your own instruments, a validation and authorization step, reagent and expiry tracking, clear answers on access, backups and audit history, and the ability to customize and to connect with hospital or clinic systems. Ask for a demonstration using your own tests and workflows.",
+  },
 ];
 
 /** Clinic Management System page FAQ — clinic-specific questions only. */

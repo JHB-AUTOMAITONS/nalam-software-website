@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { JsonLd } from "@/components/structured-data/JsonLd";
+import { LmsBuyerSections, LmsKnowledgeSections } from "@/components/sections/LmsKnowledgeSections";
 import { LmsEfficiencySection } from "@/components/sections/LmsEfficiencySection";
 import { SolutionFaqSection } from "@/components/sections/SolutionFaqSection";
 import { SolutionHeroMedia } from "@/components/sections/SolutionHeroMedia";
@@ -39,11 +40,14 @@ export default function LaboratoryManagementSystemPage() {
         }
         extraSections={
           <>
+            <LmsKnowledgeSections />
             <LmsEfficiencySection />
+            <LmsBuyerSections />
             <SolutionFaqSection
               title="Laboratory Management System FAQ"
               description="Common questions about sample tracking, lab machine integration, reporting and customization for Nalam's Laboratory Management System."
               items={lmsFaqs}
+              renderAllAnswers
             />
           </>
         }

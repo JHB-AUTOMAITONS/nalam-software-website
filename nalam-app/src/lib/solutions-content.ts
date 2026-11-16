@@ -108,17 +108,17 @@ export const solutionContent: Record<ProductId, SolutionPageContent> = {
       "Everything a diagnostic laboratory needs to move a test from order to authorized report — in one connected system.",
     featureDetails: {
       "Test Order to Final Report":
-        "Follow every test from the moment it is ordered to the moment the report is delivered. Registration, sample collection, processing, validation, authorization and report delivery are handled as one continuous workflow, so each test's status is always clear.",
+        "Follow every test from the moment it is ordered to the moment the report is delivered. Registration, sample collection, processing, validation, authorization and report delivery are handled as one continuous workflow, so each test's status is always clear. Because the order, sample, result and report stay linked to one patient record, staff can see where any test stands without searching separate registers.",
       "Direct Lab Machine Integration":
-        "Connect laboratory instruments directly to the system so results are captured from the machine rather than typed in by hand. Reducing manual result entry helps laboratories deliver faster, more accurate reports.",
+        "Connect laboratory instruments directly to the system so results are captured from the machine rather than typed in by hand. Reducing manual result entry helps laboratories deliver faster, more accurate reports. Captured results then move straight into the validation and authorization step.",
       "Smart Sample & Barcode Management":
-        "Samples are identified and tracked with barcodes from collection through processing, helping your team keep every sample matched to the right patient and the right test.",
+        "Samples are identified and tracked with barcodes from collection through processing, helping your team keep every sample matched to the right patient and the right test. Each label ties the physical sample to its patient and test record, so identification does not depend on handwriting.",
       "Result Validation & Authorization":
-        "Results pass through validation and authorization before a report is released, giving your laboratory a controlled review step before results reach patients and doctors.",
+        "Results pass through validation and authorization before a report is released, giving your laboratory a controlled review step before results reach patients and doctors. Reviewers see results before release, giving the laboratory a consistent checkpoint for every report.",
       "Reagent, Stock & Expiry Management":
-        "Track reagents, stock and consumables with expiry visibility, so your team knows what is available and what needs attention before it affects testing.",
+        "Track reagents, stock and consumables with expiry visibility, so your team knows what is available and what needs attention before it affects testing. Seeing stock and expiry beside test workload helps teams plan consumables around actual demand.",
       "Lab Dashboard & Patient History":
-        "A lab dashboard gives managers an overview of laboratory activity, while each patient's history keeps past tests and results available for reference.",
+        "A lab dashboard gives managers an overview of laboratory activity, while each patient's history keeps past tests and results available for reference. Patient history lets staff review earlier results when following up on a new test.",
     },
     benefitsTitle: "Less Manual Entry. Faster Reports. Better Lab Control.",
     benefits: [
