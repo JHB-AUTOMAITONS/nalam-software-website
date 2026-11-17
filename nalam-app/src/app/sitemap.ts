@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { getBlogPosts } from "@/lib/blog";
 import { products, routes, siteConfig } from "@/lib/constants";
 import { countryPageList } from "@/lib/country-pages";
+import { pharmacyPagePath } from "@/lib/pharmacy-page-content";
 
 type ChangeFrequency = MetadataRoute.Sitemap[number]["changeFrequency"];
 
@@ -15,6 +16,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { path: products.hms.landingSlug, priority: 0.9, changeFrequency: "monthly" },
     { path: products.lms.landingSlug, priority: 0.9, changeFrequency: "monthly" },
     { path: products.cms.landingSlug, priority: 0.9, changeFrequency: "monthly" },
+    { path: pharmacyPagePath, priority: 0.8, changeFrequency: "monthly" },
     ...countryPageList.map((country) => ({
       path: country.path,
       priority: 0.7,
