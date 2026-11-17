@@ -123,7 +123,7 @@ function WorkflowDiagram() {
     <figure className="flex flex-col gap-4">
       <ol
         aria-label="Pharmacy workflow from prescription to inventory update"
-        className="grid grid-cols-1 gap-3 sm:grid-cols-3 lg:grid-cols-6"
+        className="grid grid-cols-1 gap-3 sm:grid-cols-3 lg:grid-cols-5"
       >
         {workflow.steps.map((step, i) => (
           <li
@@ -196,15 +196,11 @@ export default function PharmacyManagementSystemPage() {
                   <span className="font-mono text-xs text-emerald-onlight">
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <span
-                    className={`rounded-full px-2.5 py-0.5 text-[0.7rem] font-medium ${
-                      f.status === "verified"
-                        ? "bg-teal-500/10 text-emerald-onlight"
-                        : "bg-slate-100 text-slate-600"
-                    }`}
-                  >
-                    {f.status === "verified" ? "Connected in NALAM" : "Scoped in demo"}
-                  </span>
+                  {f.status === "confirm" ? (
+                    <span className="rounded-full bg-slate-100 px-2.5 py-0.5 text-[0.7rem] font-medium text-slate-600">
+                      Scoped in demo
+                    </span>
+                  ) : null}
                 </div>
                 <h3 className="font-display text-lg font-medium leading-snug text-navy-950">{f.title}</h3>
                 <p className="text-sm leading-relaxed text-slate-600">{f.body}</p>
@@ -256,13 +252,13 @@ export default function PharmacyManagementSystemPage() {
             ))}
           </div>
           <p className="text-sm text-slate-600">
-            Learn more about the platforms pharmacy connects to:{" "}
-            <Link href={products.hms.landingSlug} className="font-medium text-navy-950 underline underline-offset-2 hover:text-emerald-onlight">
-              Hospital Management System
-            </Link>{" "}
-            and{" "}
+            Pharmacy is part of the platform in the{" "}
             <Link href={products.cms.landingSlug} className="font-medium text-navy-950 underline underline-offset-2 hover:text-emerald-onlight">
               Clinic Management System
+            </Link>
+            . For hospitals, see the{" "}
+            <Link href={products.hms.landingSlug} className="font-medium text-navy-950 underline underline-offset-2 hover:text-emerald-onlight">
+              Hospital Management System
             </Link>
             .
           </p>

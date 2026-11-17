@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { JsonLd } from "@/components/structured-data/JsonLd";
+import { PharmacyLinkCallout } from "@/components/sections/PharmacyLinkCallout";
 import { RelatedArticlesSection } from "@/components/sections/RelatedArticlesSection";
 import { SolutionFaqSection } from "@/components/sections/SolutionFaqSection";
 import { SolutionHeroMedia } from "@/components/sections/SolutionHeroMedia";
@@ -39,6 +40,10 @@ export default function HospitalManagementSystemPage() {
         }
         extraSections={
           <>
+            <PharmacyLinkCallout
+              lead="Looking at the medicine side of the hospital? Read about our"
+              anchor="Hospital Pharmacy Software"
+            />
             <RelatedArticlesSection
               title="Guides to Hospital Management Software"
               description="Read more on patient flow and the features to look for in hospital management software."

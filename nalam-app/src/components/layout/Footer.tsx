@@ -3,12 +3,14 @@ import { Container } from "@/components/ui/Container";
 import { Logo } from "@/components/ui/Logo";
 import { products, routes, siteConfig } from "@/lib/constants";
 import { countryPageList } from "@/lib/country-pages";
+import { pharmacyPagePath } from "@/lib/pharmacy-page-content";
 
 const solutionLinks = [
   { label: "All Solutions", href: routes.solutions },
   { label: products.hms.fullName, href: products.hms.landingSlug },
   { label: products.lms.fullName, href: products.lms.landingSlug },
   { label: products.cms.fullName, href: products.cms.landingSlug },
+  { label: "Pharmacy Management System", href: pharmacyPagePath },
   { label: "Custom Healthcare Software", href: routes.customSolutions },
 ];
 

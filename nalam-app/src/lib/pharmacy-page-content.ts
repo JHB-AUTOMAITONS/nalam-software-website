@@ -2,22 +2,15 @@
  * Content for /solutions/pharmacy-management-system.
  *
  * VERIFICATION POLICY
- * This repository contains the marketing site only (no pharmacy product
- * source). The only pharmacy capabilities the site already states publicly are:
- *   - HMS: laboratory, radiology and pharmacy connected; prescriptions,
- *     dispensing and stock movement stay in sync across departments.
- *   - HMS: billing is itemized; hospital stock is part of the platform.
- *   - CMS: pharmacy and inventory integrated with consultations and billing.
- *   - HMS / LMS / CMS each run independently and can be connected later.
- *   - Customization: screens, reports, fields, roles & permissions,
- *     dashboards, automation, billing workflows.
- * The product owner has stated that a Pharmacy module exists (medicines,
- * stock, purchases/GRN, medicine catalogue, inventory, purchase receiving), but
- * the product source was not available to inspect, so none of it is code-verified.
- * Everything not listed above (batch/expiry, suppliers, transfers, reports,
- * OPD/IPD specifics, standalone pharmacy deployment, GST) is written as a
- * hospital need + "confirm in demo", never as a product claim.
- * Flip `status` to "verified" only with implementation evidence.
+ * Capability statements below were checked by static review of the product
+ * repository thukal/Nalam-CMS (the Clinic Management System, which contains the
+ * Pharmacy module): route table, request-validation schemas and service
+ * comments under nalam-cms-backend/src/modules/pharmacy/. Evidence per feature
+ * is listed in PHARMACY-MANAGEMENT-SYSTEM-SEO-IMPLEMENTATION-REPORT.md.
+ * The code was NOT executed. The module lives in the CMS product; no HMS code,
+ * IPD/ward workflow, weighted-average costing or standalone deployment was
+ * found, so those are never claimed here. `status: "confirm"` marks any card
+ * that cannot be tied to code (none at present).
  */
 
 export const pharmacyPagePath = "/solutions/pharmacy-management-system";
@@ -46,14 +39,14 @@ export interface PharmacyFeature {
 }
 
 export const heroIntro =
-  "Manage hospital pharmacy operations with NALAM Pharmacy Management System. Bring medicine inventory, prescription management, batch tracking, pharmacy billing and dispensing into one workflow, connected to the rest of your hospital through NALAM HMS or CMS.";
+  "Manage hospital pharmacy operations with NALAM Pharmacy Management System. Bring medicine inventory, prescription management, batch tracking, pharmacy billing and dispensing into one workflow, connected to prescriptions and billing in the NALAM platform.";
 
 export const introduction = {
   title: "Simplify Hospital Pharmacy Operations with NALAM Pharmacy Management Software",
   paragraphs: [
     "A hospital pharmacy sits between doctors who prescribe, patients who wait, purchase teams who replenish stock and accounts who need every issue billed correctly. On registers or spreadsheets, that is where information gets re-typed and mismatches surface late.",
     "Pharmacy management software gives the pharmacy one record of what was prescribed, what is in stock, what was dispensed and what was billed. For a hospital pharmacy management system, the gains are stock you can trust, fewer questions between ward, counter and store, and billing that follows what was issued.",
-    "NALAM's pharmacy is designed to sit inside the same platform as the patient record, so prescriptions, dispensing and stock movement stay in sync with the rest of the hospital.",
+    "NALAM's pharmacy sits inside the same platform as prescriptions and billing, so stock moves as bills are finalized instead of being reconciled afterwards.",
   ],
 };
 
@@ -76,27 +69,27 @@ export const whatIs = {
 export const featuresSection = {
   title: "Complete Pharmacy Management Software Features",
   description:
-    "Ten areas a hospital pharmacy needs covered. \"Connected in NALAM\" marks capabilities our website already describes as part of the platform. \"Scoped in demo\" marks areas we walk through against your requirements, so you see exactly how each works before you decide.",
+    "Ten areas a hospital pharmacy needs covered, each available in NALAM's pharmacy module today. Ask for a demo to see them on your own medicines and workflow.",
 };
 
 export const pharmacyFeatures: PharmacyFeature[] = [
-  { title: "Medicine Catalogue Management", status: "confirm", body: "A consistent medicine list is the base for reliable stock, prescriptions and billing. Without it, one medicine appears under several names." },
-  { title: "Pharmacy Inventory Management", status: "verified", body: "Stock and stock movement sit in the same platform as the hospital record, so dispensing and stock stay in sync and the pharmacy sees what is available." },
-  { title: "Batch-Wise Medicine Tracking", status: "confirm", body: "Batch records let each issue be traced to the lot it came from, which matters for recalls and audits." },
-  { title: "Medicine Expiry Management", status: "confirm", body: "Expiry dates held against stock let the store spot near-expiry items before they are shelved or issued." },
-  { title: "Purchase Management and Goods Receiving", status: "confirm", body: "Purchase entries and receiving give an organized trail from order to stock on the shelf." },
-  { title: "Prescription Management", status: "verified", body: "Prescriptions raised in the hospital reach the pharmacy, so dispensing starts from the doctor's order instead of paper slips." },
-  { title: "Pharmacy Billing", status: "verified", body: "Billing is itemized and kept with the patient record, so pharmacy charges and the patient bill agree." },
-  { title: "Stock Transfers and Adjustments", status: "confirm", body: "Recorded transfers and corrections keep stock changes explainable instead of informally edited." },
-  { title: "Pharmacy Reports", status: "confirm", body: "Reports spare managers from compiling figures by hand. NALAM reports can also be customized to your needs." },
-  { title: "User and Access Management", status: "confirm", body: "Each user should see only what their job needs. NALAM supports customized roles and permissions." },
+  { title: "Medicine Catalogue Management", status: "verified", body: "Record each medicine once with generic name, company, category, strength, HSN code, GST rate, purchase and selling price, dispensing unit and strip or box packaging, and classify it as for-sale or consumable." },
+  { title: "Pharmacy Inventory Management", status: "verified", body: "Stock is held batch by batch for each branch and for a central pharmacy hub, with low-stock views and a movement ledger showing every stock-in and stock-out." },
+  { title: "Batch-Wise Medicine Tracking", status: "verified", body: "Every stock entry carries a batch number with manufacturing and expiry dates, and each medicine has a batch drill-down, so an issue can be traced to its lot." },
+  { title: "Medicine Expiry Management", status: "verified", body: "Expiry is held per batch. Expired batches are excluded from sales, and near-expiry and expired stock can be reviewed and exported." },
+  { title: "Purchase Management and Goods Receiving", status: "verified", body: "Receive stock vendor-first: choose a vendor, add many medicine lines with batch, expiry, quantity, free quantity, cost, MRP and discounts, plus invoice number, date and payment terms. Vendor bills track payments, and vendor returns can record credit notes." },
+  { title: "Prescription Management", status: "verified", body: "Doctors choose medicines from the same pharmacy catalogue while prescribing, with stock status visible, and the prescription feeds the bill." },
+  { title: "Pharmacy Billing", status: "verified", body: "Consultation bills and walk-in pharmacy bills draw stock automatically when finalized, earliest expiry first. Cancelling a finalized bill restores the stock." },
+  { title: "Stock Transfers and Adjustments", status: "verified", body: "The hub ships stock to branches (ready, ship, receive, partial receive), branches raise stock requests, and manual adjustments require a recorded reason." },
+  { title: "Pharmacy Reports and Exports", status: "verified", body: "A hub dashboard with analytics, reconciliation and low-stock suggestions, plus CSV exports for stock, receipts, near-expiry stock, expired stock and vendor bills." },
+  { title: "User and Access Management", status: "verified", body: "Permission-based roles, including a pharmacy hub manager role that has no clinical or patient access. Key actions are audit-logged." },
 ];
 
 export const opdIpd = {
-  title: "Manage OPD and IPD Pharmacy Operations",
+  title: "OPD and IPD Pharmacy: What Is Supported Today",
   paragraphs: [
-    "Outpatient pharmacy is mostly counter work against a consultation's prescription. Inpatient pharmacy is tied to an admission, with medicines needed through the stay and charges that join the patient's bill. A hospital pharmacy should handle both against one patient record.",
-    "Because NALAM connects pharmacy to the hospital record, prescriptions can reach the pharmacy from the consultation or the ward. Exactly how OPD and IPD flows are set up for your hospital is confirmed during a demo, so we commit only to what fits your workflow.",
+    "Outpatient pharmacy follows the consultation. The doctor prescribes from the catalogue, reception creates the bill, and stock is drawn when the bill is finalized. Walk-in pharmacy sales can also be billed directly.",
+    "Inpatient pharmacy, meaning ward medicine requests, issues and returns against an admission, is not a workflow we describe here. If your hospital needs it, tell us during scoping and we will say plainly what fits.",
   ],
 };
 
@@ -104,40 +97,40 @@ export const inventory = {
   title: "Smart Pharmacy Inventory Management for Hospitals",
   paragraphs: [
     "Pharmacy inventory management software should answer one question quickly: what do we have, and will it last? The counter, ward, purchase team and management all ask it, often at once.",
-    "Good pharmacy stock management software keeps stock movement tied to dispensing, so quantities change as medicines are issued rather than being corrected at day end. Hospitals should look for stock visibility, receiving, adjustments, batch-level records, expiry tracking and stock reports, and ask to see each on their own data.",
+    "Good pharmacy stock management software keeps stock movement tied to billing, so quantities change as medicines are issued rather than being corrected at day end. In NALAM, stock is held per batch for each branch and a central hub, with receiving, adjustments, low-stock views, expiry review and a movement ledger.",
   ],
 };
 
 export const batchExpiry = {
   title: "Improve Medicine Batch Tracking and Expiry Monitoring",
   paragraphs: [
-    "Batch and expiry records make a pharmacy auditable. If a batch is recalled, or an inspector asks where a lot went, the answer depends on whether the batch was recorded on receipt and on issue. Near-expiry medicines can also be used first, and expired items caught before they reach a ward.",
-    "Ask any vendor, including us, to demonstrate batch identification, batch-wise stock, expiry dates and any expiry alerts on your sample data.",
+    "Batch and expiry records make a pharmacy auditable. If a batch is recalled, or an inspector asks where a lot went, the answer depends on whether the batch was recorded on receipt and on issue.",
+    "NALAM records the batch and expiry on every stock entry, deducts the earliest-expiring batch first, skips expired batches, and lets the hub review near-expiry and expired stock. Ask us to demonstrate it on your sample data.",
   ],
 };
 
 export const purchasing = {
   title: "Simplify Hospital Pharmacy Purchase and Stock Management",
   paragraphs: [
-    "Procurement is where pharmacy cost is controlled. A workable process links purchase entries, stock received and reporting, so duplicate orders, unreceived stock and unexplained differences are visible. We scope how purchase entry and goods receiving should work for your hospital during the demo.",
+    "Procurement is where pharmacy cost is controlled. NALAM links vendor records, purchase receipts with batch and expiry, vendor bills and payments, and vendor returns, so every delivery traces to a vendor and an invoice. Duplicate orders, unreceived stock and unexplained differences become easier to spot.",
   ],
 };
 
 export const billing = {
   title: "Streamline Hospital Pharmacy Billing",
   paragraphs: [
-    "Pharmacy billing software for a hospital differs from a retail billing tool: medicines are charged to a patient, often against a prescription or inside an admission, so the charge must land correctly on the patient's bill.",
-    "In NALAM, billing is handled in the same system that records patient care, with itemized charges. If you need specific invoice formats, tax handling or insurer-related billing for pharmacy, share your requirements and we will show what fits.",
+    "Pharmacy billing software for a hospital differs from a retail billing tool: medicines are charged to a patient, often from a prescription, so the charge must land correctly on the patient's bill.",
+    "In NALAM, a consultation bill reads the prescription, and a walk-in pharmacy bill is created directly. Finalizing either deducts stock automatically from the earliest-expiring batches. If you need specific invoice formats, tax handling or insurer billing for pharmacy, share your requirements and we will show what fits.",
   ],
 };
 
 export const workflow = {
   title: "From Prescription to Medicine Dispensing – A Connected Pharmacy Workflow",
   intro:
-    "A connected hospital pharmacy follows the sequence below. Because pharmacy sits inside the hospital platform, each step builds on the one before instead of starting a new record.",
-  steps: ["Prescription", "Pharmacy review", "Medicine availability", "Dispensing", "Billing", "Inventory update"],
-  outpatient: "Outpatient: the prescription follows the consultation; medicines are dispensed and billed at the counter.",
-  inpatient: "Inpatient: the request comes from the treating team during the stay; charges follow the admission.",
+    "This is the flow as NALAM's pharmacy runs it today. Because pharmacy sits inside the same platform as consultations and billing, each step builds on the one before instead of starting a new record.",
+  steps: ["Doctor prescribes", "Stock status checked", "Bill created", "Bill finalized", "Stock deducted"],
+  outpatient: "Consultation: the prescription flows from the doctor to the bill, and stock is deducted when the bill is finalized, earliest expiry first.",
+  inpatient: "Walk-in: a pharmacy bill is created directly and stock is deducted when it is finalized.",
 };
 
 export const setups = {
@@ -145,15 +138,15 @@ export const setups = {
   integrated: {
     title: "Option A: Integrated Pharmacy Management",
     paragraphs: [
-      "An integrated pharmacy management system works as part of NALAM HMS, or CMS for clinics. Laboratory, radiology and pharmacy are connected to the rest of the hospital, so prescriptions, dispensing and stock movement stay in sync.",
-      "Patient details, consultations, prescriptions and billing already live in one platform, so the pharmacy does not re-enter them. That reduces duplicate data entry and gives doctors, pharmacists and billing one view.",
+      "An integrated pharmacy management system keeps pharmacy on the same platform as prescriptions and billing. In NALAM's Clinic Management System, doctors prescribe from the pharmacy catalogue and bills draw stock automatically, so nothing is entered twice.",
+      "For hospitals running NALAM HMS, how pharmacy connects to your hospital setup is confirmed with you during scoping.",
     ],
   },
   standalone: {
     title: "Option B: Standalone Pharmacy Management",
     paragraphs: [
-      "Each NALAM system runs independently today and can be connected to the others later. A pharmacy-only deployment is a direction we are exploring, not something we promise yet.",
-      "If you want to start with pharmacy, contact us. We will confirm plainly whether it fits your hospital and how it would connect to your other systems.",
+      "Pharmacy currently runs as a module inside the NALAM platform. A pharmacy hub role can work without any clinical or patient access, but a separate pharmacy-only deployment is not available today and we do not promise it yet.",
+      "If you want to start with pharmacy, contact us. We will confirm plainly whether it fits your hospital.",
     ],
   },
 };
@@ -176,8 +169,8 @@ export const whyNalam = {
   title: "Why Choose NALAM Healthcare for Hospital Pharmacy Management?",
   items: [
     { title: "Healthcare-focused", body: "NALAM builds hospital, laboratory and clinic systems, not generic retail tools." },
-    { title: "HMS and CMS integration", body: "Pharmacy connects to the hospital or clinic record rather than being bolted on." },
-    { title: "Connected departments", body: "Laboratory, radiology and pharmacy share one platform." },
+    { title: "Part of the patient workflow", body: "Prescriptions, billing and stock sit on one platform rather than in a separate tool." },
+    { title: "Central hub and branches", body: "Receive vendor stock at a hub and send it to branches with a recorded trail." },
     { title: "Customizable", body: "Screens, reports, fields, roles, dashboards, automation and billing workflows can be tailored." },
     { title: "Start small, connect later", body: "Each NALAM system runs alone and can be linked when you are ready." },
   ],
@@ -195,20 +188,20 @@ export const comparison = {
     ["Stock reporting", "Compiled by hand", "Generated from the same records"],
     ["Coordination", "Phone calls and messengers", "Shared record"],
   ],
-  note: "This table describes pharmacy management software in general. Which capabilities NALAM covers for your pharmacy is confirmed in a demo.",
+  note: "The digital column describes pharmacy management software in general; NALAM capabilities are listed in the features section above.",
 };
 
 export const faqs = [
-  { question: "What is a pharmacy management system?", answer: "Software that manages a pharmacy's medicines, stock, prescriptions, dispensing, purchasing and billing in one place. A hospital version also connects to doctors, wards and patient billing." },
-  { question: "How does a pharmacy management system work in hospitals?", answer: "A doctor raises a prescription, the pharmacy reviews it, checks stock, dispenses and bills, and stock is updated. In a connected system such as NALAM's, those steps share the patient record." },
-  { question: "What are the important features of hospital pharmacy software?", answer: "A medicine catalogue, inventory with batch and expiry records, prescription handling, dispensing, billing, purchasing, stock adjustments, reports and access control. Ask vendors to demonstrate each on your workflows." },
-  { question: "Can pharmacy management software manage medicine inventory?", answer: "Yes, that is its core job. NALAM keeps stock movement in sync with dispensing inside the hospital platform. Specific functions you need, such as adjustments or transfers, can be reviewed in a demo." },
-  { question: "Does pharmacy software support batch and expiry tracking?", answer: "Good hospital pharmacy software should record batches and expiry dates and make near-expiry stock visible. We will walk through how NALAM handles this against your requirements." },
-  { question: "Can pharmacy management software integrate with hospital management systems?", answer: "Yes. NALAM's pharmacy is connected to its Hospital Management System, and to the Clinic Management System for clinics. Integration with other systems you use should be discussed during scoping." },
-  { question: "Can a pharmacy management system work independently?", answer: "In principle, yes. NALAM's Hospital, Laboratory and Clinic systems each run independently today. A pharmacy-only deployment is not something we promise yet; contact us and we will confirm what is possible." },
-  { question: "How does pharmacy management software improve billing?", answer: "It lets staff bill what was dispensed instead of re-typing it and keeps pharmacy charges consistent with the patient bill. In NALAM, billing is itemized and handled alongside patient care." },
-  { question: "How can hospitals manage medicine purchases and suppliers?", answer: "By linking purchase entries and stock receiving, so each delivery traces to an order. How this works in NALAM for your hospital is covered during a demo." },
-  { question: "How do I choose the right pharmacy management software for my hospital?", answer: "List your workflows first, then ask vendors to demonstrate each on your data. Check batch and expiry handling, hospital-system integration, reports, access control, support and customization. Prefer hospital-built software over a retail billing tool." },
+  { question: "What is a pharmacy management system?", answer: "Software that manages a pharmacy's medicines, stock, prescriptions, dispensing, purchasing and billing in one place. A hospital version also connects to doctors and patient billing." },
+  { question: "How does a pharmacy management system work in hospitals?", answer: "A doctor prescribes, the pharmacy checks stock, the bill is created and finalized, and stock is deducted. In NALAM, those steps share one platform, so details are not re-entered." },
+  { question: "What are the important features of hospital pharmacy software?", answer: "A medicine catalogue, batch and expiry records, prescription handling, billing, purchasing and vendor records, stock transfers and adjustments, reports and access control. Ask vendors to demonstrate each on your workflows." },
+  { question: "Can pharmacy management software manage medicine inventory?", answer: "Yes, that is its core job. NALAM holds stock batch by batch per branch and hub, with low-stock views and a movement ledger of every stock-in and stock-out." },
+  { question: "Does pharmacy software support batch and expiry tracking?", answer: "NALAM records a batch number with manufacturing and expiry dates on every stock entry, excludes expired batches from sales, and lets you review and export near-expiry and expired stock." },
+  { question: "Can pharmacy management software integrate with hospital management systems?", answer: "In NALAM's Clinic Management System, pharmacy is part of the same platform as consultations, prescriptions and billing. For hospitals on NALAM HMS, we confirm how pharmacy connects during scoping." },
+  { question: "Can a pharmacy management system work independently?", answer: "Pharmacy currently runs as a module inside the NALAM platform. A pharmacy-only deployment is not available today and we do not promise it yet. Contact us and we will confirm what fits your hospital." },
+  { question: "How does pharmacy management software improve billing?", answer: "Staff bill what was prescribed or sold without re-typing it, and stock is deducted automatically when the bill is finalized. Cancelling a finalized bill restores the stock." },
+  { question: "How can hospitals manage medicine purchases and suppliers?", answer: "By receiving stock against a vendor and invoice with batch and expiry on each line. NALAM also tracks vendor bills, payments, payment terms and vendor returns with credit notes." },
+  { question: "How do I choose the right pharmacy management software for my hospital?", answer: "List your workflows first, then ask vendors to demonstrate each on your data. Check batch and expiry handling, billing links, reports, access control, support and customization. Prefer hospital-built software over a retail billing tool." },
 ];
 
 export const finalCta = {

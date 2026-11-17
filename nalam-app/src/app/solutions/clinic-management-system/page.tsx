@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { JsonLd } from "@/components/structured-data/JsonLd";
+import { PharmacyLinkCallout } from "@/components/sections/PharmacyLinkCallout";
 import { RelatedArticlesSection } from "@/components/sections/RelatedArticlesSection";
 import { SolutionFaqSection } from "@/components/sections/SolutionFaqSection";
 import { SolutionHeroMedia } from "@/components/sections/SolutionHeroMedia";
@@ -40,6 +41,10 @@ export default function ClinicManagementSystemPage() {
         }
         extraSections={
           <>
+            <PharmacyLinkCallout
+              lead="Pharmacy, stock and purchasing are covered in more depth on our"
+              anchor="Pharmacy Management System page"
+            />
             <RelatedArticlesSection
               title="Guides to Clinic Management Software"
               description="Read more on appointment scheduling, digital patient records and billing, and choosing medical practice management software."

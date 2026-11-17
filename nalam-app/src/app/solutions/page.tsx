@@ -8,6 +8,7 @@ import { StaggerGroup } from "@/components/ui/StaggerGroup";
 import { FinalCta } from "@/components/sections/FinalCta";
 import { PageBackdrop } from "@/components/sections/PageBackdrop";
 import { PageHero } from "@/components/sections/PageHero";
+import { PharmacyLinkCallout } from "@/components/sections/PharmacyLinkCallout";
 import { ProductCard } from "@/components/sections/ProductCard";
 import { productList, products, routes, siteConfig } from "@/lib/constants";
 import { countryPageList } from "@/lib/country-pages";
@@ -102,6 +103,11 @@ export default function SolutionsPage() {
           </StaggerGroup>
         </Container>
       </section>
+
+      <PharmacyLinkCallout
+        lead="Need pharmacy operations covered in depth? See our"
+        anchor="Pharmacy Management System"
+      />
 
       <section className={sectionClass}>
         <Container className="flex flex-col gap-8">

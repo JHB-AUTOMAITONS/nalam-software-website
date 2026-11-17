@@ -1,182 +1,163 @@
-# Pharmacy Management System SEO Landing Page: Implementation Report
+# Pharmacy Management System SEO Landing Page: Final Pre-Publication Report
 
-Status: revision 2, on branch `claude/trusting-ritchie-s4pg7g`. Not deployed. **Not ready to publish until the product-owner items in section 17 are answered.**
-
-**Revision 2 summary:** content cut from ~2,800 to **1,914 words** (rendered `<main>`); OPD/IPD, supplier and advanced-reporting claims removed or reduced to need-framed wording; "Pharmacy Stock Management Software" added to the inventory section; standalone wording made explicit that it is not promised yet. **Product-source verification was not possible**: access to the likely product repo (`thukal/Nalam-CMS`) was denied by the session's permission classifier, so no feature status changed to "verified".
-
-New URL: `/solutions/pharmacy-management-system` (canonical `https://nalam.care/solutions/pharmacy-management-system`)
+Page: `/solutions/pharmacy-management-system` (canonical `https://nalam.care/solutions/pharmacy-management-system`)
+Branch: `claude/trusting-ritchie-s4pg7g` (the commit hash is reported in the delivery message; a file cannot contain its own hash).
+**Production was NOT deployed. Nothing was pushed to any branch other than the one above.**
 
 ---
 
-## 1. Existing website audit
+## 0. What changed in this revision
 
-- **Stack:** Next.js 16.3.5 App Router, React 19, Tailwind 4, framer-motion. Static pages; contact form posts to `/api/contact` (Resend / Google Apps Script). Deployed via Netlify/Hostinger configs.
-- **Repo scope (important):** this repository is the **marketing website only**. It contains no pharmacy product source, schema or approved product documentation. Pharmacy capabilities could therefore only be verified against what the site already states publicly.
-- **Solution pages:** `/solutions/hospital-management-system`, `/clinic-management-system`, `/laboratory-management-system` use `SolutionPageTemplate` + `buildMetadata` (self-referencing canonical, absolute title for HMS). Country pages (`/hospital-management-software-*`) and 20 blog posts exist.
-- **Schema:** Organization + WebSite sitewide (layout), SoftwareApplication per solution (template), FAQPage on solution pages, BreadcrumbList emitted by `Breadcrumbs` (used inside `PageHero`).
-- **Sitemap/robots:** `sitemap.ts` is explicit (no auto-discovery), so the new page needed a manual entry. `robots.ts` allows all except `/api/`.
-- **Enquiry flow:** `/contact` (RequirementsForm). All demo/talk CTAs route there.
-- **Brand note:** site brand string is "Nalam Software" with title template `%s | Nalam Software`. The approved title ends in "| NALAM", so the page uses `absoluteTitle` (same approach as the HMS page). Body copy follows the brief's "NALAM" in headings.
-- **Existing pharmacy mentions:** only as bullets inside HMS/CMS content (`constants.ts`, `solutions-content.ts`, `country-pages.ts`, blog posts). No page targets "pharmacy management system".
-- **Cannibalization:** low. HMS/CMS target "hospital/clinic management system". Pharmacy appears only as a feature there. Risk to watch: HMS FAQ answer on "pharmacy connected" and CMS "Integrated Pharmacy & Inventory", which this page links to rather than duplicates.
+1. **Product verification done** against the product source (`thukal/Nalam-CMS`, commit `d926f52a`). Access was granted via the session's repository tool. A shell `git clone` was denied by the permission classifier, so I did not clone. I read files through the GitHub read tool and code search instead. No permissions were bypassed or changed.
+2. **Page copy rewritten from evidence.** Ten feature cards now describe what the code implements. Unsupported claims were removed or qualified.
+3. **Internal links applied** on HMS, CMS, `/solutions` and the footer (no metadata or schema changed).
+4. **Measured:** main content 1,940 words; all checks below re-run.
 
-## 2. Competitor analysis
+## 1. Product verification matrix
 
-Fetched live via web reads, paraphrased only. Schema was not checkable (the fetch tool strips scripts).
+**Method and limits.** Static review of: the pharmacy route table, request-validation schemas, service comments, file listings and code search results in `thukal/Nalam-CMS`. **The code was not executed, no running instance was available, and I did not read every service function body.** Old docs (`docs/PHARMACY_*.md`) were used only as pointers, never as sole evidence; "Strong" = route + validation schema both present, "Moderate" = implementation file and tests located but body not line-reviewed.
 
-| | DocPulse | Healthray (2 pages) | RedSail |
+**Important finding:** the pharmacy module lives in the **Clinic Management System** (CMS) repository, not an HMS. No HMS, IPD, ward or admission code was found in the repositories reachable to this session.
+
+Paths below are under `nalam-cms-backend/src/modules/pharmacy/` unless stated.
+
+### A. Verified and implemented
+
+| # | Capability | Strength | Evidence |
 |---|---|---|---|
-| H1 | "Pharmacy Management System for Clinics and Hospitals" | "AI-powered pharmacy software that actually saves you time" / "Best Pharmacy Management Software in India" | "Pharmacy Management Systems" |
-| Depth | ~900 words | ~1,900 / ~1,300 | ~850 |
-| Structure | Audiences, 6 features, 6-step workflow, manual vs digital table, FAQ | Very deep: 12 feature blocks, retail vs hospital setup, compliance badges, deployment, 9 FAQs. Second page is thin keyword-repeating copy | Directory of 4 US products, 4 FAQs |
-| Hospital workflows | OPD counters, IPD wards, OT stores, EMR to dispensing queue | Ward indents, unit-dose, charges to patient bill, EMR link | None (US retail/LTC) |
-| CTA | "Book a Free Demo" ×2 to contact | 3 forms, mismatched hospital forms on pharmacy page | None in body |
-| Trust | Logos, stats, 4.5 widget | Badges, ratings, outcome metrics, testimonials | Brand claims only |
-| Gaps | No HMS mention, FAQ questions are images, no regulatory/security detail | No pricing, unsourced metrics, duplicated definitions, mismatched CTAs | No demo CTA, US-only, typos |
+| 1 | Medicine catalogue (create/list/edit). Fields: generic name, company, category, strength, **HSN**, **GST rate**, purchase and selling price, dispensing unit, strip/box packaging, for-sale vs consumable | Strong | `pharmacy.routes.js`: `POST/GET /medicines`, `GET/PUT /medicines/:id`. `pharmacy.dto.js`: `createMedicineSchema` (`hsn`, `gstRate`, `purchasePrice`, `sellingPrice`, `genericName`, `baseUnit`, `packageType`, `unitsPerStrip`, `stripsPerBox`, `itemType`) |
+| 2 | Inventory per batch, per branch and a central pharmacy hub; low-stock view; stock-movement ledger | Strong | `pharmacy.routes.js`: `POST/GET /inventory`, `GET /inventory/low-stock`, `GET /movements`, `GET /hub/stock`; `pharmacy.dto.js`: `addStockSchema`, `inventoryQuerySchema`, `branchMovementsQuerySchema` |
+| 3 | Batch tracking: batch number, manufacturing and expiry date on every entry; auto-generated batch numbers on single entry; per-medicine batch drill-down | Strong | `pharmacy.dto.js`: `addStockSchema` (`batchNo` optional, auto-generated), `hubReceiveItemSchema` (`batchNo`, `expiryDate` required); `batchNumber.js`; route `GET /medicines/:id/batches` |
+| 4 | Expiry handling: expiry per batch; expired batches excluded from sale; near-expiry and expired stock review/export | Strong (sale exclusion: Moderate) | `pharmacy.dto.js`: `expiringBefore`; routes `GET /hub/export/near-expiry.csv`, `/hub/export/expired-stock.csv`; `selfUse.service.js` and `b2bSales.service.js` document the shared FIFO consumer throwing `INSUFFICIENT_SELLABLE_STOCK` for expired-only stock; `stockTransfer.service.js` orders by expiry ascending |
+| 5 | Purchase / goods receiving (GRN): vendor-first, multi-line, batch, expiry, quantity, **free quantity**, unit cost, **MRP**, product and bill discounts, invoice number/date, payment terms | Strong | routes `POST/GET /hub/receipts`; `pharmacy.dto.js`: `hubReceiveSchema`, `hubReceiveItemSchema` |
+| 6 | Vendor bills with payments, due dates and cancellation; vendor returns with credit notes | Strong | routes `/hub/vendor-bills*`, `/hub/vendor-bills/:id/payments`, `/hub/vendor-bills/:purchaseId/returns`, `/hub/vendor-returns/:id/credit-received`; `vendorBills.service.js`, `vendorReturns.service.js` exist |
+| 7 | Vendor (supplier) records: create, update, activate/deactivate | Strong | routes `/suppliers`, `/suppliers/:id`, `/deactivate`, `/activate`; `createSupplierSchema`, `updateSupplierSchema` |
+| 8 | Stock transfers hub to branch (ready, ship, receive, partial receive, cancel); branch stock requests; manual adjustments with required reason | Strong | routes `/transfers*`, `/stock-requests*`, `POST /inventory/adjust`, `POST /hub/inventory/:inventoryId/adjust`; `stockTransfer.service.js`; `hubAdjustStockSchema` |
+| 9 | Hub dashboard, analytics, reconciliation, low-stock suggestions, saved views, CSV exports (stock, receipts, near-expiry, expired, vendor bills) | Strong for existence; analytics content not reviewed | routes `/hub/dashboard`, `/hub/analytics`, `/hub/reconciliation/*`, `/hub/low-stock-suggestions`, `/hub/export/*.csv`; `hubDashboard.repo.js` / `.service.js` |
+| 10 | Role-based access with a pharmacy hub manager role (no clinical/patient access) | Strong | `requirePermission('pharmacy:*')` on every route in `pharmacy.routes.js`; route comments on `pharmacy_hub_manager`; `tests/pharmacyHub/permissionMatrix.test.js` located |
+| 11 | Prescription picks medicines from the pharmacy catalogue with stock status | Moderate | `nalam-cms-frontend/src/pages/App/components/PrescriptionEditor.jsx`, `nalam-cms-backend/src/modules/consultation/consultation.service.js`, `src/__tests__/PrescriptionDispensingUnit.test.jsx` located; function bodies not line-reviewed |
+| 12 | Billing draws stock FIFO by expiry on finalization; walk-in pharmacy bills; stock restored on cancel | Moderate | `nalam-cms-backend/src/modules/billing/billing.routes.js` (`billing:pharmacy_manual`), `billing.service.js`, `tests/billing/billing.exactBatchAttribution.test.js`; `b2bSales.service.js` and `selfUse.service.js` call `pharmacy.consumeForBill` |
+| 13 | Dispensing-unit and conversion model (UOM, units per strip, strips per box, strip price) | Strong | `uom.js` (`DISPENSING_UNITS`), `pharmacy.dto.js` (`unitsPerStrip`, `stripsPerBox`, `stripPrice`) |
+| 14 | Shared inventory: tenant-wide medicine masters; stock per branch and hub | Strong | `pharmacy.dto.js` (`medicineQuerySchema` comment: masters tenant-wide, branch-scoped rollups); `/hub/*` and `/transfers` routes |
+| 15 | Also implemented (not used on the page): B2B sales, customer damage returns, self-use register, consumable-usage tracking | Strong | routes `/b2b-*`, `/damage-returns*`, `/self-use*`, `/consumable-usage*` |
 
-**Takeaway for NALAM:** the winning angle is hospital-specific, honest and connected-to-HMS. Competitors lean on unsourced stats and badges, which this page deliberately does not copy.
+### B. Partially implemented
 
-## 3. Keyword research (Ubersuggest India snapshot, as provided)
+| Capability | What exists | What does not |
+|---|---|---|
+| Vendor GSTIN verification | `gst.provider.js` calls a third-party GST search API; route `POST /suppliers/gstin/verify` | Works only when `ENABLE_SANDBOX_GST` and API credentials are configured |
+| Tax on bills | Per-line tax rate/amount migrations (`20260529120000_billing_tax_percentage`, `20260601120000_billing_item_tax_and_options`); `billing.service.js` references tax | GST invoice formats, GST returns and insurer billing not verified. Page makes no GST claim |
+| MRP | Captured on each receipt line (`hubReceiveItemSchema.mrp`, `addStockSchema.mrp`) | Not a medicine-master field |
+| Cost | `purchasePrice` on master, `unitCost` on each receipt | See weighted-average below |
+| Expiry alerts | Low-stock alert events exist; near-expiry/expired are views and exports | Automatic expiry-date alert notifications not confirmed; page does not claim them |
 
-| Keyword | Vol | SD |
-|---|---:|---:|
-| Pharmacy Management System | 590 | 23 |
-| Pharmacy Management Software | 590 | 23 |
-| Pharmacy Billing Software | 1300 | 24 |
-| Pharmacy Stock Management Software | 170 | 17 |
-| Pharmacy Inventory Management Software | 110 | 23 |
-| Hospital Pharmacy Software | 90 | 17 |
-| Medicine Inventory Management System | 90 | 16 |
-| Hospital Pharmacy Management System | 30 | 20 |
-| Integrated Pharmacy Management System | 0 | 4 |
+### C. Planned / incomplete (per product docs only; code not confirmed)
 
-Snapshots, not guarantees. Billing stays a section, not the focus, because of retail intent.
+`docs/PHARMACY_MANAGEMENT.md` section 11 (dated 2026-05, may be stale) lists: barcode scan at receive/dispense, stock reservation at prescription time, strip-wise prescription and billing, GST line detail on the bill PDF. Strip pricing exists at master level (`stripPrice`), but strip-wise prescribing was not confirmed. None are on the page.
 
-## 4. Keyword placement mapping (final, measured on built page)
+### D. Not found / not supported
 
-| Keyword | Vol / SD | Assigned | Actual placement | Natural? | Cannibalization |
-|---|---|---|---|---|---|
-| Pharmacy Management System | 590 / 23 | URL, title, H1, hero | URL, `<title>`, H1, hero paragraph, intro | Yes | None |
-| Hospital Pharmacy Management System | 30 / 20 | Introduction | Intro paragraph + "What Is a Hospital Pharmacy Management System?" H2 | Yes | Low |
-| Pharmacy Management Software | 590 / 23 | Features | Intro H2 and Features H2 | Yes | Low |
-| Pharmacy Inventory Management Software | 110 / 23 | Inventory | Inventory section body (1×) | Yes | Low |
-| Pharmacy Stock Management Software | 170 / 17 | Stock | Inventory section body, as "pharmacy stock management software" (1×). Need-framed, not a feature claim | Yes | None |
-| Pharmacy Billing Software | 1300 / 24 | Billing | Billing section body (1×) | Yes | Low |
-| Integrated Pharmacy Management System | 0 / 4 | Integration | Setups section, Option A (1×) | Yes | None |
-| Hospital Pharmacy Software | 90 / 17 | FAQ | FAQ H2, eyebrow and answers (4×) | Yes | None |
-| Medicine Inventory Management System | 90 / 16 | Supporting | Not used (avoided forcing) | n/a | None |
+| Capability | Result |
+|---|---|
+| **Weighted-average stock ledger / costing** | Code searches for `weightedAverage`, `averageCost`, `avgCost`: no matches. A movement ledger exists (row 2) but not average costing. Not claimed |
+| **IPD / ward / admission pharmacy** (ward requests, issue and return against an admission) | No matches in the repository. Not claimed. Page says inpatient pharmacy is scoped separately |
+| **Business GST registrations** (tenant-level GST registration records) | Not found; only vendor `gstin`. Not claimed |
 
-Exact-match counts for secondary keywords are 1 each in the body; no density targets were applied.
+### E. Requires product-owner confirmation
 
-## 5. Final page content and length
+| Item | Why |
+|---|---|
+| **HMS integration** | Pharmacy code is in the CMS repo; no HMS code was reachable. The HMS page on the site says pharmacy is connected. That claim is not backed by anything I could inspect. Page now says the connection scope is confirmed during scoping |
+| **Standalone pharmacy deployment** | The pharmacy router requires the shared app authentication and tenant context, and billing consumes pharmacy stock, so it runs as a CMS module. A hub role without clinical access exists, but no separate deployment exists. Page states it is not available and not promised |
+| Moderate-evidence rows 11 and 12 | Function bodies were not line-reviewed or executed; owner/QA should confirm before publishing |
+| Whether pharmacy is sold to hospitals as part of CMS or HMS | Affects positioning of the "for hospitals" H1 |
 
-Source: `src/lib/pharmacy-page-content.ts`, rendered by `src/app/solutions/pharmacy-management-system/page.tsx`. All 16 sections and the 10 required FAQs remain. All SEO topics are kept (inventory, batch/expiry, purchase, billing, OPD/IPD, workflow, integrated/standalone, benefits, why NALAM, comparison, FAQ).
+## 2. Landing page content
 
-**Length:** 1,914 words in rendered `<main>` (previously 2,802); 2,045 including header/footer. Within the 1,500-2,000 target.
+- H1 unchanged: "A Smarter Pharmacy Management System for Modern Hospitals".
+- Title, description and canonical unchanged (verified in built HTML).
+- Main content: **1,940 words** (rendered `<main>`, excludes header/footer). Target 1,500-2,000.
+- Key changes: ten feature cards rewritten from the matrix; supplier/purchase and expiry statements now supported; OPD/IPD section renamed "OPD and IPD Pharmacy: What Is Supported Today" with IPD explicitly out of scope; workflow reduced to the verified five steps (prescribe, stock check, bill, finalize, stock deducted); Option A is tied to CMS and defers HMS to scoping; Option B states pharmacy-only deployment is not available.
+- Competitor differentiation kept: hub-and-branch stock model with a recorded trail, no unsourced stats or badges, no US retail framing.
 
-How: the 11 four-part feature cards became 10 one-paragraph cards (supplier merged into purchase/receiving), OPD/IPD bullet lists became two need-framed paragraphs, and other sections were tightened.
+## 3. Keyword placement (measured, main content)
 
-## 6. SEO metadata
+| Keyword | Vol / SD | Placement | Count |
+|---|---|---|---|
+| Pharmacy Management System | 590 / 23 | URL, title, H1, hero, intro, headings | 10 |
+| Hospital Pharmacy Management System | 30 / 20 | Intro and "What Is..." H2 | 3 |
+| Pharmacy Management Software | 590 / 23 | Intro H2, Features H2 | 9 |
+| Pharmacy Inventory Management Software | 110 / 23 | Inventory section | 1 |
+| Pharmacy Stock Management Software | 170 / 17 | Inventory section | 1 |
+| Pharmacy Billing Software | 1300 / 24 | Billing section | 1 |
+| Integrated Pharmacy Management System | 0 / 4 | Option A | 1 |
+| Hospital Pharmacy Software | 90 / 17 | FAQ H2 and answers | 3 |
+| Medicine Inventory Management System | 90 / 16 | Not used (not forced) | 0 |
 
-- Title: `Pharmacy Management System for Hospitals | NALAM`
-- Description: as approved (verified in built HTML).
-- Canonical self-referencing; robots `index, follow`; OG url/title/locale `en_IN`; OG/Twitter image is the sitewide default `og-default.jpg`.
-- Page `<html lang>` stays `en` (sitewide layout, not changed). `inLanguage: en-IN` is set in the page's SoftwareApplication schema.
+Natural usage; no density targets. Cannibalization risk with HMS/CMS: low (pharmacy appears there only as a feature).
 
-## 7. Heading hierarchy
+## 4. Internal links added
 
-One H1 (approved text, unchanged). 16 content H2s matching the brief order (plus sitewide footer H2s). H3s are feature, option and card titles. Verified in the rendered DOM.
+| From | Link | Anchor |
+|---|---|---|
+| `/solutions/hospital-management-system` | `/solutions/pharmacy-management-system` | "Hospital Pharmacy Software" (callout above the articles section) |
+| `/solutions/clinic-management-system` | same | "Pharmacy Management System page" |
+| `/solutions` | same | "Pharmacy Management System" (callout between systems and "Better Together") |
+| Footer (all pages) | same | "Pharmacy Management System" (Solutions list) |
+| New page to HMS and CMS | `/solutions/hospital-management-system`, `/solutions/clinic-management-system` | "Hospital Management System", "Clinic Management System" |
 
-## 8. Internal linking
+Not applied: header Solutions dropdown (would add a top-level nav entry sitewide; left as a decision). Blog posts untouched.
 
-Implemented from the new page: links to HMS and CMS in the "Integrated or Standalone" section, breadcrumb to Home/Solutions, CTAs to `/contact`.
+## 5. Structured data
 
-**Proposed, NOT applied** (per brief, awaiting approval):
-1. HMS page: add a contextual link in the "Laboratory, Radiology & Pharmacy" feature text, anchor "Pharmacy Management System".
-2. CMS page: same, on "Integrated Pharmacy & Inventory", anchor "Pharmacy Management Software".
-3. `/solutions` overview: add a card, and add the page to header Solutions dropdown/footer.
-4. Optional: HMS blog posts mentioning pharmacy, anchor "Hospital Pharmacy Software".
+On the page: `SoftwareApplication` (no offers, ratings, reviews or certifications), `FAQPage` (all 10 answers visible), `BreadcrumbList` (from `PageHero`). Organization and WebSite remain sitewide only (no duplicates). All four JSON-LD blocks parse as valid JSON in the built HTML. Not tested with Google's Rich Results tool (needs a public URL).
 
-## 9. Structured data
+## 6. Visual assets
 
-On the page: `SoftwareApplication` (no offers, ratings, reviews or certifications; related to HMS/CMS), `FAQPage` (all 10 answers are visible on the page), `BreadcrumbList` (from `PageHero`). Organization/WebSite come from the layout, so there is no duplicate. All blocks parsed as valid JSON in the build output. Not run through Google's Rich Results test (needs a live URL).
+- No product screenshots are used. None exist in this repo and no authorized running environment was available. The product repo has `docs/SCREENSHOT_CHECKLIST.md`, which could guide a capture session.
+- No new Open Graph image was created: the only brand asset available is the sitewide `og-default.jpg`, which the page uses. A pharmacy-specific OG image needs real branding/screenshot assets. **Missing assets are documented here, nothing was fabricated.**
 
-## 10. UI/UX
-
-Reuses `PageHero`, `SectionHeading`, `Container`, `Button`, `SolutionFaqSection`, existing tokens and section rhythm. New: a simple semantic ordered-list workflow diagram, a responsive accessible comparison table (`caption`, `scope`), and capability tags. No redesign, no new dependencies.
-
-**No product screenshots are used.** The repository holds none for pharmacy, and the brief forbids generic stock dashboards as NALAM screenshots. Real pharmacy screenshots should be supplied and added with descriptive alt text.
-
-## 11. Technical SEO validation
+## 7. Technical validation (this revision)
 
 | Check | Result |
 |---|---|
-| Unique title/description, single H1, canonical, robots | Pass |
-| Sitemap inclusion | Pass (`/sitemap.xml` contains the URL) |
-| OG metadata | Pass (default image; a pharmacy-specific OG image would be better) |
-| Responsive 1440 / 820 / 390 | No horizontal overflow at any width (re-run after revision 2) |
-| Console errors | 0 at all three widths |
-| Internal links | 16 distinct internal links, all return 200 |
-| Images | Page has no images of its own. One lazy header logo reported incomplete before scroll (sitewide, not from this change) |
-| Core Web Vitals, formal accessibility audit, Rich Results test | **Not run** (no Lighthouse/live URL in this environment) |
+| `next build` | Pass; route `/solutions/pharmacy-management-system` generated |
+| `tsc --noEmit` | Pass |
+| ESLint (`src`) | Pass |
+| Metadata/canonical/robots | Title, description, canonical as approved; `robots: index, follow`; OG locale `en_IN` |
+| Headings | One H1; 16 content H2s in the briefed order |
+| Sitemap | `https://nalam.care/solutions/pharmacy-management-system` present in `/sitemap.xml` |
+| Responsive (1440 / 820 / 390 px) | No horizontal overflow; 0 console errors; 0 failing requests on a fresh server |
+| Internal links | 17 distinct internal links on the page checked, all return 200 |
+| Existing-page SEO comparison | Production build before vs after on home, `/solutions`, HMS, CMS, LMS, contact, about, custom solutions, blog: **title, description, canonical, H1 and JSON-LD identical on all nine**. The only link difference on each is the added link to the new page (footer, plus callouts on the three pages above) |
+| Image check | The only incomplete image on the page is the lazy header logo (sitewide, pre-existing). The page has no images of its own |
+| Lighthouse / Core Web Vitals / Rich Results / formal accessibility audit | **Not run: needs a staging URL** |
 
-## 12. Ranking protection comparison
+Note: one run showed a stale 500 error from an old server still on the test port; it was reproduced as a stale process, and a clean server had no failures.
 
-Production build before vs after (re-run after revision 2), comparing title, meta description, canonical, H1, JSON-LD and internal hrefs on: home, `/solutions`, HMS, CMS, LMS, contact, about, custom solutions. **All SAME.** Only changes to existing files: one added sitemap entry. No redirects added. Existing keyword targeting untouched.
-
-## 13. Files modified
+## 8. Files changed (this branch vs the original site)
 
 - Added `src/app/solutions/pharmacy-management-system/page.tsx`
 - Added `src/lib/pharmacy-page-content.ts`
-- Modified `src/app/sitemap.ts` (import + one entry)
+- Added `src/components/sections/PharmacyLinkCallout.tsx`
+- Modified `src/app/sitemap.ts` (1 entry)
+- Modified `src/components/layout/Footer.tsx` (1 link)
+- Modified `src/app/solutions/hospital-management-system/page.tsx` (callout only)
+- Modified `src/app/solutions/clinic-management-system/page.tsx` (callout only)
+- Modified `src/app/solutions/page.tsx` (callout only)
 - Added/updated this report
 
-## 14. Tests performed
+## 9. Remaining blockers and approvals
 
-`next build` (before and after), `tsc --noEmit`, ESLint on changed files, route generation, built-HTML SEO extraction, Playwright render at three widths with console/overflow/link checks. The repo has no automated test suite.
+1. **Owner sign-off on public claims**, especially rows 11 and 12 (moderate evidence) and the statements about hub transfers and vendor bills.
+2. **HMS integration**: confirm what pharmacy provides for NALAM HMS customers. The site's HMS page already says pharmacy is connected; I could not verify that, and the new page is deliberately more cautious than the HMS page. Consider aligning the two.
+3. **Standalone deployment**: needs an architecture decision before the wording can change.
+4. **Inpatient/IPD pharmacy** and **weighted-average costing**: not implemented; confirm roadmap before any mention.
+5. **Real pharmacy screenshots** and a pharmacy OG image.
+6. Decide on adding the page to the header Solutions menu.
+7. On staging: Lighthouse and Core Web Vitals, Rich Results test, accessibility audit.
+8. No ranking improvement is claimed; no ranking data was available.
 
-## 15. Final feature verification matrix
+## 10. Confirmation
 
-Categories: **Verified and implemented** (needs implementation evidence) / Partially implemented / Planned / Not supported / **Requires product owner confirmation**.
-
-**Evidence available to me:** (a) public copy already on nalam.care, (b) statements in your latest message. **Not available:** the product source, a running instance or product documentation. A statement from the owner is recorded below as "owner-stated"; it is not implementation evidence, so **no row is "Verified and implemented"**.
-
-| Capability | Status | Basis | Page treatment |
-|---|---|---|---|
-| Pharmacy connected to HMS (prescriptions, dispensing, stock in sync) | Requires owner confirmation | Existing website copy (HMS) | "Connected in NALAM" tag, sync wording only |
-| Pharmacy and inventory integrated in CMS | Requires owner confirmation | Existing website copy (CMS) | Mentioned as CMS integration |
-| Itemized billing with patient record | Requires owner confirmation | Existing website copy (HMS) | "Connected in NALAM" tag |
-| Prescription handoff to pharmacy | Requires owner confirmation | Existing website copy (HMS) | "Connected in NALAM" tag |
-| Medicines, medicine catalogue | Requires owner confirmation | Owner-stated existing module | "Scoped in demo" |
-| Stock / inventory management, stock ledger | Requires owner confirmation | Owner-stated existing module; stock-ledger discussion not confirmed implemented | Inventory section (need-framed; inventory card tagged via site copy) |
-| Purchases / GRN, purchase receiving | Requires owner confirmation | Owner-stated existing module | "Scoped in demo" |
-| Batch and expiry captured at purchase receiving | Requires owner confirmation | Previously discussed, implementation unconfirmed | "Scoped in demo", need-framed |
-| Product master: HSN, MRP, cost, UOM/conversion, GST registrations | Requires owner confirmation | Owner says "confirmed" as product master info, unverified in code | **Not mentioned on page** |
-| Weighted-average stock ledger, shared inventory | Requires owner confirmation | Previously discussed | **Not mentioned on page** |
-| Expiry alerts | Requires owner confirmation | No evidence | Worded "any expiry alerts" in a demo-check |
-| Supplier management | Requires owner confirmation | No evidence | Removed as a separate claim |
-| Stock transfers and adjustments | Requires owner confirmation | No evidence | "Scoped in demo" |
-| Pharmacy reports (beyond generic) | Requires owner confirmation | No evidence; report customization is website-stated | "Scoped in demo", no advanced claims |
-| OPD / IPD pharmacy specifics (ward requests, returns, patient-linked issue) | Requires owner confirmation | No evidence | Need-framed paragraphs only |
-| GST invoicing, insurance billing | Requires owner confirmation | No evidence | Not claimed |
-| Pharmacy-specific user access | Requires owner confirmation | Roles/permissions customization is website-stated | "Scoped in demo" |
-| HMS/LMS/CMS each run independently | Requires owner confirmation (website-stated) | Existing website copy | Stated |
-| **Standalone pharmacy-only deployment** | **Requires owner confirmation; treated as not available** | No architecture/deployment evidence | Option B says it is "a direction we are exploring, not something we promise yet" |
-| Planned-but-not-implemented / Not supported | Unknown | Owner to classify | n/a |
-
-Note: the rows marked as website-stated are public claims already published; I did not independently validate them.
-
-## 16. Features removed or softened in revision 2
-
-Separate supplier-management card; OPD/IPD bullet lists (ward requests, returns, patient-linked dispensing); "stock deduction after billing"; per-card "how staff use it" statements; the standalone line "where supported" was replaced with an explicit not-promised statement. GST, insurance, HSN/MRP and weighted-average items are not on the page.
-
-## 17. Remaining approvals / owner actions
-
-1. **Product verification:** the pharmacy implementation needs to be checked by someone with access to the product source (the denied repo is `thukal/Nalam-CMS`; allow read access or provide module screens/docs). For each confirmed row set `status: "verified"` in `pharmacy-page-content.ts` and then expand the copy.
-2. Classify rows as Planned / Not supported where applicable.
-3. Standalone pharmacy: architecture and deployment capability must be verified before Option B or the FAQ is strengthened.
-4. Real pharmacy screenshots (none used) and a pharmacy OG image.
-5. Approve proposed internal link changes (section 8) and nav/footer addition.
-6. Decide whether to keep the "Connected in NALAM / Scoped in demo" tags once verification is done.
-7. Brand: "NALAM" vs the site's "Nalam Software".
-8. On staging: Lighthouse/Core Web Vitals, Rich Results test, accessibility audit. No ranking claims are made.
+Production was **not** deployed. Work stays on `claude/trusting-ritchie-s4pg7g`. No other branch was pushed. No product code was modified, and the product repository was only read.
