@@ -139,6 +139,7 @@ export const navigation = {
         { label: "Hospital Management System", href: "/solutions/hospital-management-system" },
         { label: "Laboratory Management System", href: "/solutions/laboratory-management-system" },
         { label: "Clinic Management System", href: "/solutions/clinic-management-system" },
+        { label: "Pharmacy Management System", href: "/solutions/pharmacy-management-system" },
       ],
     },
     { label: "Custom Solutions", href: "/custom-healthcare-software-development" },

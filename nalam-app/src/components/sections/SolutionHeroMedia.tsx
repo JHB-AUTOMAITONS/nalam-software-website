@@ -9,9 +9,12 @@ interface HeroChip {
 }
 
 interface SolutionHeroMediaProps {
-  photoSrc: string;
+  /** Omit to render the gradient-only hero (e.g. while a photo is not yet supplied). */
+  photoSrc?: string;
   /** Meaningful alt text for the photo. */
   alt: string;
+  /** Mark the photo as the page's LCP image (preloads it). */
+  priority?: boolean;
   chips: HeroChip[];
 }
 
@@ -29,7 +32,7 @@ const chipPositions = [
  * key capabilities on desktop, where there's room for them without covering
  * the subject or the text.
  */
-export function SolutionHeroMedia({ photoSrc, alt, chips }: SolutionHeroMediaProps) {
+export function SolutionHeroMedia({ photoSrc, alt, chips, priority = false }: SolutionHeroMediaProps) {
   const shouldReduceMotion = useReducedMotion();
   const mask = "radial-gradient(ellipse 92% 95% at 72% 48%, black 58%, transparent 100%)";
 
@@ -45,13 +48,25 @@ export function SolutionHeroMedia({ photoSrc, alt, chips }: SolutionHeroMediaPro
         animate={{ opacity: 1, scale: 1 }}
         transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
       >
-        <Image
-          src={photoSrc}
-          alt={alt}
-          fill
-          sizes="100vw"
-          className="object-cover object-[65%_center] lg:object-center"
-        />
+        {photoSrc ? (
+          <Image
+            src={photoSrc}
+            alt={alt}
+            fill
+            sizes="100vw"
+            priority={priority}
+            className="object-cover object-[65%_center] lg:object-center"
+          />
+        ) : (
+          <div
+            aria-hidden
+            className="h-full w-full"
+            style={{
+              background:
+                "radial-gradient(circle at 75% 40%, rgba(189,239,244,0.7) 0%, rgba(221,247,250,0.4) 45%, transparent 75%)",
+            }}
+          />
+        )}
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0"

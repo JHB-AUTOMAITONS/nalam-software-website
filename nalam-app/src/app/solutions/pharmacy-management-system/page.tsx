@@ -1,3 +1,5 @@
+import { existsSync } from "node:fs";
+import path from "node:path";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
@@ -8,6 +10,7 @@ import { JsonLd } from "@/components/structured-data/JsonLd";
 import { PageBackdrop } from "@/components/sections/PageBackdrop";
 import { PageHero } from "@/components/sections/PageHero";
 import { SolutionFaqSection } from "@/components/sections/SolutionFaqSection";
+import { SolutionHeroMedia } from "@/components/sections/SolutionHeroMedia";
 import { products, routes, siteConfig } from "@/lib/constants";
 import {
   batchExpiry,
@@ -17,7 +20,11 @@ import {
   faqs,
   featuresSection,
   finalCta,
+  heroChips,
   heroIntro,
+  heroPhotoAlt,
+  heroPhotoPublicPath,
+  heroTagline,
   introduction,
   inventory,
   opdIpd,
@@ -45,6 +52,11 @@ export const metadata: Metadata = {
   ...base,
   openGraph: { ...base.openGraph, locale: "en_IN" },
 };
+
+// Rendered at build time: use the photo only once the file has been added.
+const heroPhoto = existsSync(path.join(process.cwd(), "public", heroPhotoPublicPath))
+  ? heroPhotoPublicPath
+  : undefined;
 
 const sectionClass =
   "relative border-t border-teal-500/15 bg-white/40 py-10 backdrop-blur-sm sm:py-12 lg:py-14";
@@ -156,13 +168,22 @@ export default function PharmacyManagementSystemPage() {
         breadcrumbs={breadcrumbs}
         eyebrow="Hospital Pharmacy Software"
         title={pharmacyMeta.h1}
+        tagline={heroTagline}
+        media={
+          <SolutionHeroMedia
+            photoSrc={heroPhoto}
+            alt={heroPhotoAlt}
+            chips={heroPhoto ? heroChips : []}
+            priority
+          />
+        }
         actions={
           <>
             <Button href={routes.contact} size="lg" variant="primary" className="w-full sm:w-auto">
-              Book a Free Demo
-            </Button>
-            <Button href={routes.contact} size="lg" variant="secondary" className="w-full sm:w-auto">
               Talk to Our Team
+            </Button>
+            <Button href="#features" size="lg" variant="ghost" className="w-full sm:w-auto">
+              View Features
             </Button>
           </>
         }

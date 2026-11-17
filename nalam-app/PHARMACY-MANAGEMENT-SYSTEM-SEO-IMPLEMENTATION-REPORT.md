@@ -161,3 +161,17 @@ Note: one run showed a stale 500 error from an old server still on the test port
 ## 10. Confirmation
 
 Production was **not** deployed. Work stays on `claude/trusting-ritchie-s4pg7g`. No other branch was pushed. No product code was modified, and the product repository was only read.
+
+---
+
+## 11. Update: hero layout and Solutions navigation
+
+**Hero.** The pharmacy hero now uses the same `PageHero` + `SolutionHeroMedia` composition as the Clinic Management System page (full-bleed photo on the right, feathered edges, light aqua scrim, three floating chips on desktop). Supporting headline, description and the two CTAs ("Talk to Our Team", "View Features") are as requested. The H1, SEO title, meta description and canonical are unchanged. Chips use only code-verified capabilities: Medicine Stock (batch-wise visibility), Batch & Expiry (tracked on every entry), Pharmacy Billing (stock updated on finalize).
+
+**Hero photo: NOT YET ADDED (blocker).** I cannot generate images, and the licensed-photo source I tried (Unsplash) is behind a browser bot-check that I did not try to bypass. No clinic or generic image was substituted, and no product UI was fabricated. Until a photo is supplied the hero renders a clean aqua gradient and the chips are hidden. To enable the photo, add a licensed, optimized file at `nalam-app/public/images/solutions/pharmacy-hero.webp` (about 1536x1024 or larger, a pharmacist in a hospital pharmacy with shelves or a workstation, subject on the right). The page detects it at build time and then applies the alt text "Pharmacist checking medicines on organized shelves in a hospital pharmacy", `next/image` responsive sizing and LCP priority, plus the chips. A candidate that appeared free to use under the Unsplash License is the National Cancer Institute photo "Pharmacist reaching for medication on shelf" on Unsplash, but I could not open the page or download it, so its license and suitability need checking by a person.
+
+**Navigation.** "Pharmacy Management System" added as the 4th item of the Solutions dropdown (`navigation.main` in `src/lib/constants.ts`), after Hospital, Laboratory and Clinic. Desktop and mobile menus both read this list, so both show it with the existing styling. No links removed; the new link appears once per menu.
+
+**Files modified in this update:** `src/lib/constants.ts`, `src/lib/pharmacy-page-content.ts`, `src/app/solutions/pharmacy-management-system/page.tsx`, `src/components/sections/SolutionHeroMedia.tsx` (photo made optional, optional `priority`; other pages unchanged).
+
+**Validation:** `tsc --noEmit`, ESLint and `next build` pass. At 1440, 820 and 390 px: no horizontal overflow, no console errors, no failed requests. Desktop dropdown lists the four items in order with correct hrefs; the mobile menu lists them too. Existing pages' title, description, canonical, H1 and JSON-LD are identical to the original build; the only change is the added nav link. Image loading and layout-shift behavior with a real photo are untested because no photo exists yet.

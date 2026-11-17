@@ -38,8 +38,22 @@ export interface PharmacyFeature {
   body: string;
 }
 
+export const heroTagline = "Simplify Hospital Pharmacy Operations. Improve Medicine Management.";
+
 export const heroIntro =
-  "Manage hospital pharmacy operations with NALAM Pharmacy Management System. Bring medicine inventory, prescription management, batch tracking, pharmacy billing and dispensing into one workflow, connected to prescriptions and billing in the NALAM platform.";
+  "NALAM Pharmacy Management System helps hospitals manage pharmacy operations through a connected platform, supporting medicine management, inventory visibility, pharmacy billing and integration with hospital workflows.";
+
+/** Hero photo, served from /public. Add the licensed photo here to enable it. */
+export const heroPhotoPublicPath = "/images/solutions/pharmacy-hero.webp";
+export const heroPhotoAlt =
+  "Pharmacist checking medicines on organized shelves in a hospital pharmacy";
+
+/** Floating hero chips: only capabilities verified in the product code. */
+export const heroChips = [
+  { label: "Medicine Stock", sublabel: "Batch-Wise Visibility" },
+  { label: "Batch & Expiry", sublabel: "Tracked on Every Entry" },
+  { label: "Pharmacy Billing", sublabel: "Stock Updated on Finalize" },
+];
 
 export const introduction = {
   title: "Simplify Hospital Pharmacy Operations with NALAM Pharmacy Management Software",
