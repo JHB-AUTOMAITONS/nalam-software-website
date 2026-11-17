@@ -102,19 +102,6 @@ function Block({
   );
 }
 
-function Bullets({ items }: { items: string[] }) {
-  return (
-    <ul className="flex flex-col gap-2 text-sm leading-relaxed text-slate-600">
-      {items.map((item) => (
-        <li key={item} className="flex gap-2">
-          <span aria-hidden className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-teal-500" />
-          <span>{item}</span>
-        </li>
-      ))}
-    </ul>
-  );
-}
-
 function CardGrid({ items }: { items: { title: string; body: string }[] }) {
   return (
     <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">
@@ -220,12 +207,7 @@ export default function PharmacyManagementSystemPage() {
                   </span>
                 </div>
                 <h3 className="font-display text-lg font-medium leading-snug text-navy-950">{f.title}</h3>
-                <dl className="flex flex-col gap-2 text-sm leading-relaxed text-slate-600">
-                  <div><dt className="inline font-medium text-navy-900">What it does: </dt><dd className="inline">{f.does}</dd></div>
-                  <div><dt className="inline font-medium text-navy-900">How staff use it: </dt><dd className="inline">{f.staff}</dd></div>
-                  <div><dt className="inline font-medium text-navy-900">Problem it solves: </dt><dd className="inline">{f.problem}</dd></div>
-                  <div><dt className="inline font-medium text-navy-900">Benefit: </dt><dd className="inline">{f.benefit}</dd></div>
-                </dl>
+                <p className="text-sm leading-relaxed text-slate-600">{f.body}</p>
               </li>
             ))}
           </ul>
@@ -233,21 +215,12 @@ export default function PharmacyManagementSystemPage() {
       </section>
 
       <Block title={opdIpd.title}>
-        <Paragraphs items={[opdIpd.intro]} />
-        <div className="grid gap-4 sm:grid-cols-2">
-          {[opdIpd.opd, opdIpd.ipd].map((col) => (
-            <div key={col.title} className="rounded-2xl border border-teal-500/15 bg-white/75 p-5">
-              <h3 className="mb-3 font-display text-lg font-medium text-navy-950">{col.title}</h3>
-              <Bullets items={col.points} />
-            </div>
-          ))}
-        </div>
-        <p className="text-sm leading-relaxed text-slate-600">{opdIpd.note}</p>
+        <Paragraphs items={opdIpd.paragraphs} />
+
       </Block>
 
       <Block title={inventory.title}>
         <Paragraphs items={inventory.paragraphs} />
-        <Bullets items={inventory.items} />
       </Block>
 
       <Block title={batchExpiry.title}>
