@@ -115,7 +115,7 @@ export function SolutionPageTemplate({
       <section className={sectionClass}>
         <Container className="grid grid-cols-1 items-start gap-8 lg:grid-cols-[minmax(0,1.25fr)_minmax(0,1fr)] lg:gap-12">
           <div className="flex min-w-0 flex-col gap-5">
-            <SectionHeading align="left" eyebrow="Overview" title={content.overviewTitle} />
+            <SectionHeading immediate align="left" eyebrow="Overview" title={content.overviewTitle} />
             <RevealOnScroll className="flex flex-col gap-4 text-base leading-relaxed text-slate-600">
               {[...content.intro.slice(1), ...content.overview].map((paragraph) => (
                 <p key={paragraph}>{paragraph}</p>

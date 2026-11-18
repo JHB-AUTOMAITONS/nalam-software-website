@@ -2,7 +2,6 @@ import type { ReactNode } from "react";
 import { Badge } from "@/components/ui/Badge";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { Container } from "@/components/ui/Container";
-import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
 
 interface PageHeroProps {
   breadcrumbs: { name: string; path: string }[];
@@ -44,7 +43,7 @@ export function PageHero({
   const alignClass = align === "center" ? "mx-auto items-center text-center" : "items-start text-left";
 
   const textColumn = (
-    <RevealOnScroll className={`mt-5 flex min-w-0 max-w-3xl flex-col gap-5 sm:mt-6 sm:gap-6 ${alignClass}`}>
+    <div className={`hero-reveal mt-5 flex min-w-0 max-w-3xl flex-col gap-5 sm:mt-6 sm:gap-6 ${alignClass}`}>
       {eyebrow ? <Badge tone="teal">{eyebrow}</Badge> : null}
 
       <h1 className="min-w-0 max-w-full text-balance font-display text-[clamp(1.85rem,7vw,2.25rem)] font-medium leading-[1.1] tracking-tight text-navy-950 sm:text-5xl lg:text-6xl">
@@ -72,7 +71,7 @@ export function PageHero({
           {actions}
         </div>
       ) : null}
-    </RevealOnScroll>
+    </div>
   );
 
   if (media) {
@@ -109,7 +108,7 @@ export function PageHero({
         <Container className="relative">
           <Breadcrumbs items={breadcrumbs} variant="inline" />
 
-          <RevealOnScroll className="mt-4 flex min-w-0 max-w-[620px] flex-col gap-4 sm:mt-5">
+          <div className="hero-reveal mt-4 flex min-w-0 max-w-[620px] flex-col gap-4 sm:mt-5">
             {eyebrow ? <Badge tone="teal">{eyebrow}</Badge> : null}
 
             <h1 className="min-w-0 max-w-full text-balance font-display text-[clamp(2rem,6vw,3.25rem)] font-medium leading-[1.1] tracking-tight text-navy-950 lg:text-[3.75rem]">
@@ -131,7 +130,7 @@ export function PageHero({
             {actions ? (
               <div className="mt-1 flex w-full flex-col gap-3 sm:w-auto sm:flex-row">{actions}</div>
             ) : null}
-          </RevealOnScroll>
+          </div>
         </Container>
       </section>
     );

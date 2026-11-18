@@ -250,3 +250,73 @@ body {
 .skip-link:focus {
   top: 1rem;
 }
+
+/* Above-the-fold entrance animations, driven by CSS instead of framer-motion.
+   They reproduce the framer variants they replace (same duration, easing and
+   rise) but run without waiting for JS hydration: the elements are server-
+   rendered visible-then-animated, not at opacity:0 until React hydrates, which
+   gated mobile LCP on the whole JS bundle. The fade starts at opacity 0.01
+   (visually identical to 0) because Chrome does not register an LCP candidate
+   for an element animating up from exactly 0 until the animation ends, which
+   delayed LCP by ~0.6s. */
+@keyframes hero-reveal {
+  from {
+    opacity: 0.01;
+    transform: translateY(var(--reveal-y, 20px));
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-reveal {
+  animation: hero-reveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0s) backwards;
+}
+
+/* Homepage hero stagger items (framer: 0.7s, 18px rise). */
+.hero-item {
+  --reveal-y: 18px;
+  animation: hero-reveal 0.7s cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0s) backwards;
+}
+
+/* Solution hero photo entrance (framer: 0.8s, scale 1.03 -> 1, fade in). */
+@keyframes hero-media-reveal {
+  from {
+    opacity: 0.01;
+    transform: scale(1.03);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.hero-media-reveal {
+  animation: hero-media-reveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+
+/* Fixed header entrance (framer: 0.6s, drops in from -16px). */
+@keyframes header-reveal {
+  from {
+    opacity: 0.01;
+    transform: translateY(-16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.header-reveal {
+  animation: header-reveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-reveal,
+  .hero-item,
+  .hero-media-reveal,
+  .header-reveal {
+    animation-delay: 0s !important;
+  }
+}

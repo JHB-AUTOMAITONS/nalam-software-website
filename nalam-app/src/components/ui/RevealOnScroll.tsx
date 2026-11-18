@@ -9,6 +9,13 @@ interface RevealOnScrollProps {
   delay?: number;
   y?: number;
   as?: "div" | "li";
+  /**
+   * Use for content that is already in the first viewport on load. Renders a
+   * plain element with the same entrance animation driven by CSS, so it is
+   * painted without waiting for JS hydration (framer-motion renders it at
+   * opacity:0 until React hydrates). Below-the-fold content keeps scroll reveal.
+   */
+  immediate?: boolean;
 }
 
 export function RevealOnScroll({
@@ -17,8 +24,21 @@ export function RevealOnScroll({
   delay = 0,
   y = 20,
   as = "div",
+  immediate = false,
 }: RevealOnScrollProps) {
   const shouldReduceMotion = useReducedMotion();
+
+  if (immediate) {
+    const Tag = as === "li" ? "li" : "div";
+    return (
+      <Tag
+        className={`hero-reveal ${className}`}
+        style={{ "--reveal-y": `${y}px`, "--reveal-delay": `${delay}s` } as React.CSSProperties}
+      >
+        {children}
+      </Tag>
+    );
+  }
 
   const variants: Variants = shouldReduceMotion
     ? { hidden: { opacity: 1, y: 0 }, visible: { opacity: 1, y: 0 } }

@@ -219,7 +219,12 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                   alt={post.coverImage.alt}
                   width={post.coverImage.width}
                   height={post.coverImage.height}
-                  sizes="(min-width: 768px) 720px, 100vw"
+                  sizes="(min-width: 768px) 688px, calc(100vw - 5.5rem)"
+                  // The cover is the first, largest visual in the article and is the
+                  // mobile LCP element: load it eagerly at high priority instead of
+                  // next/image's default lazy loading.
+                  loading="eager"
+                  fetchPriority="high"
                   className="h-auto w-full rounded-2xl"
                 />
               ) : null}

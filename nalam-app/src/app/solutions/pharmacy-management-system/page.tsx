@@ -99,15 +99,17 @@ function Block({
   id,
   title,
   children,
+  immediate = false,
 }: {
   id?: string;
   title: string;
   children: React.ReactNode;
+  immediate?: boolean;
 }) {
   return (
     <section id={id} className={`scroll-mt-32 ${sectionClass}`}>
       <Container className="flex max-w-4xl flex-col gap-6">
-        <SectionHeading align="left" title={title} />
+        <SectionHeading immediate={immediate} align="left" title={title} />
         {children}
       </Container>
     </section>
@@ -191,7 +193,7 @@ export default function PharmacyManagementSystemPage() {
         <p className="text-balance">{heroIntro}</p>
       </PageHero>
 
-      <Block title={introduction.title}>
+      <Block immediate title={introduction.title}>
         <Paragraphs items={introduction.paragraphs} />
       </Block>
 

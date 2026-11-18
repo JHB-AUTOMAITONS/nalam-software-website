@@ -9,6 +9,8 @@ interface SectionHeadingProps {
   tone?: "light" | "dark";
   as?: "h2" | "h1";
   className?: string;
+  /** Above-the-fold heading: reveal with CSS instead of waiting for hydration. */
+  immediate?: boolean;
 }
 
 export function SectionHeading({
@@ -19,6 +21,7 @@ export function SectionHeading({
   tone = "light",
   as: Heading = "h2",
   className = "",
+  immediate = false,
 }: SectionHeadingProps) {
   const alignClass = align === "center" ? "items-center text-center mx-auto" : "items-start text-left";
   const titleColor = "text-navy-950";
@@ -26,6 +29,7 @@ export function SectionHeading({
 
   return (
     <RevealOnScroll
+      immediate={immediate}
       className={`flex min-w-0 max-w-3xl flex-col gap-4 ${alignClass} ${className}`}
     >
       {eyebrow ? (

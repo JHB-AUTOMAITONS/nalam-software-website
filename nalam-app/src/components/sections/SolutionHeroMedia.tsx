@@ -38,15 +38,14 @@ export function SolutionHeroMedia({ photoSrc, alt, chips, priority = false }: So
 
   return (
     <div className="relative h-full w-full">
-      <motion.div
-        className="relative h-full w-full overflow-hidden"
+      {/* CSS entrance (0.8s, scale 1.03 -> 1, fade in), not framer-motion: the hero
+          photo is the mobile LCP element and must not wait for hydration. */}
+      <div
+        className="hero-media-reveal relative h-full w-full overflow-hidden"
         style={{
           maskImage: mask,
           WebkitMaskImage: mask,
         }}
-        initial={shouldReduceMotion ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 1.03 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
       >
         {photoSrc ? (
           <Image
@@ -75,7 +74,7 @@ export function SolutionHeroMedia({ photoSrc, alt, chips, priority = false }: So
               "radial-gradient(circle at 70% 20%, rgba(221,247,250,0.22) 0%, transparent 55%)",
           }}
         />
-      </motion.div>
+      </div>
 
       {chips.map((chip, index) => (
         <motion.div

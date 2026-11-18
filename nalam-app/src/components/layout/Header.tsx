@@ -117,11 +117,8 @@ export function Header() {
   const barTransition = { duration: shouldReduceMotion ? 0 : 0.4, ease: [0.16, 1, 0.3, 1] as const };
 
   return (
-    <motion.header
-      className="fixed inset-x-2 top-2 z-50 xs:inset-x-3 xs:top-3 sm:inset-x-5 sm:top-5"
-      initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: -16 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: shouldReduceMotion ? 0 : 0.6, ease: [0.16, 1, 0.3, 1] }}
+    <header
+      className="header-reveal fixed inset-x-2 top-2 z-50 xs:inset-x-3 xs:top-3 sm:inset-x-5 sm:top-5"
     >
       <motion.div
         className="mx-auto w-full max-w-[1120px] rounded-[26px] border"
@@ -348,6 +345,6 @@ export function Header() {
           )}
         </AnimatePresence>
       </motion.div>
-    </motion.header>
+    </header>
   );
 }

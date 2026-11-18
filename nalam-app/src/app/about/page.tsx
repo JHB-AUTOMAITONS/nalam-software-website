@@ -33,7 +33,7 @@ export default function AboutPage() {
 
       <section className="bg-[#F5F8F6] pt-16 pb-10 sm:pt-40 sm:pb-24">
         <Container>
-          <RevealOnScroll className="mx-auto flex max-w-3xl flex-col items-center gap-6 text-center">
+          <RevealOnScroll immediate className="mx-auto flex max-w-3xl flex-col items-center gap-6 text-center">
             <h1 className="text-balance font-display text-4xl font-medium leading-[1.1] tracking-tight text-navy-950 sm:text-5xl">
               A Healthcare Technology Company, Built Around Connection
             </h1>
@@ -49,8 +49,9 @@ export default function AboutPage() {
 
       <section className="bg-white py-12 sm:py-28">
         <Container className="grid grid-cols-1 gap-10 sm:gap-12 lg:grid-cols-2 lg:gap-16">
-          <RevealOnScroll className="flex flex-col gap-4">
+          <RevealOnScroll immediate className="flex flex-col gap-4">
             <SectionHeading
+              immediate
               align="left"
               eyebrow="What We Build"
               title="Three Systems. One Design Philosophy."

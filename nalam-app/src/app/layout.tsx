@@ -14,7 +14,9 @@ const fraunces = Fraunces({
   variable: "--font-fraunces",
   subsets: ["latin"],
   weight: ["400", "500", "600"],
-  style: ["normal", "italic"],
+  // Italic Fraunces is never used anywhere in the site, so it is not loaded
+  // (it was a 45 KB preload on every page).
+  style: ["normal"],
   display: "swap",
 });
 

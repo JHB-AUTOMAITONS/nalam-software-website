@@ -1,6 +1,7 @@
 "use client";
 
-import { requirementsFormSchema, type RequirementsFormValues } from "@/lib/validation";
+// Type-only import: the zod schema must NOT be pulled into the client bundle.
+import type { RequirementsFormValues } from "@/lib/validation";
 
 // Single source of truth shared by the Contact-page form (RequirementsForm)
 // and the automatic popup (RequirementsPopup) — both read/write the same
@@ -32,17 +33,11 @@ function readCompleted(): boolean {
   }
 }
 
+// The requirements form is the embedded GHL iframe; nothing reads or writes the
+// per-field values any more, so this simply starts from the defaults instead of
+// validating sessionStorage with zod (which shipped ~395 KB of JS to every page).
 function readValues(): RequirementsFormValues {
-  if (typeof window === "undefined") return initialFormValues;
-  try {
-    const raw = window.sessionStorage.getItem(VALUES_KEY);
-    if (!raw) return initialFormValues;
-    const parsed = requirementsFormSchema.partial().safeParse(JSON.parse(raw));
-    if (!parsed.success) return initialFormValues;
-    return { ...initialFormValues, ...parsed.data };
-  } catch {
-    return initialFormValues;
-  }
+  return initialFormValues;
 }
 
 type Listener = () => void;
