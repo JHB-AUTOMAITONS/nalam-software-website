@@ -127,7 +127,7 @@ export const hospitalAdministrationSoftwareGuide: BlogPost = {
     { type: "heading", level: 3, text: "Electronic Medical Records and Patient History" },
     {
       type: "paragraph",
-      text: "A chronological patient history gives doctors context at the point of care and gives the hospital a durable record. The administrative benefit is retrievability: no hunting for files, and fewer gaps between visits. For the record-keeping side, see our guide to [electronic medical records software](/blog/electronic-medical-records-software-guide).",
+      text: "A chronological patient history gives doctors context at the point of care and gives the hospital a durable record. The administrative benefit is retrievability: no hunting for files, and fewer gaps between visits. For the record-keeping side, see our guide to [electronic medical records software](/blog/electronic-medical-records-software).",
     },
     { type: "heading", level: 3, text: "Reports and Administrative Dashboard" },
     {

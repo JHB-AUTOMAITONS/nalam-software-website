@@ -49,7 +49,7 @@ export const electronicMedicalRecordsSoftwareGuide: BlogPost = {
     },
     {
       type: "paragraph",
-      text: "This guide is written for hospital administrators, clinic owners, doctors and practice managers who are comparing products. It explains what the software does, which features are essential and which are optional, how EMR differs from EHR and from a hospital management system, and which questions to put to a vendor before you commit. It is vendor-neutral until the final section.",
+      text: "This guide is written for hospital administrators, clinic owners, doctors and practice managers who are comparing products. It explains what the software does, which features are essential and which are optional, how EMR differs from EHR and from a hospital management system, and which questions to put to a vendor before you commit. It is vendor-neutral until the final section. If you are new to the topic, start with our overview of [how electronic medical records software works](/blog/electronic-medical-records-software).",
     },
 
     { type: "heading", level: 2, text: "What Is Electronic Medical Records Software?" },

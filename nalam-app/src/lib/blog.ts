@@ -17,6 +17,7 @@
 import { cloudBasedVsOnPremiseHospitalManagementSoftware } from "./blog-posts/cloud-based-vs-on-premise-hospital-management-software";
 import { clinicAppointmentSchedulingSoftware } from "./blog-posts/clinic-appointment-scheduling-software";
 import { clinicPatientRecordsAndBilling } from "./blog-posts/clinic-patient-records-and-billing";
+import { electronicMedicalRecordsSoftware } from "./blog-posts/electronic-medical-records-software";
 import { electronicMedicalRecordsSoftwareGuide } from "./blog-posts/electronic-medical-records-software-guide";
 import { healthManagementInformationSystemsVsFragmentedTools } from "./blog-posts/health-management-information-systems-vs-fragmented-tools";
 import { healthcareItSolutionsHospitalsClinicsLaboratories } from "./blog-posts/healthcare-it-solutions-hospitals-clinics-laboratories";
@@ -74,10 +75,13 @@ export interface BlogPost {
    * emitted as FAQPage JSON-LD. Answers must be plain text (no links).
    */
   faqs?: { question: string; answer: string }[];
+  /** Optional H2 for the FAQ section. Defaults to "FAQs". */
+  faqHeading?: string;
 }
 
 async function loadPosts(): Promise<BlogPost[]> {
   return [
+    electronicMedicalRecordsSoftware,
     hospitalManagementSoftwarePatientDataSecurity,
     howToDigitizeHospitalOperations,
     hospitalManagementSoftwareCostIndia,

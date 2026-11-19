@@ -122,7 +122,7 @@ export const healthcareItSolutionsHospitalsClinicsLaboratories: BlogPost = {
     { type: "heading", level: 3, text: "Electronic Medical Records (EMR)" },
     {
       type: "paragraph",
-      text: "Electronic medical records replace paper files with a digital patient record holding history, diagnoses, prescriptions and results for authorised staff. Choosing between a standalone EMR and a wider system is a common decision, which we cover in our [guide to electronic medical records software](/blog/electronic-medical-records-software-guide).",
+      text: "Electronic medical records replace paper files with a digital patient record holding history, diagnoses, prescriptions and results for authorised staff. Choosing between a standalone EMR and a wider system is a common decision, which we cover in our [guide to electronic medical records software](/blog/electronic-medical-records-software).",
     },
     { type: "heading", level: 3, text: "Healthcare Workflow Automation" },
     {

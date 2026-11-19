@@ -234,7 +234,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               {post.faqs && post.faqs.length > 0 ? (
                 <>
                   <h2 id="faqs" className="scroll-mt-32 pt-4 font-display text-2xl font-medium leading-tight text-navy-950 sm:text-3xl">
-                    FAQs
+                    {post.faqHeading ?? "FAQs"}
                   </h2>
                   {post.faqs.map((faq) => (
                     <div key={faq.question} className="flex flex-col gap-2">
