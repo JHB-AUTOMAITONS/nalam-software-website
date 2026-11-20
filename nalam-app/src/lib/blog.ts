@@ -30,6 +30,7 @@ import { hospitalManagementSoftwarePatientDataSecurity } from "./blog-posts/hosp
 import { hospitalPatientFlowManagement } from "./blog-posts/hospital-patient-flow-management";
 import { labManagementSoftwareKeyFeatures } from "./blog-posts/lab-management-software-key-features";
 import { laboratoryManagementSystemKeyFeatures } from "./blog-posts/laboratory-management-system-key-features";
+import { limsSoftwareForHospitals } from "./blog-posts/lims-software-for-hospitals";
 import { manualVsDigitalHospitalManagement } from "./blog-posts/manual-vs-digital-hospital-management";
 import { medicalAppointmentSchedulingSoftware } from "./blog-posts/medical-appointment-scheduling-software";
 import { medicalPracticeManagementSoftware } from "./blog-posts/medical-practice-management-software";
@@ -81,6 +82,7 @@ export interface BlogPost {
 
 async function loadPosts(): Promise<BlogPost[]> {
   return [
+    limsSoftwareForHospitals,
     electronicMedicalRecordsSoftware,
     hospitalManagementSoftwarePatientDataSecurity,
     howToDigitizeHospitalOperations,
