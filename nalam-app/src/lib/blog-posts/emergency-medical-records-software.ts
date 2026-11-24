@@ -24,9 +24,9 @@ import type { BlogPost } from "../blog";
  * Ubersuggest metrics were unavailable (daily report quota exhausted) so none
  * are published or embedded here.
  *
- * COVER IMAGE: not set yet. Add /public/images/blog/emergency-medical-records-software-featured-image.webp
- * (1200x630) and then add `coverImage` with alt
- * "Emergency medical records software for digitally managing hospital emergency patient records".
+ * COVER IMAGE: 1200x630 WebP cropped from NALAM's existing hospital photo
+ * (/images/solutions/hospital.png). It is not an emergency-department-specific
+ * or newly generated image; replace the file at the same path if one is made.
  */
 export const emergencyMedicalRecordsSoftware: BlogPost = {
   slug: "emergency-medical-records-software",
@@ -53,6 +53,12 @@ export const emergencyMedicalRecordsSoftware: BlogPost = {
   author: { name: "Nalam Software", type: "Organization" },
   category: "Hospital Management",
   readingTimeMinutes: 10,
+  coverImage: {
+    src: "/images/blog/emergency-medical-records-software-featured-image.webp",
+    alt: "Emergency medical records software for digitally managing hospital emergency patient records",
+    width: 1200,
+    height: 630,
+  },
   faqHeading: "Frequently Asked Questions About Emergency Medical Records Software",
   content: [
     {
