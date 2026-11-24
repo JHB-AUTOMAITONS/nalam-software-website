@@ -19,6 +19,7 @@ import { clinicAppointmentSchedulingSoftware } from "./blog-posts/clinic-appoint
 import { clinicPatientRecordsAndBilling } from "./blog-posts/clinic-patient-records-and-billing";
 import { electronicMedicalRecordsSoftware } from "./blog-posts/electronic-medical-records-software";
 import { electronicMedicalRecordsSoftwareGuide } from "./blog-posts/electronic-medical-records-software-guide";
+import { emergencyMedicalRecordsSoftware } from "./blog-posts/emergency-medical-records-software";
 import { healthManagementInformationSystemsVsFragmentedTools } from "./blog-posts/health-management-information-systems-vs-fragmented-tools";
 import { healthcareItSolutionsHospitalsClinicsLaboratories } from "./blog-posts/healthcare-it-solutions-hospitals-clinics-laboratories";
 import { howToDigitizeHospitalOperations } from "./blog-posts/how-to-digitize-hospital-operations";
@@ -82,6 +83,7 @@ export interface BlogPost {
 
 async function loadPosts(): Promise<BlogPost[]> {
   return [
+    emergencyMedicalRecordsSoftware,
     limsSoftwareForHospitals,
     electronicMedicalRecordsSoftware,
     hospitalManagementSoftwarePatientDataSecurity,
