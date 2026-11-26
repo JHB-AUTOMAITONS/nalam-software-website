@@ -23,6 +23,7 @@ import { emergencyMedicalRecordsSoftware } from "./blog-posts/emergency-medical-
 import { healthManagementInformationSystemsVsFragmentedTools } from "./blog-posts/health-management-information-systems-vs-fragmented-tools";
 import { healthcareItSolutionsHospitalsClinicsLaboratories } from "./blog-posts/healthcare-it-solutions-hospitals-clinics-laboratories";
 import { howToDigitizeHospitalOperations } from "./blog-posts/how-to-digitize-hospital-operations";
+import { hospitaalbestuursagtewareSuidAfrika } from "./blog-posts/hospitaalbestuursagteware-suid-afrika";
 import { hospitalAdministrationSoftwareGuide } from "./blog-posts/hospital-administration-software-guide";
 import { hospitalInformationSystemVsHospitalManagementSystem } from "./blog-posts/hospital-information-system-vs-hospital-management-system";
 import { hospitalManagementSoftwareCostIndia } from "./blog-posts/hospital-management-software-cost-india";
@@ -83,6 +84,7 @@ export interface BlogPost {
 
 async function loadPosts(): Promise<BlogPost[]> {
   return [
+    hospitaalbestuursagtewareSuidAfrika,
     emergencyMedicalRecordsSoftware,
     limsSoftwareForHospitals,
     electronicMedicalRecordsSoftware,
