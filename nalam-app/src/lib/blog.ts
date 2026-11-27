@@ -17,6 +17,7 @@
 import { cloudBasedVsOnPremiseHospitalManagementSoftware } from "./blog-posts/cloud-based-vs-on-premise-hospital-management-software";
 import { clinicAppointmentSchedulingSoftware } from "./blog-posts/clinic-appointment-scheduling-software";
 import { clinicPatientRecordsAndBilling } from "./blog-posts/clinic-patient-records-and-billing";
+import { digitalMedicalRecordsSoftwareHospitals } from "./blog-posts/digital-medical-records-software-hospitals";
 import { electronicMedicalRecordsSoftware } from "./blog-posts/electronic-medical-records-software";
 import { electronicMedicalRecordsSoftwareGuide } from "./blog-posts/electronic-medical-records-software-guide";
 import { emergencyMedicalRecordsSoftware } from "./blog-posts/emergency-medical-records-software";
@@ -85,6 +86,7 @@ export interface BlogPost {
 async function loadPosts(): Promise<BlogPost[]> {
   return [
     hospitaalbestuursagtewareSuidAfrika,
+    digitalMedicalRecordsSoftwareHospitals,
     emergencyMedicalRecordsSoftware,
     limsSoftwareForHospitals,
     electronicMedicalRecordsSoftware,
